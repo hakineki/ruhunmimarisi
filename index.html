@@ -1473,42 +1473,6 @@ function renderProfilBody(profil, shadow) {
   return renderGolgeBody(profil, shadow, null, null, null);
 }
 
-/* ── Gölge basit fallback ── */
-  const elC = EL[_result?.elements ? Object.entries(_result.elements).sort((a,b)=>b[1]-a[1])[0]?.[0] : 'hava'] || {};
-
-  // Shadow engine varsa ek arketip bilgisi ekle
-  const arkExtra = shadow?.primaryArketipler?.[0];
-
-  return `
-    <div class="shadow-section" style="border-color:${elC.color||'var(--border)'}22">
-      <div class="shadow-label">Tema</div>
-      <div class="shadow-theme" style="font-size:14px;line-height:1.6">${profil.tema}</div>
-    </div>
-
-    <div class="shadow-section">
-      <div class="shadow-label">⬛ Gölge</div>
-      <div class="shadow-desc" style="font-size:13px;line-height:1.75;color:var(--text2)">${profil.golge}</div>
-    </div>
-
-    <div class="shadow-section" style="border-color:rgba(196,184,248,.2);background:rgba(196,184,248,.03)">
-      <div class="shadow-label" style="color:var(--violet)">✦ Dönüşüm</div>
-      <div class="shadow-desc" style="font-size:13px;line-height:1.75;color:var(--text2)">${profil.donusum}</div>
-    </div>
-
-    <div class="daily-action" style="margin-top:4px">
-      <div class="daily-action-label">Bugünün Eylemi</div>
-      <div class="daily-action-text">${profil.eylem}</div>
-    </div>
-
-    ${arkExtra ? `
-    <div class="shadow-section" style="margin-top:10px;opacity:.7">
-      <div class="shadow-label">${arkExtra.kaynak||'Arketip'}</div>
-      <div class="shadow-theme" style="font-size:13px">${arkExtra.isim||''}</div>
-      ${arkExtra.golge ? `<div class="shadow-desc" style="font-size:11px;margin-top:4px">${arkExtra.golge}</div>` : ''}
-    </div>` : ''}
-  `;
-}
-
 /* ── Shadow body render (SHADOW_ENGINE varsa, profiles.js yoksa) ── */
 function renderShadowBody(shadow) {
   const arks = shadow.primaryArketipler||[];
