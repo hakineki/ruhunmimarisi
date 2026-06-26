@@ -1,0 +1,3097 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taş Rehberi — Ruhun Mimarisi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:    #08060f;
+  --bg2:   #0f0d1a;
+  --bg3:   #16131f;
+  --bg4:   #1c1828;
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --gold:  #c9a96e;
+  --gold2: #e8c98a;
+  --violet: #c4b8f8;
+  --violet2: #a89ae0;
+  --text:  rgba(245,240,232,0.92);
+  --text2: rgba(245,240,232,0.68);
+  --text3: rgba(245,240,232,0.38);
+  --text4: rgba(245,240,232,0.2);
+  --rs: 6px;
+  --rs2: 12px;
+  /* Element renkleri */
+  --el-ates:    #ff9650;
+  --el-toprak:  #b49664;
+  --el-hava:    #c4b8f8;
+  --el-su:      #64b4ff;
+  --el-firtina: #8c64c8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── YILDIZLAR ──────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 15% 25%, rgba(255,255,255,0.45) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 12%, rgba(255,255,255,0.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 45% 68%, rgba(255,255,255,0.25) 0%, transparent 100%),
+    radial-gradient(2px 2px at 28% 14%, rgba(220,190,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 88% 42%, rgba(190,160,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 10% 85%, rgba(210,180,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 62% 90%, rgba(255,255,255,0.2) 0%, transparent 100%),
+    radial-gradient(800px 600px at 85% 5%, rgba(80,40,120,0.18) 0%, transparent 70%),
+    radial-gradient(600px 400px at 5% 90%, rgba(60,30,100,0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── HEADER ─────────────────────────────────── */
+.hdr {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 54px 24px 36px;
+  border-bottom: 1px solid var(--border);
+}
+.hdr-back {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text4);
+  text-decoration: none;
+  margin-bottom: 16px;
+  transition: color 0.2s;
+}
+.hdr-back:hover { color: var(--text3); }
+.hdr-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  color: var(--text3);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.hdr h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: var(--gold2);
+  margin-bottom: 9px;
+}
+.hdr-sub {
+  font-size: 15px;
+  font-style: italic;
+  color: var(--text3);
+  font-weight: 300;
+}
+
+/* ── GÜNLÜK TAŞ BANNER ───────────────────────── */
+.daily-banner {
+  position: relative;
+  z-index: 10;
+  margin: 27px 18px;
+  padding: 18px 24px;
+  background: var(--bg2);
+  border: 1px solid rgba(201,169,110,0.18);
+  border-radius: var(--rs2);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+.daily-banner:hover { border-color: rgba(201,169,110,0.35); }
+.daily-emoji { font-size: 32px; flex-shrink: 0; }
+.daily-info { flex: 1; min-width: 0; }
+.daily-label {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  color: var(--text3);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.daily-name {
+  font-size: 19px;
+  color: var(--gold2);
+  font-weight: 400;
+  margin-bottom: 2px;
+}
+.daily-ruh {
+  font-size: 13px;
+  color: var(--text3);
+  font-style: italic;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.daily-arrow {
+  font-size: 18px;
+  color: var(--text4);
+  transition: transform 0.2s;
+}
+.daily-banner:hover .daily-arrow { transform: translateX(3px); }
+
+/* ── ARAMA & FİLTRE ─────────────────────────── */
+.search-area {
+  position: relative;
+  z-index: 10;
+  padding: 0 18px 18px;
+}
+.search-box {
+  position: relative;
+  margin-bottom: 12px;
+}
+.search-box input {
+  width: 100%;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: var(--rs2);
+  padding: 12px 18px 12px 42px;
+  color: var(--text);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-box input:focus { border-color: rgba(201,169,110,0.4); }
+.search-box input::placeholder { color: var(--text4); }
+.search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text4);
+  font-size: 15px;
+  pointer-events: none;
+}
+.filter-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text3);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.filter-btn:hover, .filter-btn.active {
+  color: var(--text);
+  border-color: var(--border2);
+  background: var(--bg3);
+}
+.filter-btn.el-ates.active   { color: var(--el-ates); border-color: rgba(255,150,80,0.4); background: rgba(255,150,80,0.08); }
+.filter-btn.el-su.active     { color: var(--el-su); border-color: rgba(100,180,255,0.4); background: rgba(100,180,255,0.08); }
+.filter-btn.el-hava.active   { color: var(--el-hava); border-color: rgba(196,184,248,0.4); background: rgba(196,184,248,0.08); }
+.filter-btn.el-toprak.active { color: var(--el-toprak); border-color: rgba(180,150,100,0.4); background: rgba(180,150,100,0.08); }
+.filter-btn.el-firtina.active{ color: var(--el-firtina); border-color: rgba(140,100,200,0.4); background: rgba(140,100,200,0.08); }
+
+/* ── TAŞ GRİD ───────────────────────────────── */
+.gem-grid {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  padding: 0 18px 27px;
+}
+@media(min-width:600px) { .gem-grid { grid-template-columns: repeat(4,1fr); } }
+@media(min-width:900px) { .gem-grid { grid-template-columns: repeat(6,1fr); } }
+
+.gem-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--rs2);
+  padding: 12px 10px 10px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.gem-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.25s;
+  border-radius: var(--rs2);
+}
+.gem-card:hover { border-color: var(--border2); background: var(--bg3); transform: translateY(-1px); }
+.gem-card:hover::before { opacity: 1; }
+.gem-card.el-ates::before  { background: radial-gradient(ellipse at 50% 0%, rgba(255,150,80,0.06) 0%, transparent 70%); }
+.gem-card.el-su::before    { background: radial-gradient(ellipse at 50% 0%, rgba(100,180,255,0.06) 0%, transparent 70%); }
+.gem-card.el-hava::before  { background: radial-gradient(ellipse at 50% 0%, rgba(196,184,248,0.06) 0%, transparent 70%); }
+.gem-card.el-toprak::before{ background: radial-gradient(ellipse at 50% 0%, rgba(180,150,100,0.06) 0%, transparent 70%); }
+.gem-card.el-firtina::before{background: radial-gradient(ellipse at 50% 0%, rgba(140,100,200,0.06) 0%, transparent 70%); }
+
+.gem-card-emoji { font-size: 24px; margin-bottom: 6px; }
+.gem-card-name {
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 1.3;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.03em;
+}
+.el-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  margin: 6px auto 0;
+}
+.el-dot-ates   { background: var(--el-ates); }
+.el-dot-su     { background: var(--el-su); }
+.el-dot-hava   { background: var(--el-hava); }
+.el-dot-toprak { background: var(--el-toprak); }
+.el-dot-firtina{ background: var(--el-firtina); }
+
+.no-results {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 36px;
+  color: var(--text4);
+  font-style: italic;
+}
+
+/* ── TAŞ MODAL ──────────────────────────────── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(8,6,15,0.88);
+  z-index: 100;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  backdrop-filter: blur(4px);
+}
+.modal-overlay.open { display: block; }
+.modal {
+  position: relative;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: var(--rs2);
+  max-width: 560px;
+  margin: 27px auto;
+  overflow: hidden;
+  animation: modalIn 0.25s ease;
+}
+@keyframes modalIn {
+  from { opacity:0; transform:translateY(12px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: var(--text3);
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  line-height: 1;
+  padding: 4px;
+  transition: color 0.2s;
+}
+.modal-close:hover { color: var(--text); }
+.modal-head {
+  padding: 27px 24px 18px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.modal-el-strip {
+  height: 2px;
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  border-radius: 0;
+}
+.modal-emoji { font-size: 42px; margin-bottom: 9px; display: block; }
+.modal-name {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--gold2);
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+.modal-ruh {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--text3);
+  margin-bottom: 12px;
+}
+.modal-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.modal-badge {
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  color: var(--text3);
+  letter-spacing: 0.04em;
+}
+.modal-body { padding: 18px 24px; }
+.modal-section { margin-bottom: 18px; }
+.modal-section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--text4);
+  text-transform: uppercase;
+  margin-bottom: 9px;
+}
+.modal-section p {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.75;
+}
+.modal-dikkat {
+  background: rgba(212,127,139,0.06);
+  border: 1px solid rgba(212,127,139,0.18);
+  border-radius: var(--rs);
+  padding: 12px 14px;
+  font-size: 13px;
+  color: rgba(212,127,139,0.8);
+  line-height: 1.65;
+}
+.modal-birlikte {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.modal-tag {
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  color: var(--text3);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.modal-tag:hover { color: var(--text); border-color: var(--border2); }
+.modal-alternatif {
+  background: rgba(201,169,110,0.06);
+  border: 1px solid rgba(201,169,110,0.15);
+  border-radius: var(--rs);
+  padding: 10px 14px;
+}
+.modal-alternatif-label {
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  margin-bottom: 5px;
+}
+.modal-alternatif-list {
+  font-size: 13px;
+  color: var(--text2);
+}
+
+/* ── BÖLÜCÜ ─────────────────────────────────── */
+.section-divider {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  margin: 9px 18px 27px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.section-divider-text {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--text4);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── REÇETE BÖLÜMÜ ──────────────────────────── */
+.recipe-section {
+  position: relative;
+  z-index: 10;
+  margin: 0 18px 36px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--rs2);
+  overflow: hidden;
+}
+.recipe-header {
+  padding: 18px 24px 14px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.2s;
+}
+.recipe-header:hover { background: rgba(255,255,255,0.015); }
+.recipe-header-icon { font-size: 20px; }
+.recipe-header-text { flex: 1; }
+.recipe-header-title {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--gold2);
+  margin-bottom: 2px;
+}
+.recipe-header-sub {
+  font-size: 12px;
+  color: var(--text3);
+  font-style: italic;
+}
+.recipe-toggle {
+  font-size: 16px;
+  color: var(--text4);
+  transition: transform 0.3s;
+}
+.recipe-toggle.open { transform: rotate(180deg); }
+
+.recipe-body { display: none; padding: 18px 24px; }
+.recipe-body.open { display: block; }
+
+.recipe-form { }
+.form-group {
+  margin-bottom: 14px;
+}
+.form-label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--text3);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: block;
+}
+.form-input {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--rs);
+  padding: 9px 12px;
+  color: var(--text);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-input:focus { border-color: rgba(201,169,110,0.35); }
+.form-row { display: flex; gap: 9px; }
+.form-row .form-group { flex: 1; }
+
+/* Niyet seçimi */
+.niyet-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.niyet-btn {
+  padding: 9px 12px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--rs);
+  color: var(--text3);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.niyet-btn:hover { border-color: var(--border2); color: var(--text2); }
+.niyet-btn.active {
+  border-color: rgba(201,169,110,0.4);
+  background: rgba(201,169,110,0.07);
+  color: var(--gold2);
+}
+
+.btn-recete {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, rgba(201,169,110,0.5), rgba(232,201,138,0.6));
+  border: 1px solid rgba(201,169,110,0.3);
+  border-radius: var(--rs);
+  color: rgba(245,240,232,0.92);
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 6px;
+}
+.btn-recete:hover { background: linear-gradient(135deg, rgba(201,169,110,0.65), rgba(232,201,138,0.75)); }
+.btn-recete:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Reçete sonucu */
+.recete-result { margin-top: 18px; }
+.recete-intro {
+  font-size: 13px;
+  color: var(--text3);
+  font-style: italic;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Element profil bar */
+.el-profile { margin-bottom: 18px; }
+.el-profile-label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--text4);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.el-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 6px;
+}
+.el-bar-icon { font-size: 12px; width: 18px; }
+.el-bar-name { font-size: 11px; width: 48px; }
+.el-bar-track {
+  flex: 1;
+  height: 4px;
+  background: var(--bg3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.el-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s cubic-bezier(0.4,0,0.2,1);
+}
+.el-bar-pct {
+  font-size: 10px;
+  color: var(--text4);
+  width: 28px;
+  text-align: right;
+}
+
+/* Reçete taş kartı */
+.recete-stone {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--rs);
+  padding: 12px 14px;
+  margin-bottom: 9px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.recete-stone:hover { border-color: var(--border2); }
+.recete-stone-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.recete-stone-emoji { font-size: 20px; }
+.recete-stone-info { flex: 1; }
+.recete-stone-name {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  color: var(--text);
+  letter-spacing: 0.04em;
+}
+.recete-stone-why {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 1px;
+}
+.recete-stone-badge {
+  font-size: 9px;
+  padding: 2px 7px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  color: var(--text4);
+  white-space: nowrap;
+}
+.recete-stone-alt {
+  font-size: 11px;
+  color: var(--gold);
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: 1px solid var(--border);
+}
+
+/* Modulor teşvik */
+.modulor-cta {
+  margin-top: 18px;
+  padding: 14px;
+  background: rgba(196,184,248,0.04);
+  border: 1px solid rgba(196,184,248,0.12);
+  border-radius: var(--rs);
+  text-align: center;
+}
+.modulor-cta-text {
+  font-size: 13px;
+  color: var(--text3);
+  margin-bottom: 9px;
+  font-style: italic;
+}
+.modulor-cta-link {
+  display: inline-block;
+  padding: 8px 18px;
+  border: 1px solid rgba(196,184,248,0.25);
+  border-radius: 20px;
+  color: var(--violet2);
+  font-size: 12px;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.07em;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: none;
+}
+.modulor-cta-link:hover {
+  border-color: rgba(196,184,248,0.45);
+  color: var(--violet);
+  background: rgba(196,184,248,0.06);
+}
+
+/* ── FOOTER ─────────────────────────────────── */
+footer {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 27px 18px 36px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text4);
+  font-style: italic;
+}
+footer a {
+  color: var(--text3);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  transition: color 0.2s;
+}
+footer a:hover { color: var(--gold); }
+
+/* ── TOAST ──────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 27px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  padding: 8px 18px;
+  font-size: 12px;
+  color: var(--text2);
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: 9999;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── MOBİL ──────────────────────────────────── */
+@media(max-width:480px) {
+  .hdr h1 { font-size: 28px; }
+  .recipe-body { padding: 14px 18px; }
+  .modal { margin: 0; border-radius: var(--rs2) var(--rs2) 0 0; margin-top: 27px; }
+  .modal-overlay { align-items: flex-end; display: flex; flex-direction: column; justify-content: flex-end; }
+  .modal-overlay.open { display: flex; }
+}
+
+/* ── MAX-WIDTH WRAPPER ──────────────────────── */
+.wrap { max-width: 720px; margin: 0 auto; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- HEADER -->
+<header class="hdr">
+  <a href="/" class="hdr-back">← Haritama Dön</a>
+  <div class="hdr-eyebrow">✦ Ruhun Mimarisi</div>
+  <h1>TAŞ REHBERİ</h1>
+  <p class="hdr-sub">60 taş · Kocabaş, Judy Hall & Tuhfe-i Murâdî'den</p>
+</header>
+
+<!-- GÜNLÜK TAŞ -->
+<div class="daily-banner" id="daily-banner" onclick="openDailyStone()">
+  <span class="daily-emoji" id="daily-emoji">✦</span>
+  <div class="daily-info">
+    <div class="daily-label">Bugünün Taşı</div>
+    <div class="daily-name" id="daily-name">Yükleniyor…</div>
+    <div class="daily-ruh" id="daily-ruh"></div>
+  </div>
+  <span class="daily-arrow">›</span>
+</div>
+
+<!-- ARAMA & FİLTRE -->
+<div class="search-area">
+  <div class="search-box">
+    <span class="search-icon">◎</span>
+    <input type="text" id="search-input" placeholder="Taş ara…" oninput="filterStones()">
+  </div>
+  <div class="filter-row">
+    <button class="filter-btn active" data-el="" onclick="setElFilter(this,'')">Tümü</button>
+    <button class="filter-btn el-ates" data-el="ateş" onclick="setElFilter(this,'ateş')">🔥 Ateş</button>
+    <button class="filter-btn el-su" data-el="su" onclick="setElFilter(this,'su')">💧 Su</button>
+    <button class="filter-btn el-hava" data-el="hava" onclick="setElFilter(this,'hava')">🌬️ Hava</button>
+    <button class="filter-btn el-toprak" data-el="toprak" onclick="setElFilter(this,'toprak')">🌍 Toprak</button>
+    <button class="filter-btn el-firtina" data-el="fırtına" onclick="setElFilter(this,'fırtına')">⚡ Fırtına</button>
+  </div>
+</div>
+
+<!-- TAŞ GRİD -->
+<div class="gem-grid" id="gem-grid"></div>
+
+<!-- BÖLÜCÜ -->
+<div class="section-divider">
+  <span class="section-divider-text">Kişisel Reçete</span>
+</div>
+
+<!-- REÇETE BÖLÜMÜ -->
+<div class="recipe-section">
+  <div class="recipe-header" onclick="toggleRecipe()">
+    <span class="recipe-header-icon">✦</span>
+    <div class="recipe-header-text">
+      <div class="recipe-header-title">Element Profilim & Taş Reçetem</div>
+      <div class="recipe-header-sub">Doğum tarihinizle kişisel taş kombinasyonu</div>
+    </div>
+    <span class="recipe-toggle" id="recipe-toggle">▾</span>
+  </div>
+  <div class="recipe-body" id="recipe-body">
+    <div id="recipe-form-area">
+      <div class="form-group">
+        <label class="form-label" for="r-fullname">Tam Adınız <span style="color:var(--text4);font-size:10px;letter-spacing:0.04em">(harf enerjisi için)</span></label>
+        <input class="form-input" type="text" id="r-fullname" placeholder="Ad Soyad" oninput="previewIsimEl(this.value)">
+        <div id="isim-el-preview" style="margin-top:6px;min-height:18px;font-size:11px;color:var(--text3);letter-spacing:0.03em"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="r-date">Doğum Tarihi</label>
+          <input class="form-input" type="date" id="r-date">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="r-name">Kısa Ad</label>
+          <input class="form-input" type="text" id="r-name" placeholder="Reçetede görünecek isim">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="r-time">Doğum Saati</label>
+          <input class="form-input" type="time" id="r-time" placeholder="ör: 14:30">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="r-city">Doğum Yeri</label>
+          <input class="form-input" type="text" id="r-city" placeholder="Şehir">
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom:9px">
+        <span class="form-label">Şu an ne istiyorum?</span>
+      </div>
+      <div class="niyet-grid">
+        <button class="niyet-btn active" data-niyet="mutluluk" onclick="setNiyet(this)">🌸 Mutluluk</button>
+        <button class="niyet-btn" data-niyet="odak" onclick="setNiyet(this)">🎯 Odak</button>
+        <button class="niyet-btn" data-niyet="koruma" onclick="setNiyet(this)">🛡 Koruma</button>
+        <button class="niyet-btn" data-niyet="sevgi" onclick="setNiyet(this)">❤️ Sevgi</button>
+        <button class="niyet-btn" data-niyet="cesaret" onclick="setNiyet(this)">⚔️ Cesaret</button>
+        <button class="niyet-btn" data-niyet="donusum" onclick="setNiyet(this)">🔄 Dönüşüm</button>
+      </div>
+
+      <button class="btn-recete" onclick="calcRecipe()">Reçetemi Hesapla ✦</button>
+    </div>
+
+    <div class="recete-result" id="recete-result" style="display:none"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:9px">Bilgi amaçlıdır. Tıbbi tavsiye yerine geçmez.</p>
+  <a href="/">Ruhun Mimarisi</a>
+  <span style="margin:0 9px">·</span>
+  <a href="gemoloji.html">Gelişmiş Rehber →</a>
+  <span style="margin:0 9px">·</span>
+  <a href="https://modulor.app">Modulor</a>
+</footer>
+
+</div><!-- /wrap -->
+
+<!-- TAŞ MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div class="wrap" style="width:100%">
+    <div class="modal" id="modal">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// gems-data.js — Modulor GEM Taş Rehberi
+// 60 taş | Mayıs 2026
+// Kaynak önceliği: Kocabaş → Judy Hall → Tuhfe-i Murâdî → Evrensel mineraloji
+
+const GEMS_DATA = {
+
+  'Ametist': {
+    slug: 'ametist',
+    isim: 'Ametist',
+    ruh: 'Zihin durulduğunda sezgi konuşmaya başlar.',
+    emoji: '💜',
+    aile: 'Kuvars (SiO₂)',
+    sertlik: 7,
+    element: 'hava',
+    cakra: 'Alın (3. Göz), Kalp',
+    renk: ['mor', 'lavander', 'eflatun', 'kırmızımsı mor'],
+    koken: ['Brezilya', 'Uruguay', 'Madagaskar', 'Zambiya', 'Rusya', 'Hindistan'],
+    tarih: 'Türk geleneğinde "Mor Yakut" ve "Aşk Taşı" olarak bilinen ametist, yüzyıllarca nazara karşı koruyucu tılsım olarak taşınmış; yıldırım çarpmasından ve büyüden koruduğuna inanılmıştır. Sarhoşluktan koruduğuna olan inanç o kadar güçlüydü ki antik çağlarda içki kadehleri ametistten yaptırılırdı. Orta Çağda din adamları ruhsal berraklık için yüzüklerini ametistten yaptırdı. Yunancada "methystos" — sarhoş olmayan — kökünden gelir.',
+    niyet: 'Zihni durultmak ve sezgiyi açmak için. Bağımlılık ve aşırılığa karşı — alkol dahil — geleneksel kullanımı güçlüdür. Uyku sorununda yastık altına konur. Meditasyona zemin hazırlamak için. Migren ataklarında alın bölgesine tutulur. Karar vermek güçleştiğinde. Yas ve yoğun duygusal dönemlerde netlik için.',
+    dikkat: {
+      fiziksel: 'Uzun süreli güneş ışığı rengini solar. Temizlik için ay ışığı veya tütsü tercih edilir.',
+      baglamsal: 'Paranoya veya şizofreni tanısı olan durumlarda kullanılması önerilmez. Yoğun depresyonda obsidyen veya hematit ile dengeleyin.'
+    },
+    bakim: 'Ay ışığında şarj edilir. Tütsüyle temizlenir. Jeod içinde bırakmak hem şarj hem koruma sağlar.',
+    birlikte: ['Roze Kuvars', 'Ay Taşı', 'Labradorit', 'Moldavit'],
+    ayri: ['Sitrin'],
+    alternatif: ['Ametrin', 'Lepidolit'],
+    varyantlar: {
+      'Lavanta Ametist': 'Yüksek titreşimli; boğaz ve kalp çakralarını uyarır, sakinleştirir.',
+      'Şevron Ametist': 'Güçlü üçüncü göz uyarıcısı; sezgisel görüşü ve aurayı temizler.'
+    },
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'judy-hall', 'sifalı-dogal-taslar'] }
+  },
+
+  'Roze Kuvars': {
+    slug: 'roze-kuvars',
+    isim: 'Roze Kuvars',
+    ruh: 'Kalp önce kendine açılır, sonra her şeye.',
+    emoji: '🌸',
+    aile: 'Kuvars (SiO₂)',
+    sertlik: 7,
+    element: 'su',
+    cakra: 'Kalp',
+    renk: ['açık pembe', 'şeftali pembe', 'soluk gül'],
+    koken: ['Brezilya', 'Madagaskar', 'Hindistan', 'Güney Afrika'],
+    tarih: 'En eski sevgi tılsımlarından biri — İsa\'dan önce 600\'lü yıllardan beri Mezopotamya ve Mısır\'da takı olarak kullanıldığı bilinmektedir. Roma ve Yunan mitolojisinde Afrodit ile özdeşleştirilmiş; tanrıçanın yaralı bedeninden dökülen kanın beyaz kuvarsı pembeye boyadığı anlatılır.',
+    niyet: 'Sevgiye açılmak için — önce kendine, sonra başkasına. Kıskançlık, suçluluk ve korku gibi kapatan duygularda. Duygusal travma sonrası yeniden açılmak için. Ametist ile birlikte aklı güçlendirip kalbi koruduğu aktarılır.',
+    dikkat: {
+      fiziksel: 'Güneşte uzun süre bırakmayın — solma geri dönüşsüz.',
+      baglamsal: 'Yoğun negatif enerji dönemlerinde obsidyenden ayrı tutun.'
+    },
+    bakim: 'Ay ışığında veya gül yaprakları arasında şarj edilir. Soğuk su ile temizlenir.',
+    birlikte: ['Ametist', 'Ay Taşı'],
+    ayri: ['Obsidyen', 'Oniks'],
+    alternatif: ['Rodonit', 'Rodokrosit'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['judy-hall', 'sifalı-dogal-taslar'] }
+  },
+
+  'Obsidyen': {
+    slug: 'obsidyen',
+    isim: 'Obsidyen',
+    ruh: 'Karanlığa bakmak cesaret ister — ama ancak orada gerçeği görürsün.',
+    emoji: '🌑',
+    aile: 'Volkanik Cam (SiO₂)',
+    sertlik: 5,
+    element: 'toprak',
+    cakra: 'Kök',
+    renk: ['siyah', 'kahverengi-siyah', 'gökkuşağı (ışıkta)'],
+    koken: ['Meksika', 'ABD', 'Türkiye', 'Japonya', 'Arjantin'],
+    tarih: 'İnsanlığın bildiği en eski araç taşlarından biri — iki milyondan fazla yıl önce ilk kesici aletler obsidyenden yapılmıştır. Aztekler tanrı Tezcatlipoca\'nın — "Duman Tutan Ayna" — kutsal taşı olarak gördü. Roma medeniyetlerinde adını "obsius" kelimesinden aldı.',
+    niyet: 'Güçlü koruma ve topraklama için. Birikmiş negatif enerjiyi temizlemek için. Gerçekle yüzleşmek, bastırılmış duyguları yüzeye çıkarmak için. Kök çakrayı güçlendirmek için. Çok güçlüdür — başlangıçta kısa sürelerle kullanın.',
+    dikkat: {
+      fiziksel: 'Kırılgan yapısı var — düşürmemeye dikkat.',
+      baglamsal: 'Çok güçlü enerji taşır. Duygusal açıdan hassas dönemlerde dikkatli kullanın — yüzleşme tetikleyebilir.'
+    },
+    bakim: 'Soğuk su veya tütsü ile temizlenir. Ay ışığında veya toprak üzerinde şarj edilir.',
+    birlikte: ['Kaplan Gözü', 'Hematit', 'Dumanlı Kuvars'],
+    ayri: ['Roze Kuvars', 'Ay Taşı'],
+    alternatif: ['Siyah Turmalin', 'Dumanlı Kuvars'],
+    varyantlar: {
+      'Kar Tanesi Obsidyen': 'Yaşama sevinci ve azim.',
+      'Gökkuşağı Obsidyen': 'Duygusal yaraların iyileşmesi.',
+      'Altın Parlayan Obsidyen': 'Solar pleksus ve karar verme.'
+    },
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['judy-hall', 'sifalı-dogal-taslar'] }
+  },
+
+  'Şeffaf Kuvars': {
+    slug: 'seffaf-kuvars',
+    isim: 'Şeffaf Kuvars',
+    ruh: 'Her şeyi yükselten taş — niyetin ne kadarsa etkisi o kadar.',
+    emoji: '🔮',
+    aile: 'Kuvars (SiO₂)',
+    sertlik: 7,
+    element: 'hava',
+    cakra: 'Tüm çakralar',
+    renk: ['renksiz', 'beyaz', 'şeffaf'],
+    koken: ['Brezilya', 'Madagaskar', 'ABD', 'Çin', 'Japonya'],
+    tarih: 'Türk geleneğinde "necef" veya "kaya kristali" adıyla bilinen taş, guatr ve göz rahatsızlıklarında başvuru taşı olmuştur. Japonlar kristal kuvarsı sonsuz boşluk, saflık, azim ve sabır simgesi olarak görür. Kuzey Amerika\'da yerli halk kutsal armağan saymış, dini törenlerde kullanmıştır.',
+    niyet: 'Diğer taşların enerjisini yükseltmek için — kombinasyonlarda merkez taş. Meditasyonda derinleşmek için. Hafızayı güçlendirmek için. Radyasyon kaynaklarının yanında koruyucu olarak. Taşları programlamak için en etkili hazne.',
+    dikkat: {
+      fiziksel: 'Sahte ile gerçeğini ayırt etmek zordur — cam ile karışabilir.',
+      baglamsal: 'Satın alındığında temizlenmeli — önceki enerjileri absorbe etmiş olabilir.'
+    },
+    bakim: 'Güneş veya ay ışığında şarj edilir. Soğuk su ile temizlenir.',
+    birlikte: ['Her taşla uyumlu'],
+    ayri: [],
+    alternatif: ['Selenit', 'Şeffaf Kalsit'],
+    varyantlar: {
+      'Dumanlı Kuvars': 'En güçlü topraklama. Negatif enerjiyi dönüştürür.',
+      'Rutil Kuvars': 'Telepatik iletişim, saç güçlendirme.',
+      'Çift Uçlu Kuvars': 'Enerji dengeleyici.'
+    },
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'sifalı-dogal-taslar'] }
+  },
+
+  'Labradorit': {
+    slug: 'labradorit',
+    isim: 'Labradorit',
+    ruh: 'Görüneni herkes görür — labradorit görünmeyeni gösterir.',
+    emoji: '🌊',
+    aile: 'Feldispat (Ca,Na)Al(Si,Al)₃O₈',
+    sertlik: 6,
+    element: 'hava',
+    cakra: 'Tüm çakralar',
+    renk: ['gri-yeşil', 'gökkuşağı (açılı ışıkta)', 'mavi', 'altın'],
+    koken: ['Kanada', 'Finlandiya', 'Madagaskar', 'Rusya', 'Meksika'],
+    tarih: '1770\'de Kanada\'nın Labrador kıyılarında keşfedilmiş. İnuit halkı labradoriti kuzey ışıklarının taşa hapsedilmiş hali olarak görmüştür. "Doğal sihir" taşı olarak bilinir — sihirden kasıt mantık ve sezginin birlikte çalışması, astral seyahat ve boyutlar arası algıdır.',
+    niyet: 'Sezgiyi ve içsel gözü açmak için. Aura koruması için. Göz ve beyin hasarlarının iyileşmesinde destekleyici. Hormon dengesi için. Soğuk algınlığı, gut ve romatizmada tedaviyi destekler. Kan basıncını düşürür.',
+    dikkat: {
+      fiziksel: 'Hassas yüzeyi var — yumuşak bezle temizleyin. Güneşte solabilir.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında veya kuvars küme üzerinde şarj edilir.',
+    birlikte: ['Ametist', 'Ay Taşı', 'Celestit'],
+    ayri: [],
+    alternatif: ['Ay Taşı', 'Spektrolit'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['judy-hall', 'sifalı-dogal-taslar'] }
+  },
+
+  'Sitrin': {
+    slug: 'sitrin',
+    isim: 'Sitrin',
+    ruh: 'Güneşi cebinde taşıyan negatifi bilmez.',
+    emoji: '💛',
+    aile: 'Kuvars (SiO₂)',
+    sertlik: 7,
+    element: 'ateş',
+    cakra: 'Kök, Solar Pleksus',
+    renk: ['sarı', 'altın sarısı', 'açık turuncu'],
+    koken: ['Brezilya', 'Bolivya', 'Madagaskar', 'İspanya', 'Rusya'],
+    tarih: 'Fransızca "citron" — limon — kelimesinden gelir. İsa\'dan önce 300\'lü yıllardan beri Yunanistan\'da yüzük taşı olarak kullanılmıştır. Romalılar nazardan ve kıskançlıktan korunmak için taşırdı. "Tüccar taşı" olarak bilinir — bolluk ve bereket getirdiğine inanılır. Piyasadaki büyük kısmı ısıl işlem görmüş ametisttir; doğal sitrin daha soluk.',
+    niyet: 'Negatif enerjiyi dönüştürmek için. Bolluk, bereket ve başarı niyetiyle. Sindirim sistemi, dalak ve pankreas için. Böbrek ve mesane iltihabında. Tiroit dengesini sağlamak için. Aile içi uyumu güçlendirmek için.',
+    dikkat: {
+      fiziksel: 'Güneşte uzun süre bırakmayın — renk solar.',
+      baglamsal: 'Piyasadaki büyük kısmı ısıl işlem görmüş ametisttir — doğal sitrin daha mat ve soluktur.'
+    },
+    bakim: 'Sabah güneşinde kısa süre şarj edilir (en fazla 2 saat). Kendini temizleyebilen nadir taşlardan biri.',
+    birlikte: ['Pirit', 'Kaplan Gözü'],
+    ayri: ['Ametist'],
+    alternatif: ['Sarı Kalsit', 'Sarı Jasper'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Lapis Lazuli': {
+    slug: 'lapis-lazuli',
+    isim: 'Lapis Lazuli',
+    ruh: 'Gerçeği bilmek cesaret ister — lapis ona zemin hazırlar.',
+    emoji: '🔵',
+    aile: 'Lasurit (Na,Ca)₈(AlSiO₄)₆(SO₄,S,Cl)₂',
+    sertlik: 5.5,
+    element: 'hava',
+    cakra: 'Alın (3. Göz), Boğaz',
+    renk: ['koyu mavi', 'lacivert', 'altın pirit noktaları'],
+    koken: ['Afganistan', 'Şili', 'Rusya', 'Mısır', 'Pakistan'],
+    tarih: 'İsa\'dan önce 3100\'lü yıllardan beri Mısırlıların takı ve mücevherinde tercih ettiği taş. Mısırlılar lapisi toz haline getirerek hem ilaç hem makyaj malzemesi olarak kullanmış. Tuhfe-i Murâdî\'nde "lâciverd" adıyla geçer: "gök rengine benzer, yumuşak ve düz bir taş." Ruh ve beden arasındaki dengeyi koruduğu yüzyıllardır aktarılmaktadır.',
+    niyet: 'Gerçeği görmek ve dürüstçe ifade etmek için. Depresyonda ruh ve beden dengesini yeniden kurmak için. Hormonal dengeyi düzenlemek için. Migren ve baş ağrılarını hafifletmek için. Kan basıncını düşürmek için.',
+    dikkat: {
+      fiziksel: 'Uzun süre ıslatmayın — bağlayıcı madde etkilenebilir. Güneşte solabilir.',
+      baglamsal: 'Pirit noktaları gerçek lapiste doğal — sahtelerde genellikle yok.'
+    },
+    bakim: 'Ay ışığında şarj edilir. Yumuşak nemli bez ile temizlenir.',
+    birlikte: ['Ametist', 'Şeffaf Kuvars', 'Sodalit'],
+    ayri: [],
+    alternatif: ['Sodalit', 'Azurit'],
+    tarihsel_isim: 'Lâciverd', meta: { son_guncelleme: '2026-05', kaynaklar: ['judy-hall', 'tuhfe-i-muradi', 'sifalı-dogal-taslar'] }
+  },
+
+  'Ay Taşı': {
+    slug: 'ay-tasi',
+    isim: 'Ay Taşı',
+    ruh: 'Sezgi ay gibi çalışır — büyüdükçe daha çok aydınlatır.',
+    emoji: '🌙',
+    aile: 'Feldispat KAlSi₃O₈–NaAlSi₃O₈',
+    sertlik: 6,
+    element: 'hava',
+    cakra: 'Alın, Taç',
+    renk: ['beyaz-mavi', 'şeftali', 'gri', 'gökkuşağı'],
+    koken: ['Hindistan', 'Sri Lanka', 'Madagaskar', 'Myanmar', 'Avustralya'],
+    tarih: 'Hindistan\'da kutsal sayılan, düğünlerde gelinlere uğur getirdiğine inanılan taş. Tuhfe-i Murâdî\'nde "hacerü\'l-kamer" — ay taşı — adıyla geçer: "ak, berrak ve hafiftir; ay ziyadesinde (dolunayda) bulunur." Eski çağlarda yolculuklarda koruma sağladığına inanılmış.',
+    niyet: 'Yeni başlangıçlar için. Sezgisel gücü artırmak için. Adet döneminin düzenlenmesi ve regl ağrılarında. Hormon dengesini kurmak için. Böbrek sorunlarında. Kilo kontrolüne yardımcı. Evliler arasında sevgi bağını güçlendirmek için.',
+    dikkat: {
+      fiziksel: 'Düşmeye karşı hassas. Güneşte bırakmayın.',
+      baglamsal: null
+    },
+    bakim: 'Dolunayda ay ışığında şarj edilir — tüm gece.',
+    birlikte: ['Roze Kuvars', 'Ametist', 'Labradorit'],
+    ayri: ['Oniks'],
+    alternatif: ['Selenit', 'Beyaz Labradorit'],
+    varyantlar: {
+      'Gri Ay Taşı': 'Yeni ayın gizemini taşır.',
+      'Şeftali Ay Taşı': 'Kalbi destekler.',
+      'Beyaz Ay Taşı': 'Dolunay enerjisi, kundalini.',
+      'Gökkuşağı Ay Taşı': 'Nazardan korur.'
+    },
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'tuhfe-i-muradi', 'sifalı-dogal-taslar'] }
+  },
+
+  'Turkuaz': {
+    slug: 'turkuaz',
+    isim: 'Turkuaz',
+    ruh: 'Koruma bir duvar değil, bir kalkan — geçirmez ama nefes alır.',
+    emoji: '💠',
+    aile: 'Fosfat CuAl₆(PO₄)₄(OH)₈·4H₂O',
+    sertlik: 6,
+    element: 'fırtına',
+    cakra: 'Boğaz',
+    renk: ['gök mavisi', 'yeşil-mavi', 'siyah matris damarı'],
+    koken: ['İran (Nişabur)', 'ABD (Arizona)', 'Çin', 'Mısır', 'Meksika'],
+    tarih: 'İsa\'dan önce 5000\'li yıllardan beri bilinen en eski değerli taşlardan biri. Fransızca "pierre turquoise" — Türk taşı — adından gelir. Tuhfe-i Murâdî\'nde "pirûze" adıyla geçer: "mavi renge mâil yeşil bir taştır, madeni bakır madenidir." Dikkat notu da eklenmiştir: "bahtçı" denilen düşük kalite pirûzeye yağ sürününce rengi gider.',
+    niyet: 'Koruma ve bütünlük için. Nazara karşı. Boğaz çakrasını açmak için. Huzur ve duygusal denge için. Yolculuklarda koruyucu.',
+    dikkat: {
+      fiziksel: 'Suya, yağa ve kimyasallara maruz bırakmayın — renk değişir ve bozulur.',
+      baglamsal: 'Piyasada çok sahte var — boyalı howlit ile karıştırılır.'
+    },
+    bakim: 'Yumuşak kuru bez ile silinir. Ay ışığında şarj edilir.',
+    birlikte: ['Lapis Lazuli', 'Ametist', 'Şeffaf Kuvars'],
+    ayri: [],
+    alternatif: ['Amazonit', 'Akuamarin'],
+    tarihsel_isim: 'Pirûze', meta: { son_guncelleme: '2026-05', kaynaklar: ['tuhfe-i-muradi', 'sifalı-dogal-taslar'] }
+  },
+
+  'Malakit': {
+    slug: 'malakit',
+    isim: 'Malakit',
+    ruh: 'Dönüşüm acısız olmaz — malakit bunu bilir ve yanında durur.',
+    emoji: '🟢',
+    aile: 'Karbonat Cu₂[(OH)₂|CO₃]',
+    sertlik: 3.5,
+    element: 'ateş',
+    cakra: 'Solar Pleksus, Kalp',
+    renk: ['koyu yeşil', 'açık yeşil bantlı', 'halka desenli'],
+    koken: ['Kongo', 'Zambiya', 'Rusya', 'Avustralya', 'Namibya'],
+    tarih: 'Antik Mısır\'da göz boyası ve koruyucu boya olarak kullanılmıştır. Rusya\'da Çar\'ın sarayında dekoratif taş olarak kullanılmış — St. Petersburg Hermitage\'da büyük malakit sütunlar bugün durmaktadır. Negatif enerjiyi ve radyasyonu emen en güçlü taşlardan biri olarak bilinir.',
+    niyet: 'Güçlü değişim ve dönüşüm dönemlerinde. Negatif enerjiyi emmek için. Alın çakrasına tutulduğunda görüş ve bakış açısını geliştirmek için. Regl ağrıları ve doğum sürecinde.',
+    dikkat: {
+      fiziksel: 'Toz ve ham hali zehirlidir — sadece cilalanmış hali kullanın. Suya bırakmayın.',
+      baglamsal: 'Kalp çarpıntısı yaparsa kullanımı bırakın. Yetenekli rehber gözetiminde kullanmak önerilir.'
+    },
+    bakim: 'Sadece yumuşak kuru bez ile silinir. Tuz kullanmayın.',
+    birlikte: ['Azurit', 'Roze Kuvars'],
+    ayri: [],
+    alternatif: ['Yeşil Aventurin', 'Yeşil Kalsit'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Karneol': {
+    slug: 'karneol',
+    isim: 'Karneol',
+    ruh: 'Eylem korkudan değil, içten gelen ateşten doğar.',
+    emoji: '🔶',
+    aile: 'Kalsedon (SiO₂)',
+    sertlik: 6.5,
+    element: 'ateş',
+    cakra: 'Kök, Solar Pleksus',
+    renk: ['turuncu', 'kırmızı-turuncu', 'kırmızı-kahve'],
+    koken: ['Hindistan', 'Brezilya', 'Uruguay', 'Madagaskar', 'Mısır'],
+    tarih: 'Tuhfe-i Murâdî\'nde "akik: çeşitli renkleri olan değerli bir taş, en iyisi gül rengindeki açık kızıl akiktir." Hz. Muhammed\'in akik yüzük taktığı aktarılır. Antik çağlarda savaşa giden askerler daha cesur dövüşmek için üzerinde taşımış. İsa\'dan önce 3000 yılından beri Hindistan\'da mücevher yapımında kullanılmaktadır.',
+    niyet: 'Cesaret, canlılık ve güven için. Harekete geçmek için. Göz sağlığı için. Enerji yenilemek için. Düşük tansiyonu normale getirmek için. Hamilelikte destekleyici. Kan dolaşımını düzenler.',
+    dikkat: {
+      fiziksel: null,
+      baglamsal: 'Yapay boyalı akik piyasada çok yaygın — bantlar silik veya hiç yoksa şüphelenin.'
+    },
+    bakim: 'Güneş veya ay ışığında şarj edilir. Soğuk su ile temizlenir.',
+    birlikte: ['Şeffaf Kuvars', 'Jasper', 'Kalsedon'],
+    ayri: [],
+    alternatif: ['Kırmızı Jasper', 'Kırmızı Kalsedon'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'tuhfe-i-muradi', 'sifalı-dogal-taslar'] }
+  },
+
+  'Kaplan Gözü': {
+    slug: 'kaplan-gozu',
+    isim: 'Kaplan Gözü',
+    ruh: 'Gücünü doğru yerde kullanmak — işte gerçek güç bu.',
+    emoji: '🐯',
+    aile: 'Kuvars (SiO₂)',
+    sertlik: 7,
+    element: 'ateş',
+    cakra: 'Solar Pleksus, Kök',
+    renk: ['altın-kahve bantlı', 'bal sarısı', 'kahverengi'],
+    koken: ['Güney Afrika', 'Avustralya', 'Hindistan', 'Brezilya', 'ABD'],
+    tarih: 'Adını içindeki ipeksi parıltıdan alır — ışık değiştikçe göz gibi kayar. Roma\'da savaş tanrısı Mars\'ın taşı. Kocabaş geleneğinde özellikle migren ve baş ağrısı için önerilen taşlar arasında geçer.',
+    niyet: 'Zihinsel odak için. Gücü doğru yönde kullanmak için. İş hayatında başarı için. Migren ve baş ağrısında destekleyici. Boğaz ve üreme organlarını destekler. Sağ kolda taşınması önerilir.',
+    dikkat: {
+      fiziksel: 'Krisotil (mavi asbest) içerebilir — güvenilir kaynak tercih edin.',
+      baglamsal: null
+    },
+    bakim: 'Güneş ışığında şarj edilir. Soğuk su ile temizlenir.',
+    birlikte: ['Hematit', 'Obsidyen', 'Sitrin'],
+    ayri: [],
+    alternatif: ['Hematit', 'Piroksen'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'sifalı-dogal-taslar'] }
+  },
+
+  'Hematit': {
+    slug: 'hematit',
+    isim: 'Hematit',
+    ruh: 'Topraklanmış zihin dağılmaz — yerinden konuşur.',
+    emoji: '⚫',
+    aile: 'Demir Oksit Fe₂O₃',
+    sertlik: 5.5,
+    element: 'toprak',
+    cakra: 'Kök',
+    renk: ['gri-siyah metalik', 'kırmızımsı (ham)', 'gümüş parlaklığı (cilalanmış)'],
+    koken: ['Brezilya', 'Avustralya', 'İngiltere', 'Meksika', 'Kanada'],
+    tarih: 'Yunancada "kan" anlamına gelen "haima"dan gelir. Orta Çağ\'da "kan taşı" olarak da anıldı. Antik Mısır\'da ölülerin mezarlarına eşlik etmesi için konurdu. Romalılar savaşlarda korunmak için taşırdı. Kocabaş geleneğinde kan dolaşımını düzenleyen, enerji veren ve cesaret güçlendiren taş olarak aktarılır.',
+    niyet: 'Topraklanmak için. Kan dolaşımını düzenlemek için. Karar verme gücünü artırmak için. Eklem ve romatizmal ağrılarda. Detoks için. Bellek ve hafızayı güçlendirmek için.',
+    dikkat: {
+      fiziksel: 'Suya uzun süre bırakmayın — paslanabilir. Sert yüzeyi diğer taşları çizebilir.',
+      baglamsal: 'Çok ağır ve yoğun enerji — uzun süre taşımaktan kaçının.'
+    },
+    bakim: 'Toprak ile temizlenir, kuvars üzerinde şarj edilir.',
+    birlikte: ['Obsidyen', 'Siyah Turmalin', 'Dumanlı Kuvars'],
+    ayri: [],
+    alternatif: ['Obsidyen', 'Siyah Turmalin'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'sifalı-dogal-taslar'] }
+  },
+
+  'Akuamarin': {
+    slug: 'akuamarin',
+    isim: 'Akuamarin',
+    ruh: 'Deniz ne kadar derin olursa olsun — üstü her zaman sakindir.',
+    emoji: '🔹',
+    aile: 'Beril Be₃Al₂(SiO₃)₆',
+    sertlik: 7.5,
+    element: 'su',
+    cakra: 'Boğaz, Kalp',
+    renk: ['açık mavi', 'mavi-yeşil', 'deniz mavisi'],
+    koken: ['Brezilya', 'Madagaskar', 'Pakistan', 'Rusya', 'Nijerya'],
+    tarih: 'Latince "aqua marina" — deniz suyu. Kocabaş geleneğinde "Gökzümrüt" adıyla da anılır. Denizciler arasında fırtınadan koruyucu tılsım olarak yüzyıllarca taşınmıştır. Alkol, sigara ve uyuşturucu bağımlılığına karşı geleneksel kullanımı güçlüdür.',
+    niyet: 'Solunum sistemini desteklemek için. Alkol, sigara ve madde bağımlılığında. Hafızayı güçlendirmek için. Utangaçlığı yenmek için. Bezeler ve şişliklerde. Boğaz ağrısı ve tiroit sorunlarında.',
+    dikkat: {
+      fiziksel: 'Uzun süreli güneşte solabilir.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında veya sabah güneşinde şarj edilir.',
+    birlikte: ['Labradorit', 'Ay Taşı'],
+    ayri: [],
+    alternatif: ['Mavi Topaz', 'Larimar'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'sifalı-dogal-taslar'] }
+  },
+
+  'Zümrüt': {
+    slug: 'zumrut',
+    isim: 'Zümrüt',
+    ruh: 'Sevgi güneş gibidir — ısıtır ama yakmaz.',
+    emoji: '💚',
+    aile: 'Beril Be₃Al₂(SiO₃)₆',
+    sertlik: 7.5,
+    element: 'su',
+    cakra: 'Kalp',
+    renk: ['yoğun yeşil', 'koyu yeşil', 'zeytin yeşili'],
+    koken: ['Kolombiya', 'Brezilya', 'Zimbabve', 'Zambiya', 'Afganistan'],
+    tarih: 'Tuhfe-i Murâdî\'nde zümrüt şöyle tarif edilir: "başlangıçta yakut iken madeninde çok durmaktan ve üzerine güneş hararetiyle yübuset galip olup dış yüzü değişerek yeşil renk alan değerli bir cevher." İsa\'dan önce 1300\'lü yıllardan beri Mısır\'da bilinen taş; Hz. Musa\'nın "on emir"i zümrüt plakaya yazdığı söylenir.',
+    niyet: 'Sevgi ve şefkat için. Hamilelikte düşük riskini azaltmak için. Göz ağrılarını gidermek için. Baş dönmesini önlemek için. Evlilikte huzur ve sadakat için. Yeni başlangıçlarda cesaret için.',
+    dikkat: {
+      fiziksel: 'Kırılgan yapısı var. Ultrasonik temizleyici kullanmayın.',
+      baglamsal: 'Çoğu zümrüt yağ veya reçine ile işlenmiştir — kimyasal temas yapıyı bozar.'
+    },
+    bakim: 'Ay ışığında şarj edilir. Yumuşak nemli bez ile temizlenir.',
+    birlikte: ['Roze Kuvars', 'Yeşil Aventurin'],
+    ayri: [],
+    alternatif: ['Yeşil Aventurin', 'Yeşim', 'Dioptaz'],
+    tarihsel_isim: 'Zümrüd / Zeberced', meta: { son_guncelleme: '2026-05', kaynaklar: ['tuhfe-i-muradi', 'sifalı-dogal-taslar'] }
+  },
+
+  'Granat': {
+    slug: 'granat',
+    isim: 'Granat',
+    ruh: 'Tutku enerjiyi, enerji hareketi, hareket hayatı yaratır.',
+    emoji: '🔴',
+    aile: 'Silikat X₃Y₂(SiO₄)₃',
+    sertlik: 7,
+    element: 'toprak',
+    cakra: 'Kök, Solar Pleksus',
+    renk: ['koyu kırmızı', 'morumsu kırmızı', 'turuncu', 'yeşil (nadir)'],
+    koken: ['Hindistan', 'Brezilya', 'Çekya', 'Sri Lanka', 'Madagaskar'],
+    tarih: 'Adını "nar" anlamına gelen Latince "granatum"dan alır. Çekya\'da tunç çağından, Mısır\'da 5000 yıldan beri bilinmektedir. Kocabaş geleneğinde "Lal taşı" adıyla anılır; kan damarları için çok yararlı ve sevgi-şefkati simgeleyen taş olarak aktarılır.',
+    niyet: 'Yaratıcılığı artırmak için. Hormonsal dengeyi sağlamak için. Kan hastalıklarında. Kalp ve akciğer için. Sosyal ilişkileri güçlendirmek için. İrade gücünü artırmak için.',
+    dikkat: {
+      fiziksel: null,
+      baglamsal: 'Hassas kişilerde bel altında kullanımda baş ağrısı yapabilir.'
+    },
+    bakim: 'Güneş veya ay ışığında şarj edilir.',
+    birlikte: ['Hematit', 'Obsidyen'],
+    ayri: [],
+    alternatif: ['Kırmızı Jasper', 'Rodolit'],
+    varyantlar: {
+      'Almandin': 'En yaygın türü. Sevgi ve şefkat.',
+      'Pirop': 'Kan kırmızısı. Anlama kabiliyeti.',
+      'Grossular': 'Yeşil-kahve. Yoğunlaşma.',
+      'Uvarovit': 'Yeşil. Sakinlik.',
+      'Tsavorit': 'Nadir yeşil. Kalp çakrası.'
+    },
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'sifalı-dogal-taslar'] }
+  },
+
+  'Kehribar': {
+    slug: 'kehribar',
+    isim: 'Kehribar',
+    ruh: 'Geçmişin enerjisini taşır — ama şimdiyi ısıtır.',
+    emoji: '🟡',
+    aile: 'Fosil Reçine (organik)',
+    sertlik: 2.5,
+    element: 'toprak',
+    cakra: 'Solar Pleksus',
+    renk: ['bal sarısı', 'turuncu-kırmızı', 'kehribar'],
+    koken: ['Baltık', 'Dominik Cumhuriyeti', 'Myanmar'],
+    tarih: 'Tuhfe-i Murâdî\'nde "kehrübâ" adıyla geçer: "mânâsı saman kapıcı demektir — sürtmekle kızdırıldığında samanı kendine çeker." Taş değil, reçinenin taşlaşmış hali. Roma devrinde guatr tedavisinde boyuna takılmış. Kocabaş geleneğinde sol el ile taşındığında bedendeki negatif elektriği toplar notu önemlidir.',
+    niyet: 'Boğaz ve tiroit enfeksiyonları için boyuna takılarak. Guatr tedavisinde. Astım ve alerji için. Sol elde negatif enerjiyi toplamak için. Romatizmal ağrılarda. Bebeklerde diş çıkarma için.',
+    dikkat: {
+      fiziksel: 'Su, sabun, parfüm ve kimyasallardan uzak tutun.',
+      baglamsal: 'Piyasada çok sahte var — gerçek kehribar sürtünce elektriklenir; yakıldığında çam kokusu verir. Yeşil kehribar neredeyse her zaman boyalıdır.'
+    },
+    bakim: 'Güneş ışığında kısa süre şarj edilir. Yumuşak kuru bez ile silinir.',
+    birlikte: ['Selenit', 'Labradorit'],
+    ayri: [],
+    alternatif: ['Sitrin', 'Sarı Kalsit'],
+    tarihsel_isim: 'Kehrübâ', meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'tuhfe-i-muradi', 'sifalı-dogal-taslar'] }
+  },
+
+  'Aventurin': {
+    slug: 'aventurin',
+    isim: 'Aventurin',
+    ruh: 'Şans kapıyı çalmaz — sen kapıyı açık bırakırsın.',
+    emoji: '🍀',
+    aile: 'Kuvars (SiO₂)',
+    sertlik: 6.5,
+    element: 'toprak',
+    cakra: 'Kalp',
+    renk: ['yeşil', 'mavi', 'kırmızı', 'turuncu', 'sarı'],
+    koken: ['Hindistan', 'Brezilya', 'Çin', 'Rusya', 'Tibet'],
+    tarih: 'Kocabaş geleneğinde pozitif düşünce, mutluluk, şans ve kalp sağlığı için başvurulan taş olarak kapsamlı işlenir. "Sınırsız imkanların taşı" olarak da bilinir. Adını İtalyanca "a ventura" — şansa — kelimesinden almıştır.',
+    niyet: 'Pozitif düşünce ve iyimserlik için. Mutluluk ve stres azaltma için. Depresyona karşı. Kalp sağlığı için. Değişimlere uyum için.',
+    dikkat: {
+      fiziksel: 'Uzun süreli güneşte solabilir.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında veya toprak üzerinde şarj edilir.',
+    birlikte: ['Roze Kuvars', 'Sitrin', 'Yeşim'],
+    ayri: [],
+    alternatif: ['Yeşil Kalsit', 'Yeşim'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'sifalı-dogal-taslar'] }
+  },
+
+  'Rodonit': {
+    slug: 'rodonit',
+    isim: 'Rodonit',
+    ruh: 'Affetmek unutmak değil — yükü bırakmaktır.',
+    emoji: '🌺',
+    aile: 'Silikat (Mn²)SiO₃',
+    sertlik: 6,
+    element: 'toprak',
+    cakra: 'Kalp, Kök',
+    renk: ['pembe', 'koyu pembe', 'siyah damar'],
+    koken: ['Rusya', 'Avustralya', 'İsveç', 'Brezilya', 'ABD'],
+    tarih: 'Adını Yunanca "gül" anlamından alır. Rusya\'da ulusal taş olarak tanınmış. Duygusal şifa ve affetme taşı olarak bilinir — pembe rengi roze kuvarsa benzer ama siyah damarları onu daha topraklayıcı kılar.',
+    niyet: 'Affetmek ve geçmişi bırakmak için. Gizli yetenekleri keşfetmek için. Aşk enerjisini güçlendirmek için. Meditasyonda derinleşmek için. Safra ve böbrek taşı tedavisine destek.',
+    dikkat: {
+      fiziksel: 'Sert düşmelerden kaçının.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında şarj edilir.',
+    birlikte: ['Roze Kuvars', 'Ametist'],
+    ayri: [],
+    alternatif: ['Rodokrosit', 'Roze Kuvars'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Sodalit': {
+    slug: 'sodalit',
+    isim: 'Sodalit',
+    ruh: 'Mantık ve sezgi düşman değil — ikisi birden konuştuğunda gerçeği duyarsın.',
+    emoji: '🔷',
+    aile: 'Feldispatoid Na₈[(Cl,OH)₂|Al₆Si₆O₂₄]',
+    sertlik: 5.5,
+    element: 'hava',
+    cakra: 'Alın (3. Göz)',
+    renk: ['koyu mavi', 'lacivert', 'beyaz damar'],
+    koken: ['Kanada', 'Brezilya', 'Namibya', 'Hindistan', 'Rusya'],
+    tarih: 'İçeriğinde soda ve kalsiyum barındırdığından adını almıştır. Lapis lazuli\'ye benzer görünümü nedeniyle zaman zaman karıştırılır — farkı pirit (altın) nokta içermemesidir. Kocabaş geleneğinde mavi renginden dolayı nazardan koruduğuna inanılır.',
+    niyet: 'Sezgileri güçlendirmek için. Mantık ve sezgiyi birlikte çalıştırmak için. Kan basıncını düşürmek için. Alkol ve bağımlılık tedavisinde sakinleştirici destek. Kendini ifade etmekte zorlananlar için boğaz bölgesinde taşınır.',
+    dikkat: {
+      fiziksel: 'Güneşte solduruyor. Lapis lazuli ile karıştırılır.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında şarj edilir.',
+    birlikte: ['Lapis Lazuli', 'Ametist', 'Safir'],
+    ayri: [],
+    alternatif: ['Lapis Lazuli', 'Azurit'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'sifalı-dogal-taslar'] }
+  },
+
+  'Amazonit': {
+    slug: 'amazonit',
+    isim: 'Amazonit',
+    ruh: 'Gerçeği söylemek için önce onu taşımayı öğrenmek gerekir.',
+    emoji: '🌊',
+    aile: 'Feldispat KAlSi₃O₈',
+    sertlik: 6,
+    element: 'su',
+    cakra: 'Kalp, Boğaz',
+    renk: ['turkuaz-yeşil', 'mavi-yeşil', 'beyaz damar'],
+    koken: ['Brezilya', 'Rusya', 'Madagaskar', 'ABD', 'Avustralya'],
+    tarih: 'Adını Amazon Nehri\'nden almıştır. Tutankhamun\'un mezarında bulunan taşlar arasında amazonit de yer almaktadır. Kocabaş geleneğinde "beden dışı deneyimler karşısında duyulan korkuyu yatıştırır, beden ve ruh dünyaları arasında sürekliliği sağlar" olarak aktarılır.',
+    niyet: 'İletişimi iyileştirmek için. Duygusal yaraların iyileşmesi için. Değişimleri kabullenmeyi kolaylaştırmak için. Elektromanyetik kirliliği filtrelemek için. Kemik, diş, tırnak ve saç sağlığı için.',
+    dikkat: {
+      fiziksel: 'Güneşte solabilir.',
+      baglamsal: 'Turkuaz ile karıştırılabilir.'
+    },
+    bakim: 'Ay ışığında şarj edilir.',
+    birlikte: ['Roze Kuvars', 'Turkuaz', 'Akuamarin'],
+    ayri: [],
+    alternatif: ['Turkuaz', 'Akuamarin'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'sifalı-dogal-taslar'] }
+  },
+
+  'Opal': {
+    slug: 'opal',
+    isim: 'Opal',
+    ruh: 'Her açıdan farklı görünür — tıpkı gerçek gibi.',
+    emoji: '🌈',
+    aile: 'Hidrate Silika SiO₂·nH₂O',
+    sertlik: 6,
+    element: 'su',
+    cakra: 'Tüm çakralar',
+    renk: ['süt beyazı', 'siyah', 'ateş (turuncu-kırmızı)', 'mavi', 'gökkuşağı'],
+    koken: ['Avustralya', 'Etiyopya', 'Meksika', 'Brezilya', 'Madagaskar'],
+    tarih: 'Adını değerli anlamına gelen "Opalus"tan almıştır. Roma medeniyetinde şans ve umut taşı olarak kullanılmıştır. 19. yüzyılda kötü şans getirdiğine dair bir inanç yayılmış — bu büyük ölçüde Walter Scott\'ın bir romanından kaynaklanmaktadır.',
+    niyet: 'Duyguları yoğunlaştırmak için. Sindirim sistemi için. Kanı temizlemek için. Cilt, saç ve tırnak sağlığı için. Yaratıcılık ve tutku için.',
+    dikkat: {
+      fiziksel: 'Kuruluktan çatlar — kuru ortamda saklamayın. Tuzlu su kesinlikle hayır.',
+      baglamsal: 'Duyguları büyütür — hassas dönemlerde dikkatli kullanın.'
+    },
+    bakim: 'Ay ışığında nazikçe şarj edilir. Yumuşak nemli bez ile silinir.',
+    birlikte: ['Ametist', 'Labradorit'],
+    ayri: [],
+    alternatif: ['Ay Taşı', 'Labradorit'],
+    varyantlar: {
+      'Süt Opal': 'Sindirim ve çakra temizliği.',
+      'Ateş Opal': 'Solar pleksus — tutku.',
+      'Mavi Opal': 'Zihni dinlendirmek, uyku.',
+      'Avustralya Opali': 'Cilt, saç, derin duygusallık.'
+    },
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Ametrin': {
+    slug: 'ametrin',
+    isim: 'Ametrin',
+    ruh: 'Zihin ile sezgi aynı anda konuştuğunda — cevap gelir.',
+    emoji: '✨',
+    aile: 'Kuvars (SiO₂)',
+    sertlik: 7,
+    element: 'hava',
+    cakra: 'Solar Pleksus, Taç',
+    renk: ['mor ve sarı', 'iki renk bir arada'],
+    koken: ['Bolivya (Anahi Madeni)', 'Brezilya'],
+    tarih: 'Dünyadaki en önemli ametrin yatağı Bolivya\'nın Anahi Madeni\'dir. Ametist ve sitrinin aynı kristal içinde birleştiği nadir oluşum. Efsaneye göre maden İspanyol fatih Conquistador\'a yerli prensesin çeyizi olarak verilmiş.',
+    niyet: 'Zihinsel ve ruhsal berraklık için. Bağımlılıklardan kurtulmak için. Beyin fonksiyonlarını güçlendirmek için. Sindirim sorunları ve kilo kontrolünde. Hem ametistin sakinleştiriciliği hem sitrinin netliği bir arada.',
+    dikkat: {
+      fiziksel: 'Güneşte her iki renk de solar.',
+      baglamsal: 'Piyasada yapay ametrin çok — renk geçişi çok keskin ise şüphelenin.'
+    },
+    bakim: 'Ay ışığında şarj edilir.',
+    birlikte: ['Şeffaf Kuvars', 'Labradorit'],
+    ayri: ['Sitrin'],
+    alternatif: ['Ametist', 'Lepidolit'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Pirit': {
+    slug: 'pirit',
+    isim: 'Pirit',
+    ruh: 'Altın gibi parlarsın — ama sen asılsın.',
+    emoji: '✨',
+    aile: 'Sülfür FeS₂',
+    sertlik: 6.5,
+    element: 'toprak',
+    cakra: 'Solar Pleksus',
+    renk: ['altın sarısı metalik', 'bronz parlaklığı'],
+    koken: ['İspanya', 'Peru', 'Rusya', 'Güney Afrika', 'ABD'],
+    tarih: 'Yunanca "ateş" anlamına gelen "pyr"dan gelir. İnka medeniyetinde ayna olarak kullanılmıştır. "Aptal altını" olarak da anılır. Halk arasında para ve zenginlik getirdiğine inanılmış.',
+    niyet: 'Solar pleksus çakrasını aktif tutmak için. İrade gücünü artırmak için. Korku ve endişeden kurtulmak için. Girişimcilik ruhunu desteklemek için. Endokrin sistemini güçlendirmek için.',
+    dikkat: {
+      fiziksel: 'Su ve nemde paslanır. Tuzlu su kesinlikle hayır.',
+      baglamsal: 'Pirit tozu solunmamalı.'
+    },
+    bakim: 'Güneş ışığında kısa süre şarj edilir. Kuru bez ile silinir — suya bırakmayın.',
+    birlikte: ['Sitrin', 'Kaplan Gözü'],
+    ayri: [],
+    alternatif: ['Sitrin', 'Sarı Jasper'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Lepidolit': {
+    slug: 'lepidolit',
+    isim: 'Lepidolit',
+    ruh: 'Huzur dışarıdan gelmez — içeride zaten vardı.',
+    emoji: '💜',
+    aile: 'Mika K(Li,Al)₃[(F,OH)₂|(Si,Al)₄O₁₀]',
+    sertlik: 2.5,
+    element: 'su',
+    cakra: 'Tüm çakralar, özellikle Kalp ve Alın',
+    renk: ['leylak', 'mor', 'pembe-mor', 'gri-mor'],
+    koken: ['Brezilya', 'Rusya', 'ABD', 'Madagaskar', 'Zimbabve'],
+    tarih: 'İçeriğindeki lityum elementi nedeniyle doğanın sunduğu en güçlü sakinleştiricilerden biri. Modern psikiyatride lityum tuzları bipolar bozukluk tedavisinde kullanılmaktadır. Stres ve uyku bozuklukları için yastık altında kullanımı yaygındır.',
+    niyet: 'Stres ve kaygıyı azaltmak için. Uyku bozukluklarında. Menopoz sıkıntılarında iksir olarak. Elektromanyetik dalgaları temizlemek için bilgisayar yanında. Bağışıklık sistemini güçlendirmek için.',
+    dikkat: {
+      fiziksel: 'Çok yumuşak — sert taşlardan mutlaka ayrı. Uzun süre suya bırakmayın.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında şarj edilir.',
+    birlikte: ['Ametist', 'Roze Kuvars', 'Ay Taşı'],
+    ayri: [],
+    alternatif: ['Ametist', 'Mavi Kalsit'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Kalsedon': {
+    slug: 'kalsedon',
+    isim: 'Kalsedon',
+    ruh: 'İyi niyet söylemez — taşır.',
+    emoji: '🔘',
+    aile: 'Kuvars (SiO₂)',
+    sertlik: 6.5,
+    element: 'su',
+    cakra: 'Boğaz, Alın',
+    renk: ['mavi-beyaz', 'açık gri', 'bej', 'sarımsı'],
+    koken: ['Türkiye (Eskişehir)', 'Brezilya', 'Hindistan', 'Namibya'],
+    tarih: 'Adını Romalılar döneminde İstanbul\'un Kadıköy limanından almıştır — o dönemki adı "Chalcedon"du. Rivayete göre insanların ilk mücevher taşıdır. Anadolu\'da Hitit döneminden bu yana kullanılmaktadır. Antik çağda başarı ve gücün sembolü.',
+    niyet: 'Düşünce yeteneğini güçlendirmek ve iyi konuşmak için. Kardeşlik bağlarını güçlendirmek için. Nazara karşı. Kabuslardan korunmak için yastık altına. Solunum yolu ve göz hastalıklarında.',
+    dikkat: {
+      fiziksel: 'Uzun süreli güneşte solabilir.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında şarj edilir.',
+    birlikte: ['Lapis Lazuli', 'Sodalit', 'Akuamarin'],
+    ayri: [],
+    alternatif: ['Sodalit', 'Akuamarin'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Krizolit': {
+    slug: 'krizolit',
+    isim: 'Krizolit',
+    ruh: 'Kıskançlık enerjini çalar — bırakınca ne kadar hafiflersin.',
+    emoji: '💛',
+    aile: 'Olivin (Mg,Mn,Fe)₂[SiO₄]',
+    sertlik: 6.5,
+    element: 'toprak',
+    cakra: 'Solar Pleksus, Kalp',
+    renk: ['açık yeşil', 'sarı-yeşil', 'zeytin yeşili'],
+    koken: ['Mısır (Zabargad)', 'Pakistan', 'Myanmar', 'Etiyopya', 'ABD'],
+    tarih: 'Tuhfe-i Murâdî\'nde "zeberced" adıyla geçer: "başlangıçta zümrüt idi, fakat hararet azlığından tamam olgunlaşmadan bağlandı ve zeberced hâsıl oldu — yeşil renklidir." 3000 yıl önce Mısır\'da kimselerin yaşamadığı Zabargad Adası\'nda bulunmuştur.',
+    niyet: 'Kıskançlık, kızma ve gücenme duygularını azaltmak için. Solar pleksus ve kalp çakrasını aktif tutmak için. Metabolizmayı güçlendirmek için. Kalp, ciğerler, dalak, pankreas ve bağırsak için.',
+    dikkat: {
+      fiziksel: 'Asitli maddeler ve uzun süreli su maruziyeti zarar verir.',
+      baglamsal: null
+    },
+    bakim: 'Sabah güneşinde kısa süre şarj edilir.',
+    birlikte: ['Sitrin', 'Roze Kuvars', 'Aventurin'],
+    ayri: [],
+    alternatif: ['Yeşil Aventurin', 'Yeşil Kalsit'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['tuhfe-i-muradi', 'sifalı-dogal-taslar'] }
+  },
+
+  'Akik': {
+    slug: 'akik',
+    isim: 'Akik',
+    ruh: 'Uzun ömür ve mutluluk — basit ama her şey bu.',
+    emoji: '🟤',
+    aile: 'Kalsedon (SiO₂)',
+    sertlik: 6.5,
+    element: 'toprak',
+    cakra: 'Kök, Solar Pleksus',
+    renk: ['bantlı çok renkli', 'gri-beyaz', 'kahverengi', 'mavi', 'kırmızı'],
+    koken: ['Hindistan', 'Brezilya', 'Madagaskar', 'Meksika', 'Çin'],
+    tarih: 'Tuhfe-i Murâdî\'nde "akik: çeşitli renkleri olan değerli bir taş, en iyisi gül rengindeki açık kızıl akiktir." Hz. Muhammed\'in akik yüzük taktığı İslam geleneğinde aktarılır. İsa\'dan önce 3000 yılından beri bilinmektedir.',
+    niyet: 'Göz sağlığı için. Kalbi korumak ve kan dolaşımını düzenlemek için. Uyku vermek ve korkutucu rüyaları engellemek için. Akıl gücünü geliştirmek için. Tansiyonu dengelemek için.',
+    dikkat: {
+      fiziksel: null,
+      baglamsal: 'Mavi ve yeşil akik çoğunlukla boyalıdır — doğal hali gri-beyazdır.'
+    },
+    bakim: 'Güneş veya ay ışığında şarj edilir.',
+    birlikte: ['Kalsedon', 'Jasper', 'Şeffaf Kuvars'],
+    ayri: [],
+    alternatif: ['Kalsedon', 'Jasper'],
+    varyantlar: {
+      'Mavi Akik': 'Diplomat taşı — iletişim.',
+      'Yosunlu Akik': 'Topraklama, kararlılık.',
+      'Ateş Akik': 'Canlılık, yaratıcılık.',
+      'Kırmızı Akik': 'Sadakat, kan dolaşımı.',
+      'Mavi Akik': 'Zihinsel esneklik ve karar verme; boğaz çakrasını aktive eder.',
+      'Ateş Akik': 'Yeryüzüyle derin bağlantı; yaratıcılığı güçlendirir.',
+      'Dendritik Akik': 'Bolluk ve büyüme; doğayla bağlantıyı derinleştirir.'
+    },
+    tarihsel_isim: '\u02BCAkîk', meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'tuhfe-i-muradi', 'sifalı-dogal-taslar'] }
+  },
+
+  'Jasper': {
+    slug: 'jasper',
+    isim: 'Jasper',
+    ruh: 'Toprak gibi — ne verirsen onu büyütür.',
+    emoji: '🟫',
+    aile: 'Kuvars (SiO₂)',
+    sertlik: 6.5,
+    element: 'toprak',
+    cakra: 'Kök, Solar Pleksus',
+    renk: ['kırmızı', 'kahverengi', 'sarı', 'yeşil', 'mavi'],
+    koken: ['Almanya', 'Hindistan', 'Fransa', 'Rusya', 'Venezüella'],
+    tarih: 'Tuhfe-i Murâdî\'nde "yasb/yasf" adıyla geçer — yeşim ile aynı kategoride değerlendirilmiştir. İbrani, Asur, Pers, Yunan ve Roma yazılı kaynaklarında adı geçer. Eski çağlarda yağmur getiren taş olduğuna inanılmıştır. Erdemlilik sembolüdür.',
+    niyet: 'Ortama huzur ve bütünlük için. Negatif enerjiyi emmek için. Karaciğer, dalak ve mesaneyi güçlendirmek için. Hormonal dengeyi sağlamak için. Vücudu toksinlerden temizlemek için.',
+    dikkat: {
+      fiziksel: 'Uzun süreli güneşte solabilir.',
+      baglamsal: 'Kırmızı jasper tam kırmızı değil — kırmızımsı kahverengidir.'
+    },
+    bakim: 'Toprak üzerinde veya güneşte şarj edilir.',
+    birlikte: ['Akik', 'Kalsedon', 'Şeffaf Kuvars'],
+    ayri: [],
+    alternatif: ['Akik', 'Kırmızı Kalsedon'],
+    varyantlar: {
+      'Kırmızı Jasper': 'Sevgi ve inanç. Dolaşım.',
+      'Sarı Jasper': 'Safra kesesi, böbrek. Menopoz.',
+      'Ocean Jasper': 'Boğaz çakrası, aura.',
+      'Rainforest Jasper': 'Doğa ile iletişim.'
+    },
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'tuhfe-i-muradi', 'sifalı-dogal-taslar'] }
+  },
+
+  'Angelit': {
+    slug: 'angelit',
+    isim: 'Angelit',
+    ruh: 'Sessizlikte en güçlü mesajlar gelir.',
+    emoji: '👼',
+    aile: 'Anhidrit CaSO₄',
+    sertlik: 3.5,
+    element: 'hava',
+    cakra: 'Boğaz, 3. Göz, Taç',
+    renk: ['açık mavi', 'buz mavisi', 'beyazımsı mavi'],
+    koken: ['Peru', 'Almanya', 'Polonya', 'Meksika', 'İngiltere'],
+    tarih: 'Meleklerin fiziksel temsilcisi olarak bilinen taş. Barışı ve kardeşliği simgeler. Telepatik iletişimi geliştirdiği ve ruhsal boyutlarla bilinçli iletişim kurmayı kolaylaştırdığı aktarılır.',
+    niyet: 'Barış ve huzur için. Melekler dünyasıyla iletişim için. Şefkat ve hoşgörüyü artırmak için. Boğaz ağrısı ve iltihaplanmada. Kilo kontrolü için. Daha derin düşünmek için.',
+    dikkat: {
+      fiziksel: 'Suya maruz bırakmayın — yumuşak yapısı bozulur. Düşürmemeye dikkat.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında şarj edilir. Yumuşak kuru bez ile silinir.',
+    birlikte: ['Selenit', 'Şeffaf Kuvars', 'Celestit'],
+    ayri: [],
+    alternatif: ['Celestit', 'Selenit'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Selenit': {
+    slug: 'selenit',
+    isim: 'Selenit',
+    ruh: 'Işık içeriden gelir — selenit sadece hatırlatır.',
+    emoji: '🤍',
+    aile: 'Jips CaSO₄·2H₂O',
+    sertlik: 2,
+    element: 'hava',
+    cakra: 'Alın (3. Göz), Taç',
+    renk: ['şeffaf-beyaz', 'inci parlaklığı', 'şampanya'],
+    koken: ['Meksika', 'Fas', 'ABD', 'Avustralya', 'Polonya'],
+    tarih: 'Adını Yunan Ay tanrısı Selene\'den alır. Kendi kendini temizleyebildiği aktarılan nadir taşlardan biri — diğer kristalleri de selenit kasesinde şarj edilir. Kanser ve tümör tedavilerinde destekleyici olarak bazı üniversite hastanelerinde kullanıldığına dair bilgiler dolaşmaktadır.',
+    niyet: 'Aurayı hızla temizlemek için. Ortama barış getirmek için. Diğer taşları temizlemek ve şarj etmek için. Diş sağlığı için. Kemik ve omurga sağlığı için. Kanser tedavisinde ışın yan etkilerini azaltmak için önerilir.',
+    dikkat: {
+      fiziksel: 'Suya maruz bırakmayın — erir. Çok yumuşak.',
+      baglamsal: null
+    },
+    bakim: 'Temizleme ve şarj gerekmez — kendisi diğer taşları temizler.',
+    birlikte: ['Tüm taşlarla uyumlu'],
+    ayri: [],
+    alternatif: ['Şeffaf Kuvars', 'Angelit'],
+    varyantlar: {
+      'Turuncu Selenit': 'Dünya enerjilerini canlandırır, fiziksel şifaya yardımcı olur.',
+      'Mavi Selenit': 'Meditasyonda zihin sohbetini kapatır, üçüncü gözü destekler.'
+    },
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Apatit': {
+    slug: 'apatit',
+    isim: 'Apatit',
+    ruh: 'Bilgi güç değil — bilgiyi paylaşmak güçtür.',
+    emoji: '💙',
+    aile: 'Fosfat Ca₅(PO₄)₃(F,Cl,OH)',
+    sertlik: 5,
+    element: 'hava',
+    cakra: 'Alın (3. Göz)',
+    renk: ['mavi', 'yeşil', 'sarı', 'mor', 'renksiz'],
+    koken: ['Meksika', 'Brezilya', 'Madagaskar', 'Rusya', 'Pakistan'],
+    tarih: 'Adı Yunanca "aldatmak" anlamından gelir — pek çok taşla karıştırıldığı için. Kemik ve dişlerin yapısında doğal olarak bulunan hidroksiapatit ile aynı mineral grubundadır — kemik sağlığı üzerindeki etkisi mineralojik açıdan desteklenir.',
+    niyet: 'Motivasyonu yükseltmek için. Kemiklerde kalsiyum emilimi için. Eklem iltihapları ve raşitizm desteği. Açlık hissini azaltmak için. Yüksek tansiyonu düzenlemek için. Kekemelik tedavisinde açık mavi apatit.',
+    dikkat: {
+      fiziksel: 'Asitli maddelerden uzak tutun. Güneşte solabilir.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında şarj edilir.',
+    birlikte: ['Şeffaf Kuvars', 'Akuamarin'],
+    ayri: [],
+    alternatif: ['Mavi Kalsit', 'Akuamarin'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Florit': {
+    slug: 'florit',
+    isim: 'Florit',
+    ruh: 'Zihin düzenlenince her şey yerli yerine oturur.',
+    emoji: '🟣',
+    aile: 'Florit CaF₂',
+    sertlik: 4,
+    element: 'hava',
+    cakra: 'Tüm çakralar',
+    renk: ['mor', 'yeşil', 'mavi', 'sarı', 'pembe', 'çok renkli'],
+    koken: ['Çin', 'Meksika', 'ABD', 'Güney Afrika', 'İngiltere'],
+    tarih: '"Bedenin elektrik süpürgesi" olarak tanımlanır. Öğrenme ve konsantrasyon taşı olarak öğrenciler arasında popülerdir. Ultraviyole ışınları altında büyüleyici renk oyunları sergiler.',
+    niyet: 'Zihni düzenlemek için. Sabit fikirleri çözmek için. Öğrenmeyi kolaylaştırmak için. Doğru karar vermeyi desteklemek için. Cilt hücrelerinin yenilenmesi için. Diş ve dişeti hastalıklarında iksir olarak.',
+    dikkat: {
+      fiziksel: 'Sertliği 4 — çok kolay çizilir. Kırılgan.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında şarj edilir.',
+    birlikte: ['Şeffaf Kuvars', 'Ametist'],
+    ayri: [],
+    alternatif: ['Ametist', 'Sodalit'],
+    varyantlar: {
+      'Mor Florit': 'Alın çakrası, meditasyon.',
+      'Yeşil Florit': 'Kalp çakrası.',
+      'Mavi Florit': 'Boğaz çakrası.',
+      'Sarı Florit': 'Solar pleksus.'
+    },
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Dumanlı Kuvars': {
+    slug: 'dumanli-kuvars',
+    isim: 'Dumanlı Kuvars',
+    ruh: 'Topraklan — sonra her şey daha net görünür.',
+    emoji: '🌫️',
+    aile: 'Kuvars (SiO₂)',
+    sertlik: 7,
+    element: 'toprak',
+    cakra: 'Kök',
+    renk: ['kahverengi', 'duman grisi', 'siyahımsı kahve'],
+    koken: ['Brezilya', 'Avustralya', 'İsviçre', 'ABD', 'Madagaskar'],
+    tarih: 'İskoçya\'da ulusal taş olarak tanınmış. En etkili topraklama taşlarından biri. Negatif enerjiyi emmez — dönüştürür. Radyasyonu engellemedeki gücü şeffaf kuvarstan daha yüksek olduğu aktarılır.',
+    niyet: 'Topraklanmak ve stresle baş etmek için. Negatif enerjiyi dönüştürmek için. Radyasyon kaynaklarının yanında koruyucu olarak. Depresyonu hafifletmek için. Baş ağrıları ve sırt ağrılarında.',
+    dikkat: {
+      fiziksel: 'Güneşte solabilir.',
+      baglamsal: null
+    },
+    bakim: 'Toprak üzerinde veya ay ışığında şarj edilir. Stresten arınma için önce bir gece toprakta bekletin.',
+    birlikte: ['Obsidyen', 'Siyah Turmalin', 'Hematit'],
+    ayri: [],
+    alternatif: ['Hematit', 'Obsidyen'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Moldavit': {
+    slug: 'moldavit',
+    isim: 'Moldavit',
+    ruh: 'Dönüşüm acımasız değil — sadece hızlıdır.',
+    emoji: '🌿',
+    aile: 'Tektit (meteorit kökenli cam)',
+    sertlik: 5.5,
+    element: 'hava',
+    cakra: 'Tüm çakralar, özellikle Kalp ve Alın',
+    renk: ['koyu yeşil', 'zeytin yeşili', 'şeffaf yeşil'],
+    koken: ['Çekya (Moldau Nehri)', 'Almanya', 'Avusturya'],
+    tarih: 'Yaklaşık 15 milyon yıl önce büyük bir meteoritin Avrupa\'ya çarpmasıyla oluştuğu düşünülmektedir. Taş çağı boyunca tılsımlı taç olduğuna inanılmış. Kocabaş geleneğinde gribal enfeksiyonlar ve solunum yolu hastalıklarında kullanımı aktarılır.',
+    niyet: 'Hızlı dönüşüm için. Çakralardaki enerji bloklarını çözmek için. Solunum yolu hastalıklarında. Anemide. Bağımlılıklardan kurtulmak için. Olumsuzluklardan kurtulmak için Ametist ile birlikte.',
+    dikkat: {
+      fiziksel: 'Piyasada sahte çok — gerçek moldavit hafif, cam gibi ama düzensiz yüzeyli.',
+      baglamsal: 'Çok güçlüdür — başlangıçta kısa sürelerle kullanın. Bazı kişilerde baş dönmesi yapabilir.'
+    },
+    bakim: 'Şarj gerekmez — kendi enerjisi sabittir. Arada bir suya tutmak yeterli.',
+    birlikte: ['Ametist', 'Dumanlı Kuvars'],
+    ayri: [],
+    alternatif: ['Labradorit'],
+    varyantlar: {
+      'İşlenmiş Moldavit': 'Ham halinden daha yoğun titreşim; hızlı dönüşüm ve yüksek bilinç.'
+    },
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'sifalı-dogal-taslar'] }
+  },
+
+  'Larimar': {
+    slug: 'larimar',
+    isim: 'Larimar',
+    ruh: 'Deniz kadar derin, gökyüzü kadar özgür.',
+    emoji: '🌊',
+    aile: 'Pektolite Ca₂Na[Si₃O₈OH]',
+    sertlik: 5,
+    element: 'su',
+    cakra: 'Boğaz',
+    renk: ['açık mavi', 'turkuaz-mavi', 'beyaz damar'],
+    koken: ['Dominik Cumhuriyeti (tek kaynak)'],
+    tarih: 'Dünyada yalnızca Dominik Cumhuriyeti\'nin küçük bir bölgesinde çıkarılır. 1974\'te yeniden keşfedilmiş. "Atlantis taşı" olarak da anılır. Kadın enerjisini ve ilahi güç bağlantısını temsil eder.',
+    niyet: 'Stres panzehiri. Boğaz çakrasını açmak için. Ses sanatçıları için ses koruması. Hamilelik ve doğum sonrası. Yüksek kan basıncını düzenlemek için.',
+    dikkat: {
+      fiziksel: 'Güneş ve ısıdan uzak tutun. Sert taşlardan uzak.',
+      baglamsal: 'Çok nadir — piyasada boyalı howlit ile karıştırılır.'
+    },
+    bakim: 'Ay ışığında şarj edilir.',
+    birlikte: ['Akuamarin', 'Amazonit', 'Turkuaz'],
+    ayri: [],
+    alternatif: ['Akuamarin', 'Mavi Kalsit'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Kyanit': {
+    slug: 'kyanit',
+    isim: 'Kyanit',
+    ruh: 'Köprü olmak güçtür — ama iki kıyıyı da görürsün.',
+    emoji: '💎',
+    aile: 'Silikat Al₂[O|SiO₄]',
+    sertlik: 5,
+    element: 'hava',
+    cakra: 'Tüm çakralar, özellikle Alın ve Kalp',
+    renk: ['mavi', 'yeşil', 'siyah', 'turuncu'],
+    koken: ['Brezilya', 'Nepal', 'Avustralya', 'Hindistan', 'İsviçre'],
+    tarih: 'Selenit gibi kendi kendini temizleyebildiği aktarılan nadir taşlardan biri. Reiki ve meditasyon pratisyenlerinin tercih ettiği güçlü bir taş. Mavi kyanit ile uyuyunca rüyaları bilinçli kontrol edebildiğine dair aktarımlar yaygındır.',
+    niyet: 'Telepatik iletişim için. Tüm çakraları otomatik hizalamak için. Doğa ile bağlantı için. Aurayı korumak için. Kan basıncını düşürmek için.',
+    dikkat: {
+      fiziksel: 'Kırılgan — dilimli kristal yapısı kolayca ayrılabilir.',
+      baglamsal: null
+    },
+    bakim: 'Temizleme ve şarj gerekmez — kendi kendini temizler.',
+    birlikte: ['Ametist', 'Labradorit', 'Ay Taşı'],
+    ayri: [],
+    alternatif: ['Labradorit', 'Lapis Lazuli'],
+    varyantlar: {
+      'Mavi Kyanit': 'Telepatik iletişim, rüya çalışması.',
+      'Yeşil Kyanit': 'Doğa ile bağlantı, kalp çakrası.',
+      'Siyah Kyanit': 'Güçlü koruma ve topraklama.',
+      'Mavi Kyanit': 'Sesi güçlendirir, boğaz çakrasını iyileştirir; sanatçılar için.',
+      'Siyah Kyanit': 'Çakraları hizalar, koruyucu kalkan oluşturur.'
+    },
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Prehnit': {
+    slug: 'prehnit',
+    isim: 'Prehnit',
+    ruh: 'İyileştirmeden önce kabul etmek gerekir.',
+    emoji: '🍏',
+    aile: 'Silikat Ca₂Al(AlSi₃O₁₀)(OH)₂',
+    sertlik: 6,
+    element: 'toprak',
+    cakra: 'Solar Pleksus, Kalp',
+    renk: ['açık yeşil', 'sarı-yeşil', 'şeffaf yeşil'],
+    koken: ['Güney Afrika', 'Avustralya', 'Çin', 'Namibya', 'ABD'],
+    tarih: '"Şifacının şifacısı" olarak bilinir — şifacıların ve terapistlerin koruyucu taşı olarak aktarılır. Kişinin hazır olmadan şifa vermesini engeller, önce kendi enerjisini güçlendirir.',
+    niyet: 'Şifacılar için koruyucu. Depolanmış duyguları temizlemek için. Korkusuz kabullenme için. Böbrek ve mesane sağlığı için.',
+    dikkat: {
+      fiziksel: 'Uzun süreli güneşte solabilir.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında veya toprak üzerinde şarj edilir.',
+    birlikte: ['Yeşim', 'Aventurin', 'Roze Kuvars'],
+    ayri: [],
+    alternatif: ['Yeşil Aventurin', 'Amazonit'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Dioptaz': {
+    slug: 'dioptaz',
+    isim: 'Dioptaz',
+    ruh: 'Kalp kırıldıkça büyür — dioptaz bunu bilir.',
+    emoji: '💚',
+    aile: 'Silikat CuSiO₃·H₂O',
+    sertlik: 5,
+    element: 'su',
+    cakra: 'Kalp',
+    renk: ['canlı zümrüt yeşili', 'koyu zümrüt'],
+    koken: ['Kazakistan', 'Kongo', 'Namibya', 'Şili', 'Rusya'],
+    tarih: 'Adını Yunanca "aracılığıyla görmek" anlamından alır. Kalp çakrasını açma özelliği olan en güçlü taş olarak kabul edilir. Nadir bulunan ve değerli bir taştır.',
+    niyet: 'Kalp çakrasını açmak için. Affetme ve şefkat için. Kalp kırıklıklarının tedavisinde. Yüksek tansiyon ve migrende. Bitkinliği azaltmak için.',
+    dikkat: {
+      fiziksel: 'Çok kırılgan. Bakır içerikli — suya bırakmayın. Toz solunmamalı.',
+      baglamsal: 'Nadir ve değerli — güvenilir kaynaklardan alın.'
+    },
+    bakim: 'Ay ışığında şarj edilir. Yumuşak nemli bez ile nazikçe silinir.',
+    birlikte: ['Roze Kuvars', 'Rodonit'],
+    ayri: [],
+    alternatif: ['Yeşil Aventurin', 'Zümrüt'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Azurit': {
+    slug: 'azurit',
+    isim: 'Azurit',
+    ruh: 'Bilinçaltı konuştuğunda — dinlemesini bilen duyar.',
+    emoji: '🔷',
+    aile: 'Karbonat Cu₃(CO₃)₂(OH)₂',
+    sertlik: 3.5,
+    element: 'hava',
+    cakra: 'Taç, Alın (3. Göz)',
+    renk: ['derin mavi', 'koyu lapis mavisi', 'mavi-mor'],
+    koken: ['Fas', 'Namibya', 'Kongo', 'Avustralya', 'ABD'],
+    tarih: 'Antik Mısır ve Orta Çağ Avrupa\'sında azurit tozu mavi boya olarak kullanılmış — pek çok Rönesans tablosundaki mavi tonlar azuritten gelir. Kocabaş geleneğinde göz yorulması için özel kullanım aktarılır: "sırt üstü yatarak göz kapaklarının üzerine iki azurit taşı yerleştirin."',
+    niyet: 'Bilinçaltını yeniden programlamak için. Göz yorulması için. Adet sancılarında. Duyguları rahatça ifade etmek için. Ruhsal uyanıklık için.',
+    dikkat: {
+      fiziksel: 'Bakır içerikli — suya bırakmayın, iksir olarak kullanmayın. Toz solunmamalı.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında şarj edilir. Yumuşak kuru bez ile silinir.',
+    birlikte: ['Malakit'],
+    ayri: [],
+    alternatif: ['Lapis Lazuli', 'Sodalit'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'sifalı-dogal-taslar'] }
+  },
+
+  'Rodokrosit': {
+    slug: 'rodokrosit',
+    isim: 'Rodokrosit',
+    ruh: 'Kendini sevmek sonradan öğrenilen bir şeydir — ama öğrenilebilir.',
+    emoji: '🌸',
+    aile: 'Karbonat Mn[CO₃]',
+    sertlik: 3.5,
+    element: 'su',
+    cakra: 'Solar Pleksus, Kalp',
+    renk: ['pembe-kırmızı', 'şeftali pembe', 'beyaz bantlı'],
+    koken: ['Arjantin', 'Peru', 'ABD', 'Güney Afrika', 'Japonya'],
+    tarih: 'Arjantin\'in ulusal taşıdır; İnka medeniyetinde "İnka gülü" olarak bilinmiş, İnka hanedanının kanının taşlaşmış hali olduğuna inanılmıştır. Kendini sevme ve duygusal şifa taşı olarak bilinir.',
+    niyet: 'Kendini sevmek ve kabullenmek için. Çocukluktan gelen duygusal yaraları iyileştirmek için. Kan basıncını dengelemek için. Sinir sistemindeki dengesizlikleri gidermek için. Kafeinin olumsuz etkilerini azaltmak için.',
+    dikkat: {
+      fiziksel: 'Çok yumuşak — sert taşlardan mutlaka ayrı. Uzun süre suya bırakmayın.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında veya gül yaprakları arasında şarj edilir.',
+    birlikte: ['Roze Kuvars', 'Rodonit', 'Ametist'],
+    ayri: [],
+    alternatif: ['Rodonit', 'Roze Kuvars'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Kunzit': {
+    slug: 'kunzit',
+    isim: 'Kunzit',
+    ruh: 'Kalp açıkken dünya farklı görünür.',
+    emoji: '💗',
+    aile: 'Spodümen LiAl[Si₂O₆]',
+    sertlik: 6.5,
+    element: 'su',
+    cakra: 'Kalp',
+    renk: ['açık pembe', 'leylak pembe', 'soluk mor-pembe'],
+    koken: ['Afganistan', 'Brezilya', 'Madagaskar', 'Pakistan', 'ABD'],
+    tarih: '1902 yılında ünlü mineralog George Frederick Kunz tarafından keşfedilmiş. Kalp çakrasını aktive eden en güçlü taşlardan biri. Lityum içerdiğinden doğal sakinleştirici özelliği vardır. Ameliyat sonrasında anestezinin olumsuz etkilerinden kurtulmak için önerilir.',
+    niyet: 'Kalbi sevgiye açmak için. Stresten hızla arınmak için. Epilepsi ataklarını yumuşatmak için. Eklem ağrılarını azaltmak için. Ameliyat sonrası iyileşmede.',
+    dikkat: {
+      fiziksel: 'Güneşten kesinlikle uzak tutun — renk solması çok hızlı ve geri dönüşsüz. Kırılgan.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında veya gün batımında şarj edilir. Güneşten uzak karanlık ortamda saklanır.',
+    birlikte: ['Roze Kuvars', 'Ametist', 'Lepidolit'],
+    ayri: [],
+    alternatif: ['Roze Kuvars', 'Rodokrosit'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Tanzanit': {
+    slug: 'tanzanit',
+    isim: 'Tanzanit',
+    ruh: 'Akıl ve kalp aynı dili konuştuğunda — gerçek ortaya çıkar.',
+    emoji: '💙',
+    aile: 'Zoisit Ca₂Al₃(SiO₄)(Si₂O₇)O(OH)',
+    sertlik: 6.5,
+    element: 'hava',
+    cakra: 'Kalp, Boğaz, Alın, Taç',
+    renk: ['mavi-mor', 'derin mavi', 'mor-lacivert'],
+    koken: ['Tanzanya (tek kaynak — Mererani)'],
+    tarih: '1967 yılında Tanzanya\'da keşfedilmiş — dünyada yalnızca Mererani bölgesinde çıkarılır. Tiffany & Co tarafından "tanzanit" adıyla dünyaya tanıtılmıştır. Metafizikçilerin en çok tercih ettiği taşlardan biridir.',
+    niyet: 'Akıl ve kalbin enerjisini birleştirmek için. İletişim kabiliyetini artırmak için. Gerçek aşk ve mutluluğu hissetmek için. Ruhsal yetenekleri geliştirmek için.',
+    dikkat: {
+      fiziksel: 'Çok nadir ve değerli — güvenilir kaynaklardan alın. Ultrasonik temizleyici kullanmayın.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında şarj edilir. Yumuşak nemli bez ile silinir.',
+    birlikte: ['Ametist', 'Lapis Lazuli', 'Akuamarin'],
+    ayri: [],
+    alternatif: ['Ametist', 'Safir'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Spinel': {
+    slug: 'spinel',
+    isim: 'Spinel',
+    ruh: 'Yeniden başlamak için önce durman gerekir.',
+    emoji: '❤️',
+    aile: 'Oksit MgAl₂O₄',
+    sertlik: 7.5,
+    element: 'su',
+    cakra: 'Tüm çakralar',
+    renk: ['kırmızı', 'pembe', 'mavi', 'mor', 'siyah', 'yeşil'],
+    koken: ['Myanmar', 'Sri Lanka', 'Tayland', 'Tanzanya', 'Afganistan'],
+    tarih: 'Tarih boyunca yakut ve safir ile karıştırılmıştır — İngiliz kraliyet tacındaki "Siyah Prens Yakutu" aslında bir spineldir. İngiliz kraliyet taçları spinel taşından yapılmaktadır. Yeniden canlanma ve hayat bulma taşı olarak bilinir.',
+    niyet: 'Yeniden canlanmak ve enerji kazanmak için. Tüm çakraları aktive etmek için. Bağışıklık sistemini güçlendirmek için. Umut ve zafer enerjisi için.',
+    dikkat: {
+      fiziksel: 'Yakut ve safir ile karıştırılabilir — güvenilir kaynak tercih edin.',
+      baglamsal: null
+    },
+    bakim: 'Ay veya güneş ışığında şarj edilir.',
+    birlikte: ['Şeffaf Kuvars', 'Ametist'],
+    ayri: [],
+    alternatif: ['Yakut', 'Safir'],
+    varyantlar: {
+      'Kırmızı Spinel': 'Fiziksel canlılık, kök çakra.',
+      'Mavi Spinel': 'Ruhsal canlılık, mantıksal zeka.',
+      'Yeşil Spinel': 'Duyguları yeniler, sevgi.',
+      'Mor Spinel': 'Ruhsal arınma.',
+      'Turuncu Spinel': 'Yaratıcılık ve özgüven.',
+      'Siyah Spinel': 'Maddi sorunlara içgörü; kundalini dengeleme, güçlü topraklayıcı.',
+      'Kırmızı Spinel': 'Fiziksel enerji ve dayanıklılık; vitaliteyi yeniler.'
+    },
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Tsavorit': {
+    slug: 'tsavorit',
+    isim: 'Tsavorit',
+    ruh: 'Bolluk içten dışa akar — dışarıdan içeri değil.',
+    emoji: '💚',
+    aile: 'Grossular Granat Ca₃Al₂(SiO₄)₃',
+    sertlik: 7,
+    element: 'toprak',
+    cakra: 'Kalp',
+    renk: ['canlı yeşil', 'zümrüt yeşili', 'açık yeşil'],
+    koken: ['Kenya (Tsavo)', 'Tanzanya', 'Madagaskar'],
+    tarih: '1967\'de Kenya\'nın Tsavo bölgesinde keşfedilmiş. Zümrütten daha parlak ve daha sert bir yeşil granat türüdür. Granat ailesinin kalp çakrası temsilcisi olarak bilinir.',
+    niyet: 'Kalp çakrasını açmak için. Bolluk ve refah bilincini güçlendirmek için. Bağışıklık sistemini desteklemek için. Yaratıcılığı artırmak için.',
+    dikkat: {
+      fiziksel: 'Nadir ve değerli — güvenilir kaynaklardan alın. Zümrüt ile karıştırılabilir.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında veya yeşil bitkiler arasında şarj edilir.',
+    birlikte: ['Zümrüt', 'Roze Kuvars', 'Aventurin'],
+    ayri: [],
+    alternatif: ['Zümrüt', 'Yeşil Aventurin'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Yeşim': {
+    slug: 'yesim',
+    isim: 'Yeşim',
+    ruh: 'Şans değil — huzur. Huzur olmadan şans da tutunmaz.',
+    emoji: '🟢',
+    aile: 'Jadeit NaAl(Si₂O₆) / Nefrit Ca₂(Mg,Fe)₅Si₄O₁₁(OH)₂',
+    sertlik: 6.5,
+    element: 'toprak',
+    cakra: 'Kalp, Taç, Alın',
+    renk: ['yeşil', 'beyaz', 'lavanta', 'sarı', 'siyah'],
+    koken: ['Myanmar', 'Çin', 'Guatemala', 'Rusya', 'Yeni Zelanda'],
+    tarih: 'Tuhfe-i Murâdî\'nde "yeşm" adıyla geçer. Çin\'de binlerce yıldır kutsal sayılmaktadır. İspanyolca "piedra de ijado" — bel taşı — anlamından türemiştir. Eski Mısır\'da ölümden sonraki hayatın taşı olarak görülmüştür.',
+    niyet: 'Şans ve uyum için. Böbrek sağlığı için. Vücudu toksinlerden arındırmak için. Kısırlık tedavisinde. Rüya çalışması için. Kişiliği dengelemek için.',
+    dikkat: {
+      fiziksel: 'Piyasada çok sahte var — boyalı serpantin veya cam ile karıştırılır.',
+      baglamsal: 'Jadeit nefritten daha değerli ve daha nadir.'
+    },
+    bakim: 'Ay ışığında veya toprak üzerinde şarj edilir.',
+    birlikte: ['Roze Kuvars', 'Aventurin', 'Prehnit'],
+    ayri: [],
+    alternatif: ['Yeşil Aventurin', 'Prehnit'],
+    varyantlar: {
+      'Mavi Yeşim': 'İçsel sükunet. Solunum.',
+      'Mor Yeşim': 'Duygusal çöküntü. Mutluluk.',
+      'Sarı Yeşim': 'Korku ve endişeden arınma.',
+      'Kırmızı Yeşim': 'Yaşama tutku. Güç.'
+    },
+    tarihsel_isim: 'Yeşm / Yasb', meta: { son_guncelleme: '2026-05', kaynaklar: ['tuhfe-i-muradi', 'sifalı-dogal-taslar'] }
+  },
+
+  'Kantaşı': {
+    slug: 'kantasi',
+    isim: 'Kantaşı',
+    ruh: 'Gerçek güç kan gibidir — dolaşır, temizler, yaşatır.',
+    emoji: '🟤',
+    aile: 'Kalsedon (SiO₂)',
+    sertlik: 6.5,
+    element: 'toprak',
+    cakra: 'Kök',
+    renk: ['koyu yeşil', 'kırmızı benekli'],
+    koken: ['Hindistan', 'Avustralya', 'Brezilya', 'Çin', 'Madagaskar'],
+    tarih: 'Orta Çağ\'da üzerindeki kırmızı noktaların Hz. İsa\'nın kanı olduğuna inanılmış. Kocabaş geleneğinde kan temizleme ve kalp-dolaşım sorunları için en güçlü taşlardan biri. "Ağrı taşı" da denir — kadınların menopoz ve adet döneminde başvurulan taş.',
+    niyet: 'Kanı temizlemek için. Lenf bezlerini güçlendirmek için. Lösemi gibi kan hastalıklarında. Regl ve doğum sancılarını azaltmak için. Menopozda hormon dengesini sağlamak için. Sporcuların güç taşı.',
+    dikkat: {
+      fiziksel: 'Sahte kantaşı piyasada mevcut — kırmızı benekler yapay olabilir.',
+      baglamsal: null
+    },
+    bakim: 'Güneş veya ay ışığında şarj edilir.',
+    birlikte: ['Hematit', 'Kırmızı Jasper'],
+    ayri: [],
+    alternatif: ['Kırmızı Jasper', 'Hematit'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'sifalı-dogal-taslar'] }
+  },
+
+  'Mercan': {
+    slug: 'mercan',
+    isim: 'Mercan',
+    ruh: 'Denizin derinliğinden gelir — yüzeyde parlak, içinde canlı.',
+    emoji: '🔴',
+    aile: 'Organik (CaCO₃)',
+    sertlik: 3.5,
+    element: 'ateş',
+    cakra: 'Boğaz',
+    renk: ['kırmızı', 'turuncu', 'pembe', 'beyaz', 'siyah'],
+    koken: ['Akdeniz', 'Japonya', 'Hawaii', 'Avustralya', 'Filipinler'],
+    tarih: 'Kuran-ı Kerim\'de Rahman Suresi\'nde inci ile birlikte adı geçen taşlardan biridir. Deniz canlısıdır — öldükten sonra zamanla taşlaşır. Sahteleri ile gerçeğini ayırt etmek güçtür.',
+    niyet: 'Nazara karşı. Sedef hastalığı başta cilt rahatsızlıklarında. Kalbi ve dalağı güçlendirmek için. Kan dolaşımını güçlendirmek için. Yaşam ortamına ferahlık getirmek için.',
+    dikkat: {
+      fiziksel: 'Kimyasal ve parfümden uzak tutun. Çok yumuşak.',
+      baglamsal: 'Deniz canlısından elde edilir — etik kaynak tercih edin.'
+    },
+    bakim: 'Ay ışığında şarj edilir. Yumuşak nemli bez ile silinir.',
+    birlikte: ['Turkuaz', 'Ay Taşı'],
+    ayri: [],
+    alternatif: ['Kırmızı Jasper', 'Karneol'],
+    tarihsel_isim: 'Mercân', meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'İnci': {
+    slug: 'inci',
+    isim: 'İnci',
+    ruh: 'Bir kum tanesinden doğar — sabırla büyür, ışıkla parlar.',
+    emoji: '⚪',
+    aile: 'Organik (CaCO₃ — aragonit)',
+    sertlik: 3,
+    element: 'su',
+    cakra: 'Taç',
+    renk: ['beyaz', 'krem', 'pembe', 'gri', 'siyah'],
+    koken: ['Japonya', 'Çin', 'Avustralya', 'Tahiti', 'Basra Körfezi'],
+    tarih: 'Tuhfe-i Murâdî\'nde "lü\'lü" adıyla kapsamlı işlenir — inciler büyüklüklerine göre beş kalbura geçirilir ve kalite sınıflandırması yapılır. Kuran-ı Kerim\'de cennetle bağdaştırılmıştır. "Taşların Kraliçesi" olarak bilinir.',
+    niyet: 'Olumsuz duyguları ortadan kaldırmak için. Sanata yönelik zeka ve sezgi için. Mutlu evliliğin taşı. Alçak gönüllülük ve saflığın simgesi.',
+    dikkat: {
+      fiziksel: 'Parfüm, saç spreyi ve kozmetikten uzak tutun. Asit yüzeyi bozar. Tüm sert taşlardan ayrı.',
+      baglamsal: null
+    },
+    bakim: 'Dolunayda ay ışığında şarj edilir. Yumuşak nemli bez ile silinir.',
+    birlikte: ['Ay Taşı', 'Roze Kuvars'],
+    ayri: [],
+    alternatif: ['Ay Taşı', 'Selenit'],
+    tarihsel_isim: 'Lülü', meta: { son_guncelleme: '2026-05', kaynaklar: ['tuhfe-i-muradi', 'sifalı-dogal-taslar'] }
+  },
+
+  'Safir': {
+    slug: 'safir',
+    isim: 'Safir',
+    ruh: 'Bilgelik sessizce konuşur — ama herkese değil.',
+    emoji: '💙',
+    aile: 'Korundum Al₂O₃',
+    sertlik: 9,
+    element: 'hava',
+    cakra: 'Boğaz, Alın (3. Göz)',
+    renk: ['derin mavi', 'koyu mavi', 'açık mavi', 'sarı', 'pembe'],
+    koken: ['Sri Lanka', 'Myanmar', 'Madagaskar', 'Tayland', 'Avustralya'],
+    tarih: 'Tuhfe-i Murâdî\'nde "ezrak yakut" — mavi yakut — olarak geçer. Batı uygarlıklarında tarih boyunca ihanetten ve büyüden korunmak için kraliyet tarafından kullanılmıştır. Osmanlı hükümdarları taç ve yüzüklerinde safir kullanmıştır. Sadakat ve dostluğun taşı.',
+    niyet: 'Bilgelik ve farkındalık için. Zihinsel çeviklik için. Sadakat ve dostluğu güçlendirmek için. Baş ağrıları ve göz problemlerinde. Astral seyahat için.',
+    dikkat: {
+      fiziksel: 'Değerli taş — sahteleri çok yaygın. Çok sert — diğer taşları çizebilir.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında şarj edilir.',
+    birlikte: ['Lapis Lazuli', 'Ametist', 'Akuamarin'],
+    ayri: [],
+    alternatif: ['Tanzanit', 'Lapis Lazuli'],
+    tarihsel_isim: 'Ezrak Yâkût (Mavi Yakut)', meta: { son_guncelleme: '2026-05', kaynaklar: ['tuhfe-i-muradi', 'sifalı-dogal-taslar'] }
+  },
+
+  'Yakut': {
+    slug: 'yakut',
+    isim: 'Yakut',
+    ruh: 'Ateş yakar mı, ısıtır mı — niyet belirler.',
+    emoji: '❤️‍🔥',
+    aile: 'Korundum Al₂O₃',
+    sertlik: 9,
+    element: 'toprak',
+    cakra: 'Kök',
+    renk: ['derin kırmızı', 'koyu kırmızı', 'pembe-kırmızı'],
+    koken: ['Myanmar', 'Sri Lanka', 'Tayland', 'Madagaskar', 'Tanzanya'],
+    tarih: 'Tuhfe-i Murâdî\'nde yakut çok kapsamlı işlenir — "damarları dar, ince; suyu ve letafeti içinde sabit ve payidar kıymetli bir taş." Abbasi halifelerinin hazinesindeki beş meşhur yakuttan söz edilmektedir. Kuran-ı Kerim\'de adı geçen üç taştan biri.',
+    niyet: 'Yaşam enerjisi ve güç için. Hassas insanları motive etmek için. Kan ve lenf hastalıklarında. Bağışıklık sistemini güçlendirmek için. Regl ağrılarını azaltmak ve doğumu kolaylaştırmak için. Dinamik liderlik için.',
+    dikkat: {
+      fiziksel: 'Değerli taş — sahteleri çok yaygın. Çok sert — diğer taşları çizebilir.',
+      baglamsal: null
+    },
+    bakim: 'Güneş veya ay ışığında şarj edilir.',
+    birlikte: ['Granat', 'Hematit', 'Kantaşı'],
+    ayri: [],
+    alternatif: ['Granat', 'Kırmızı Spinel'],
+    tarihsel_isim: 'Yâkût', meta: { son_guncelleme: '2026-05', kaynaklar: ['kocabas', 'tuhfe-i-muradi', 'sifalı-dogal-taslar'] }
+  },
+
+  'Topaz': {
+    slug: 'topaz',
+    isim: 'Topaz',
+    ruh: 'Doğruyu söylemek cesaret ister — topaz o cesareti verir.',
+    emoji: '🌟',
+    aile: 'Silikat Al₂SiO₄(F,OH)₂',
+    sertlik: 8,
+    element: 'ateş',
+    cakra: 'Boğaz, Alın (3. Göz)',
+    renk: ['mavi', 'sarı', 'turuncu', 'pembe', 'renksiz'],
+    koken: ['Brezilya', 'Pakistan', 'Rusya', 'Sri Lanka', 'Meksika'],
+    tarih: 'Yunanca "aramak" anlamından türemiştir. Orta Çağ\'da akıl sağlığını koruduğuna ve zihin güçlendirici etkisi olduğuna inanılmıştır. Kudüs\'ün 12 kapısını süslediğine inanılan taşlardan biri.',
+    niyet: 'Doğruyu söylemek için cesaret. Mantıklı düşünme ve iletişimi güçlendirmek için. Migren ağrılarını hafifletmek için. Kişisel yetenekleri sergilemek için.',
+    dikkat: {
+      fiziksel: 'Mavi topaz çoğunlukla ısıl işlem görmüştür. Sıcaktan uzak tutun.',
+      baglamsal: null
+    },
+    bakim: 'Ay veya güneş ışığında şarj edilir.',
+    birlikte: ['Lapis Lazuli', 'Ametist', 'Akuamarin'],
+    ayri: [],
+    alternatif: ['Safir', 'Akuamarin'],
+    varyantlar: {
+      'Beyaz Topaz': 'Ruhanilik, zihinsel berraklık.',
+      'Mavi Topaz': 'Mantıklı düşünme, iletişim.',
+      'Sarı Topaz': 'Solar pleksus, bolluk.',
+      'Pembe Topaz': 'Kalp çakrası, sevgi.'
+    },
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Aleksandrit': {
+    slug: 'aleksandrit',
+    isim: 'Aleksandrit',
+    ruh: 'Işık değişince renk değişir — ama taş aynı taştır.',
+    emoji: '🔮',
+    aile: 'Krizoberil BeAl₂O₄',
+    sertlik: 8.5,
+    element: 'hava',
+    cakra: 'Kalp, Alın, Taç',
+    renk: ['gün ışığında yeşil', 'loş ışıkta kahverengi', 'mum ışığında kırmızımsı pembe'],
+    koken: ['Rusya (Ural)', 'Sri Lanka', 'Brezilya', 'Madagaskar', 'Tanzanya'],
+    tarih: '1830\'larda Ural Dağlarında keşfedilmiş; II. Aleksandr\'ın doğum gününde bulunduğu için Aleksandrit adını almıştır. Renk değiştirme özelliği büyüleyicidir — gün ışığında yeşil, mum ışığında kırmızımsı pembe. Elmas ve korunddan sonra en sert minerallerden biri.',
+    niyet: 'Yüksek bilgelik ve kalp enerjisi için. Duygusal zorlukları yenmek için. Karanlıkta umut ışığını bulmak için. Epifiz ve hipofiz bezlerini uyarmak için. Ameliyata hazırlanmak için.',
+    dikkat: {
+      fiziksel: 'Çok nadir ve değerli — piyasada sahte çok. Sentetik aleksandrit renk değiştirir.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında şarj edilir.',
+    birlikte: ['Ametist', 'Roze Kuvars', 'Labradorit'],
+    ayri: [],
+    alternatif: ['Labradorit', 'Tanzanit'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Diaspor': {
+    slug: 'diaspor',
+    isim: 'Diaspor',
+    ruh: 'Değişime direnmek yerine — onunla dans et.',
+    emoji: '💎',
+    aile: 'Oksihidroksit AlO(OH)',
+    sertlik: 6.5,
+    element: 'hava',
+    cakra: 'Solar Pleksus, Kalp, Alın',
+    renk: ['açık yeşil', 'sarı-yeşil', 'pembe (loş ışıkta)'],
+    koken: ['Türkiye (Muğla — Milas)', 'Rusya', 'Norveç', 'Brezilya'],
+    tarih: '1990\'lı yıllarda Türkiye\'nin Muğla-Milas bölgesinde keşfedilmiş — "Zultanit" veya "Csarite" adlarıyla da bilinir. Aleksandrit gibi ışığa göre renk değiştiren nadir taşlardan biridir. Alzheimer ve Parkinson tedavisinde kullanılan en güçlü taş olarak aktarılır.',
+    niyet: 'Değişimlere uyum sağlamak için. Beyin fonksiyonlarını uyarmak için. Alzheimer ve Parkinson desteği. Konsantrasyonu artırmak için. Moldavit ile değişime açılmak için.',
+    dikkat: {
+      fiziksel: 'Türkiye kökenli nadir taş — piyasada sahte çok. Güvenilir kaynaklardan alın.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında şarj edilir.',
+    birlikte: ['Moldavit', 'Akuamarin', 'Kunzit'],
+    ayri: [],
+    alternatif: ['Aleksandrit', 'Labradorit'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Siyah Turmalin': {
+    slug: 'siyah-turmalin',
+    isim: 'Siyah Turmalin',
+    ruh: 'En güçlü kalkan görünmez olandır.',
+    emoji: '🖤',
+    aile: 'Turmalin (Ca,K,Na)(Al,Fe,Li,Mg,Mn)₃...',
+    sertlik: 7,
+    element: 'toprak',
+    cakra: 'Kök',
+    renk: ['siyah', 'koyu siyah'],
+    koken: ['Brezilya', 'Afrika', 'Pakistan', 'Sri Lanka', 'ABD'],
+    tarih: 'Turmalin ailesinin en güçlü koruyucu üyesi. 1876\'da George Kunz tarafından keşfedilmiştir. Siyah turmalin taşıyan kişilerin aurasındaki dengesizliği ve yıkıcı enerjileri uzak tuttuğu aktarılır.',
+    niyet: 'En güçlü negatif enerji koruyucusu. Aura kalkanı için. Elektromanyetik kirliliğe karşı. Topraklama için. Stresi uzak tutmak için.',
+    dikkat: {
+      fiziksel: 'Kırılgan yapısı olabilir. Yoğun negatif enerji topladığında düzenli temizlik gerekir.',
+      baglamsal: null
+    },
+    bakim: 'Toprak üzerinde veya ay ışığında şarj edilir. Soğuk su ile temizlenir.',
+    birlikte: ['Obsidyen', 'Dumanlı Kuvars', 'Hematit'],
+    ayri: [],
+    alternatif: ['Obsidyen', 'Hematit'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Yeşil Turmalin': {
+    slug: 'yesil-turmalin',
+    isim: 'Yeşil Turmalin',
+    ruh: 'Kalp açıkken — her şey büyür.',
+    emoji: '💚',
+    aile: 'Turmalin (Ca,K,Na)(Al,Fe,Li,Mg,Mn)₃...',
+    sertlik: 7,
+    element: 'su',
+    cakra: 'Kalp',
+    renk: ['açık yeşil', 'koyu yeşil', 'zümrüt yeşili'],
+    koken: ['Brezilya', 'Afrika', 'Pakistan', 'Afganistan', 'Sri Lanka'],
+    tarih: 'Turmalin ailesinin kalp çakrası temsilcisi. Kişinin kendi kendini iyileştirmesi için ideal taşlardan biri olarak aktarılır. Klostrofobi ve panik atak hastalarına önerilir.',
+    niyet: 'Kendi kendini iyileştirmek için. Kalp çakrasını açmak için. Şefkat, hassasiyet ve sabır için. Sinirleri güçlendirmek için. Göz, kalp ve bağışıklık sistemini güçlendirmek için.',
+    dikkat: {
+      fiziksel: 'Uzun süreli güneşten kaçının.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında veya yeşil bitkiler arasında şarj edilir.',
+    birlikte: ['Roze Kuvars', 'Aventurin', 'Zümrüt'],
+    ayri: [],
+    alternatif: ['Zümrüt', 'Aventurin'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Karpuz Turmalin': {
+    slug: 'karpuz-turmalin',
+    isim: 'Karpuz Turmalin',
+    ruh: 'İçi kırmızı, dışı yeşil — sevgi ve umut bir arada.',
+    emoji: '🍉',
+    aile: 'Turmalin (Ca,K,Na)(Al,Fe,Li,Mg,Mn)₃...',
+    sertlik: 7,
+    element: 'su',
+    cakra: 'Kalp',
+    renk: ['dış yeşil, iç pembe-kırmızı'],
+    koken: ['Brezilya', 'Afrika', 'Madagaskar'],
+    tarih: 'İçi kırmızı dışı yeşil olduğundan karpuza benzediğinden bu adı almıştır. Kalp çakrası için süper bir taş. Kişinin içindeki güven duygusunu artırdığından korku ve gereksiz kuruntulardan kurtulmayı sağlar.',
+    niyet: 'Kalp çakrası için. Sevgi ve arkadaşlık için. Korkulardan arınmak için. Hayattan zevk almak için. Sinirleri onarmak için.',
+    dikkat: {
+      fiziksel: 'Nadir renk kombinasyonu — sahteleri mevcut.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında şarj edilir.',
+    birlikte: ['Roze Kuvars', 'Kunzit'],
+    ayri: [],
+    alternatif: ['Rodonit', 'Roze Kuvars'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Pirop': {
+    slug: 'pirop',
+    isim: 'Pirop',
+    ruh: 'Kızgın göz — ama ısıtan ateş.',
+    emoji: '🔴',
+    aile: 'Granat Mg₃Al₂(SiO₄)₃',
+    sertlik: 7,
+    element: 'toprak',
+    cakra: 'Kök',
+    renk: ['kan kırmızısı', 'portakal kırmızısı', 'koyu kırmızı'],
+    koken: ['Çekya', 'Güney Afrika', 'Brezilya', 'Sri Lanka', 'Tanzanya'],
+    tarih: 'Adını eski Yunancada "kızgın göz" anlamına gelen "pyropos"tan almıştır. Granat ailesinin en bilinen kırmızı türü. Çekya\'da mücevher yapım endüstrisi pirop garnete odaklanmış ve 1500\'lü yıllardan bu yana sürmektedir.',
+    niyet: 'Anlayış ve zeka kıvraklığı için. Cinsel enerjiyi artırmak için. Bedeni güçlendirmek için. Kan damarları için. Hormonsal dengeyi sağlamak için.',
+    dikkat: {
+      fiziksel: 'Yakut ile karıştırılabilir — pirop daha mat.',
+      baglamsal: null
+    },
+    bakim: 'Güneş veya ay ışığında şarj edilir.',
+    birlikte: ['Hematit', 'Yakut', 'Kantaşı'],
+    ayri: [],
+    alternatif: ['Granat', 'Yakut'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Serpantin': {
+    slug: 'serpantin',
+    isim: 'Serpantin',
+    ruh: 'Kundalini uyandığında — artık eski sen değilsin.',
+    emoji: '🐍',
+    aile: 'Filosilikat (Mg,Fe)₃(Si₂O₅)(OH)₄',
+    sertlik: 3.5,
+    element: 'toprak',
+    cakra: 'Tüm çakralar',
+    renk: ['açık yeşil', 'koyu yeşil', 'sarı-yeşil', 'kahverengi benekli'],
+    koken: ['Çin', 'Afganistan', 'Yeni Zelanda', 'İtalya', 'Güney Afrika'],
+    tarih: 'İnsana enerji veren ve kundalini enerjisini etkileyen bir taş olarak bilinir. Kundalini uyandığında çakralar aktif hale gelir ve kişi ruhsal açıdan kendini güçlü hisseder. Parazitleri ortadan kaldırdığı ve vücuttaki kalsiyum-magnezyum emilimini kolaylaştırdığı aktarılır.',
+    niyet: 'Kundalini enerjisini uyandırmak için. Ruhsal ve duygusal denge için. Hipoglisemi ve diabet desteği. Böcek ısırmaları ve alerjilerde tene değecek şekilde.',
+    dikkat: {
+      fiziksel: 'Yeşim ile karıştırılabilir — serpantin daha yumuşak. Asitli maddelerden uzak.',
+      baglamsal: null
+    },
+    bakim: 'Toprak üzerinde veya ay ışığında şarj edilir.',
+    birlikte: ['Jet', 'Moldavit'],
+    ayri: [],
+    alternatif: ['Yeşim', 'Aventurin'],
+    tarihsel_isim: 'Yeşm-i Hind', meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  },
+
+  'Celestit': {
+    slug: 'celestit',
+    isim: 'Celestit',
+    ruh: 'Gökyüzü rengi — oradan geldiğini hatırlat.',
+    emoji: '☁️',
+    aile: 'Sülfat SrSO₄',
+    sertlik: 3,
+    element: 'hava',
+    cakra: 'Alın (3. Göz), Taç',
+    renk: ['açık mavi', 'gökyüzü mavisi', 'beyazımsı mavi'],
+    koken: ['Madagaskar', 'Meksika', 'Peru', 'Polonya', 'Libya'],
+    tarih: 'Yüksek bir titreşime sahip, yeni nesiller için öğretici bir taş. İlahi bir enerji ile doldurulduğu aktarılır. Büyük parça odaya konulduğunda tüm enerjisini ortama yaydığı aktarılır. Sanatçılar için özellikle uygun.',
+    niyet: 'Huzur ve sukunet için. Kulak ve göz sorunlarında. Metabolizmayı canlandırmak için. Aura alanını temizlemek için. Yaratıcılık için. Melek enerjisiyle bağlantı için.',
+    dikkat: {
+      fiziksel: 'Suya maruz bırakmayın — dağılabilir. Çok nazik — düşürmemeye dikkat.',
+      baglamsal: null
+    },
+    bakim: 'Ay ışığında şarj edilir. Yumuşak nemli bez ile silinir.',
+    birlikte: ['Ametist', 'Labradorit', 'Angelit'],
+    ayri: [],
+    alternatif: ['Angelit', 'Akuamarin'],
+    meta: { son_guncelleme: '2026-05', kaynaklar: ['sifalı-dogal-taslar'] }
+  }
+
+};
+
+// Export (Node.js ortamı için)
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = GEMS_DATA;
+}
+
+</script>
+<script>
+// ───────────────────────────────────────────────
+// YARDIMCI
+// ───────────────────────────────────────────────
+const EL_CONFIG = {
+  ateş:   { label:'Ateş',    icon:'🔥', color:'#ff9650', bg:'rgba(255,150,80,0.12)',  cls:'el-ates'   },
+  su:     { label:'Su',      icon:'💧', color:'#64b4ff', bg:'rgba(100,180,255,0.12)', cls:'el-su'     },
+  hava:   { label:'Hava',    icon:'🌬️', color:'#c4b8f8', bg:'rgba(196,184,248,0.12)', cls:'el-hava'   },
+  toprak: { label:'Toprak',  icon:'🌍', color:'#b49664', bg:'rgba(180,150,100,0.12)', cls:'el-toprak' },
+  'fırtına':{ label:'Fırtına', icon:'⚡', color:'#8c64c8', bg:'rgba(140,100,200,0.12)', cls:'el-firtina'},
+};
+
+// Burç → element
+const BURC_EL = {
+  'Koç':'ateş','Aslan':'ateş','Yay':'ateş',
+  'Boğa':'toprak','Başak':'toprak','Oğlak':'toprak',
+  'İkizler':'hava','Terazi':'hava','Kova':'hava',
+  'Yengeç':'su','Akrep':'su','Balık':'su'
+};
+
+// Niyet → element ağırlıkları
+const NIYET_EL = {
+  mutluluk: { ateş:0.35, su:0.35, hava:0.2,  toprak:0.1  },
+  odak:     { hava:0.4,  toprak:0.3, ateş:0.2, su:0.1     },
+  koruma:   { toprak:0.4, ateş:0.3, hava:0.2, su:0.1      },
+  sevgi:    { su:0.45, ateş:0.25, toprak:0.2, hava:0.1    },
+  cesaret:  { ateş:0.5,  toprak:0.25, hava:0.15, su:0.1   },
+  donusum:  { ateş:0.3, hava:0.3, su:0.25, toprak:0.15    },
+};
+
+// Element → taş listesi (gems-data.js elementlerinden)
+function stonesByEl(el) {
+  return Object.values(GEMS_DATA).filter(g => g.element === el);
+}
+
+function toast(msg, dur=1800) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), dur);
+}
+
+// ───────────────────────────────────────────────
+// HARF ENERJİSİ (elements.js'ten)
+// ───────────────────────────────────────────────
+// Türkçeye uyarlanmış Ebced / element tablosu
+const ISIM_ELEMENTS = {
+  'A':'hava','E':'hava','İ':'hava','N':'hava','S':'hava','Ş':'hava','W':'hava','I':'hava',
+  'B':'su',  'G':'su',  'K':'su',  'P':'su',  'T':'su',  'Y':'su',
+  'C':'ateş','Ç':'ateş','F':'ateş','L':'ateş','O':'ateş','Ö':'ateş','U':'ateş','Ü':'ateş','X':'ateş',
+  'D':'toprak','H':'toprak','M':'toprak','V':'toprak','Z':'toprak','R':'toprak','J':'toprak','Q':'toprak'
+};
+
+function calcIsim(tamAd) {
+  if (!tamAd || !tamAd.trim()) return null;
+  const harfler = tamAd.toUpperCase().replace(/[^A-ZÇĞİÖŞÜ]/g, '').split('');
+  const counts = { ateş:0, su:0, hava:0, toprak:0 };
+  const detay  = [];
+  harfler.forEach(h => {
+    const el = ISIM_ELEMENTS[h];
+    if (el) { counts[el]++; detay.push({ harf:h, el }); }
+  });
+  const toplam = Object.values(counts).reduce((a,b) => a+b, 0);
+  if (!toplam) return null;
+  const dominant = Object.entries(counts).sort((a,b) => b[1]-a[1])[0][0];
+  return { counts, toplam, dominant, detay };
+}
+
+// Anlık önizleme — form altında harf renkleri
+function previewIsimEl(val) {
+  const box = document.getElementById('isim-el-preview');
+  if (!box) return;
+  const result = calcIsim(val);
+  if (!result || !val.trim()) { box.innerHTML = ''; return; }
+  const EL_RENK = { ateş:'#ff9650', su:'#64b4ff', hava:'#c4b8f8', toprak:'#b49664' };
+  const EL_AD   = { ateş:'Ateş', su:'Su', hava:'Hava', toprak:'Toprak' };
+  // Harf kutuları
+  const harfler = result.detay.map(({ harf, el }) =>
+    `<span style="display:inline-block;padding:1px 5px;margin:1px;border-radius:3px;border:1px solid ${EL_RENK[el]}44;color:${EL_RENK[el]};font-size:11px;font-family:'Cinzel',serif">${harf}</span>`
+  ).join('');
+  // Dağılım özeti
+  const ozet = Object.entries(result.counts)
+    .filter(([,v]) => v > 0)
+    .sort((a,b) => b[1]-a[1])
+    .map(([el,v]) => `<span style="color:${EL_RENK[el]}">${EL_AD[el]} ${Math.round(v/result.toplam*100)}%</span>`)
+    .join(' · ');
+  box.innerHTML = `<div style="margin-bottom:4px">${harfler}</div><div style="opacity:0.7">${ozet}</div>`;
+}
+
+// ───────────────────────────────────────────────
+// GÜNLÜK TAŞ (tarihe göre deterministic)
+// ───────────────────────────────────────────────
+function getDailyStone() {
+  const keys = Object.keys(GEMS_DATA);
+  const d = new Date();
+  const seed = d.getFullYear() * 10000 + (d.getMonth()+1) * 100 + d.getDate();
+  const idx = seed % keys.length;
+  return GEMS_DATA[keys[idx]];
+}
+
+function initDaily() {
+  const stone = getDailyStone();
+  document.getElementById('daily-emoji').textContent = stone.emoji;
+  document.getElementById('daily-name').textContent  = stone.isim;
+  document.getElementById('daily-ruh').textContent   = stone.ruh;
+  // El rengi
+  const el = EL_CONFIG[stone.element];
+  if (el) {
+    document.getElementById('daily-banner').style.borderColor = el.color + '30';
+  }
+}
+
+function openDailyStone() {
+  const stone = getDailyStone();
+  openModal(stone.isim);
+}
+
+// ───────────────────────────────────────────────
+// TAŞ GRİD
+// ───────────────────────────────────────────────
+let _elFilter = '';
+let _searchQ  = '';
+
+function renderGrid() {
+  const grid = document.getElementById('gem-grid');
+  const q = _searchQ.toLowerCase();
+  const list = Object.values(GEMS_DATA).filter(g => {
+    const matchEl = !_elFilter || g.element === _elFilter;
+    const matchQ  = !q || g.isim.toLowerCase().includes(q) || g.ruh.toLowerCase().includes(q);
+    return matchEl && matchQ;
+  });
+
+  if (!list.length) {
+    grid.innerHTML = '<div class="no-results">Taş bulunamadı.</div>';
+    return;
+  }
+
+  grid.innerHTML = list.map(g => {
+    const el = EL_CONFIG[g.element] || {};
+    const dot = g.element ? `<div class="el-dot el-dot-${(el.cls||'hava').replace('el-','')}"></div>` : '';
+    return `<div class="gem-card ${el.cls||''}" onclick="openModal('${g.isim.replace(/'/g,"\\'")}')" title="${g.ruh}">
+      <div class="gem-card-emoji">${g.emoji}</div>
+      <div class="gem-card-name">${g.isim}</div>
+      ${dot}
+    </div>`;
+  }).join('');
+}
+
+function filterStones() {
+  _searchQ = document.getElementById('search-input').value;
+  renderGrid();
+}
+
+function setElFilter(btn, el) {
+  _elFilter = el;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+
+// ───────────────────────────────────────────────
+// MODAL
+// ───────────────────────────────────────────────
+function openModal(name) {
+  const g = GEMS_DATA[name];
+  if (!g) return;
+  const el = EL_CONFIG[g.element] || { color:'var(--gold)', label:'', icon:'', bg:'', cls:'' };
+
+  const birlikte = (g.birlikte||[]).map(n =>
+    `<span class="modal-tag" onclick="closeModal();openModal('${n.replace(/'/g,"\\'")}')">✦ ${n}</span>`
+  ).join('');
+
+  const altHtml = (g.alternatif||[]).length ? `
+    <div class="modal-alternatif">
+      <div class="modal-alternatif-label">BÜTÇE DOSTU ALTERNATİF</div>
+      <div class="modal-alternatif-list">${g.alternatif.join(' · ')}</div>
+    </div>` : '';
+
+  document.getElementById('modal-content').innerHTML = `
+    <div class="modal-head">
+      <div class="modal-el-strip" style="background:${el.color}"></div>
+      <span class="modal-emoji">${g.emoji}</span>
+      <div class="modal-name">${g.isim}</div>
+      <div class="modal-ruh">${g.ruh}</div>
+      <div class="modal-meta">
+        ${el.label ? `<span class="modal-badge" style="color:${el.color};border-color:${el.color}30">${el.icon} ${el.label}</span>` : ''}
+        ${g.cakra ? `<span class="modal-badge">${g.cakra}</span>` : ''}
+        ${g.sertlik ? `<span class="modal-badge">Sertlik ${g.sertlik}</span>` : ''}
+        ${g.aile ? `<span class="modal-badge">${g.aile}</span>` : ''}
+      </div>
+    </div>
+    <div class="modal-body">
+      ${g.tarih ? `<div class="modal-section">
+        <div class="modal-section-label">Tarih & Bağlam</div>
+        <p>${g.tarih}</p>
+      </div>` : ''}
+      ${g.niyet ? `<div class="modal-section">
+        <div class="modal-section-label">Kullanım & Niyet</div>
+        <p>${g.niyet}</p>
+      </div>` : ''}
+      ${g.bakim ? `<div class="modal-section">
+        <div class="modal-section-label">Bakım & Şarj</div>
+        <p>${g.bakim}</p>
+      </div>` : ''}
+      ${(g.dikkat?.fiziksel || g.dikkat?.baglamsal) ? `<div class="modal-section">
+        <div class="modal-section-label">Dikkat</div>
+        <div class="modal-dikkat">
+          ${g.dikkat.fiziksel ? `<div>⚡ ${g.dikkat.fiziksel}</div>` : ''}
+          ${g.dikkat.baglamsal ? `<div style="margin-top:${g.dikkat.fiziksel?'6px':'0'}">○ ${g.dikkat.baglamsal}</div>` : ''}
+        </div>
+      </div>` : ''}
+      ${birlikte ? `<div class="modal-section">
+        <div class="modal-section-label">Birlikte İyi Gider</div>
+        <div class="modal-birlikte">${birlikte}</div>
+      </div>` : ''}
+      ${altHtml}
+    </div>`;
+
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ───────────────────────────────────────────────
+// REÇETE
+// ───────────────────────────────────────────────
+let _niyet = 'mutluluk';
+
+function toggleRecipe() {
+  const body    = document.getElementById('recipe-body');
+  const toggle  = document.getElementById('recipe-toggle');
+  const isOpen  = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  toggle.classList.toggle('open', !isOpen);
+}
+
+function setNiyet(btn) {
+  document.querySelectorAll('.niyet-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  _niyet = btn.dataset.niyet;
+}
+
+function calcBurc(dateStr) {
+  if (!dateStr) return null;
+  const [y,m,d] = dateStr.split('-').map(Number);
+  const md = m * 100 + d;
+  if (md >= 321 && md <= 419) return 'Koç';
+  if (md >= 420 && md <= 520) return 'Boğa';
+  if (md >= 521 && md <= 620) return 'İkizler';
+  if (md >= 621 && md <= 722) return 'Yengeç';
+  if (md >= 723 && md <= 822) return 'Aslan';
+  if (md >= 823 && md <= 922) return 'Başak';
+  if (md >= 923 && md <= 1022) return 'Terazi';
+  if (md >= 1023 && md <= 1121) return 'Akrep';
+  if (md >= 1122 && md <= 1221) return 'Yay';
+  if (md >= 1222 || md <= 119) return 'Oğlak';
+  if (md >= 120 && md <= 218) return 'Kova';
+  return 'Balık';
+}
+
+function calcElements(burc, saat) {
+  // Burca göre dominant element belirle (4 element — fırtına burç sistemine dahil değil)
+  const burcEl = BURC_EL[burc] || 'hava';
+  const base = { ateş:15, su:15, hava:15, toprak:15 };
+  base[burcEl] = (base[burcEl] || 15) + 30;
+
+  // Saate göre hafif düzenleme (sabah=ateş, öğle=hava, akşam=su, gece=toprak)
+  if (saat) {
+    const h = parseInt(saat.split(':')[0]);
+    if (h >= 5 && h < 10)  base.ateş  = (base.ateş  || 0) + 8;
+    else if (h >= 10 && h < 16) base.hava  = (base.hava  || 0) + 8;
+    else if (h >= 16 && h < 21) base.su    = (base.su    || 0) + 8;
+    else                         base.toprak = (base.toprak || 0) + 8;
+  }
+
+  // Normalize
+  const total = Object.values(base).reduce((a,b) => a+b, 0);
+  return Object.fromEntries(Object.entries(base).map(([k,v]) => [k, Math.round(v/total*100)]));
+}
+
+function calcRecipe() {
+  const fullname = document.getElementById('r-fullname').value.trim();
+  const name     = document.getElementById('r-name').value.trim() || fullname.split(' ')[0] || '';
+  const date     = document.getElementById('r-date').value;
+  const saat     = document.getElementById('r-time').value;
+  const niyet    = _niyet;
+
+  // En az isim veya tarih gerekli
+  if (!fullname && !date) { toast('Ad veya doğum tarihi girin'); return; }
+
+  // ── Burç profili (%22) ──────────────────────
+  let burcEl = null;
+  let burc   = date ? calcBurc(date) : null;
+  const burcBase = { ateş:25, su:25, hava:25, toprak:25 };
+  if (date) {
+    burcEl = BURC_EL[burc] || 'hava';
+    burcBase[burcEl] += 30;
+  }
+  const burcTotal = Object.values(burcBase).reduce((a,b) => a+b, 0);
+  const burcNorm  = Object.fromEntries(Object.entries(burcBase).map(([k,v]) => [k, v/burcTotal]));
+
+  // ── Saat profili (%12) ───────────────────────
+  const saatBase = { ateş:25, su:25, hava:25, toprak:25 };
+  if (saat) {
+    const h = parseInt(saat.split(':')[0]);
+    if      (h >= 5  && h < 10) saatBase.ateş   += 30;
+    else if (h >= 10 && h < 16) saatBase.hava   += 30;
+    else if (h >= 16 && h < 21) saatBase.su     += 30;
+    else                         saatBase.toprak += 30;
+  }
+  const saatTotal = Object.values(saatBase).reduce((a,b) => a+b, 0);
+  const saatNorm  = Object.fromEntries(Object.entries(saatBase).map(([k,v]) => [k, v/saatTotal]));
+
+  // ── İsim harf enerjisi (%66) ─────────────────
+  const isimData = calcIsim(fullname);
+  let isimNorm = { ateş:0.25, su:0.25, hava:0.25, toprak:0.25 }; // fallback eşit
+  if (isimData) {
+    const t = isimData.toplam;
+    isimNorm = Object.fromEntries(Object.entries(isimData.counts).map(([k,v]) => [k, v/t]));
+  }
+
+  // ── Ağırlıklı birleştirme: %66 isim + %22 burç + %12 saat ──────
+  // Eksik veri varsa kalan ağırlık eşit dağıtılır
+  const W_ISIM = (fullname && isimData) ? 0.66 : 0;
+  const W_BURC = date  ? 0.22 : 0;
+  const W_SAAT = saat  ? 0.12 : 0;
+  const totalW = W_ISIM + W_BURC + W_SAAT || 1;
+
+  const elements = {};
+  ['ateş','su','hava','toprak'].forEach(el => {
+    const blend = (isimNorm[el]  * W_ISIM +
+                   burcNorm[el]  * W_BURC +
+                   saatNorm[el]  * W_SAAT) / totalW;
+    elements[el] = Math.round(blend * 100);
+  });
+
+  const niyetW = NIYET_EL[niyet] || NIYET_EL.mutluluk;
+
+  // Element skorunu hesapla — eksik element yüksek skor alır (denge mantığı)
+  // elements.js ile aynı: maxEl - counts[el] × 1.5 + 1
+  const maxEl = Math.max(...Object.values(elements));
+  const elScores = {};
+  Object.keys(elements).forEach(el => {
+    elScores[el] = (maxEl - (elements[el] || 0)) * 1.5 + 1;
+    // Niyet ağırlığı — eksik elementin hangi niyet için öncelikli olduğunu belirler
+    const niyetBonus = niyetW[el] || 0.05;
+    elScores[el] *= (1 + niyetBonus);
+  });
+
+  // En yüksek skorlu elementlere göre sırala
+  const sortedEl = Object.entries(elScores).sort((a,b) => b[1]-a[1]);
+
+  // Her element için taş seç
+  let selected = [];
+  const used = new Set();
+
+  sortedEl.forEach(([el]) => {
+    if (selected.length >= 4) return;
+    const candidates = stonesByEl(el).filter(g => !used.has(g.isim));
+    if (!candidates.length) return;
+    // Niyet metninde geçen anahtar kelimelere göre sırala
+    const niyetKeywords = {
+      mutluluk: ['mutlu','neşe','sevinç','huzur','sevgi','şifa'],
+      odak:     ['odak','konsantr','hafıza','zihin','analiz','netlik'],
+      koruma:   ['koru','negatif','enerji','temiz','kalk','sınır'],
+      sevgi:    ['sevgi','ilişki','kalp','aşk','bağ','şefkat'],
+      cesaret:  ['cesaret','güç','kararlı','özgüven','liderlik'],
+      donusum:  ['dönüşüm','değişim','yeni','bırak','geçmiş','temizle'],
+    };
+    const kws = niyetKeywords[niyet] || [];
+    const scored = candidates.map(g => ({
+      ...g,
+      score: kws.filter(kw => (g.niyet||'').toLowerCase().includes(kw)).length
+    })).sort((a,b) => b.score - a.score);
+
+    const pick = scored[0];
+    selected.push({ stone: pick, el, elScore: elScores[el] });
+    used.add(pick.isim);
+  });
+
+  // Maksimum 4 taş — eğer az seçilmişse niyet bazlı tamamla
+  if (selected.length < 3) {
+    Object.values(GEMS_DATA).forEach(g => {
+      if (selected.length >= 4 || used.has(g.isim)) return;
+      selected.push({ stone: g, el: g.element, elScore: 1 });
+      used.add(g.isim);
+    });
+  }
+  selected = selected.slice(0, 4);
+
+  // Adet: element ne kadar eksikse o kadar fazla taş
+  // %0-20 arası → 2 adet, üzeri → 1 adet
+  selected.forEach(s => {
+    s.adet = (elements[s.el] !== undefined && elements[s.el] < 20) ? 2 : 1;
+  });
+
+  showRecipeResult(name, burc, elements, selected, niyet, saat, isimData, fullname);
+}
+
+function showRecipeResult(name, burc, elements, selected, niyet, saat, isimData, fullname) {
+  // El profil HTML
+  const sortedEl = Object.entries(elements).sort((a,b) => b[1]-a[1]);
+  const dominant = sortedEl[0];
+  // Zayıf: fırtına hariç, sıfır-dışı elementler arasından en düşük
+  const weakCandidates = sortedEl.filter(([k,v]) => v > 0 && k !== 'fırtına');
+  const weak = weakCandidates.length ? weakCandidates[weakCandidates.length-1] : sortedEl[sortedEl.length-1];
+
+  const barsHtml = sortedEl.map(([el,pct]) => {
+    const cfg = EL_CONFIG[el] || { icon:'✦', label:el, color:'var(--gold)' };
+    const isDom  = el === dominant[0];
+    const isWeak = el === weak[0] && pct < 25;
+    return `<div class="el-bar-row">
+      <span class="el-bar-icon">${cfg.icon}</span>
+      <span class="el-bar-name" style="color:${isDom?cfg.color:'var(--text3)'};font-size:11px">${cfg.label}</span>
+      <div class="el-bar-track">
+        <div class="el-bar-fill" style="width:${pct}%;background:${cfg.color};opacity:${isDom?1:0.6}"></div>
+      </div>
+      <span class="el-bar-pct">${pct}%${isWeak?' ↓':''}</span>
+    </div>`;
+  }).join('');
+
+  const niyetLabels = {
+    mutluluk:'🌸 Mutluluk', odak:'🎯 Odak', koruma:'🛡 Koruma',
+    sevgi:'❤️ Sevgi', cesaret:'⚔️ Cesaret', donusum:'🔄 Dönüşüm'
+  };
+
+  // Taş kartları
+  const stoneCards = selected.map((s,i) => {
+    const g   = s.stone;
+    const el  = EL_CONFIG[g.element] || { color:'var(--gold)', icon:'✦', label:'' };
+    const badges = ['Ana Taş','İkinci Taş','Destekleyici','Tamamlayıcı'];
+    const alt = (g.alternatif||[])[0];
+    return `<div class="recete-stone" onclick="openModal('${g.isim.replace(/'/g,"\\'")}')">
+      <div class="recete-stone-head">
+        <span class="recete-stone-emoji">${g.emoji}</span>
+        <div class="recete-stone-info">
+          <div class="recete-stone-name">${g.isim}${s.adet>1 ? ` <span style="font-size:11px;color:var(--text3)">× ${s.adet}</span>` : ''}</div>
+          <div class="recete-stone-why">${el.icon} ${el.label} · ${g.cakra||''}</div>
+        </div>
+        <span class="recete-stone-badge">${badges[i]||''}</span>
+      </div>
+      ${alt ? `<div class="recete-stone-alt">✦ Alternatif: ${alt}</div>` : ''}
+    </div>`;
+  }).join('');
+
+  const firstName = name || (fullname ? fullname.split(' ')[0] : '');
+
+  // Kaynak etiketi
+  const kaynaklar = [];
+  if (isimData && fullname) kaynaklar.push(`${fullname} · harf enerjisi %66`);
+  if (burc) kaynaklar.push(`${burc} · %${isimData && fullname ? 34 : 100}`);
+  const kaynakStr = kaynaklar.join(' + ');
+
+  document.getElementById('recete-result').innerHTML = `
+    <div class="recete-intro">
+      ${firstName ? `${firstName}, ` : ''}${kaynakStr}${saat ? ` · ${saat}` : ''} —
+      niyet: <strong>${niyetLabels[niyet]||niyet}</strong>
+    </div>
+    <div class="el-profile">
+      <div class="el-profile-label">Element Profiliniz</div>
+      ${barsHtml}
+    </div>
+    ${stoneCards}
+    <div class="modulor-cta">
+      <div style="font-size:9px;letter-spacing:0.18em;color:var(--text4);text-transform:uppercase;margin-bottom:14px">✦ Modulor'da seni bekleyen</div>
+
+      <!-- Mini dizim mockup -->
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs2);padding:14px;margin-bottom:12px">
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <span style="font-size:11px;color:var(--text3);letter-spacing:0.1em">✦ DİZİM</span>
+          <span style="font-size:10px;padding:2px 8px;border:1px solid var(--border);border-radius:10px;color:var(--text4)">◐ Profilimi Oku</span>
+        </div>
+
+        <!-- Profil seçici -->
+        <div style="font-size:9px;letter-spacing:0.1em;color:var(--text4);text-transform:uppercase;margin-bottom:5px">Taş Dağılımı Profili</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:10px">
+          <div style="border:1px solid var(--border);border-radius:var(--rs);padding:7px;text-align:center;opacity:0.4">
+            <div style="font-size:12px;margin-bottom:2px">🌐</div>
+            <div style="font-size:9px;color:var(--text3)">Dışarıya</div>
+          </div>
+          <div style="border:1px solid rgba(201,169,110,0.5);border-radius:var(--rs);padding:7px;text-align:center;background:rgba(201,169,110,0.06)">
+            <div style="font-size:12px;margin-bottom:2px">◈</div>
+            <div style="font-size:9px;color:var(--gold);font-weight:500">İçeriye</div>
+            <div style="font-size:8px;color:var(--text4);margin-top:1px">Güneş · Ay · Yükselen</div>
+          </div>
+          <div style="border:1px solid var(--border);border-radius:var(--rs);padding:7px;text-align:center;opacity:0.4">
+            <div style="font-size:12px;margin-bottom:2px">◐</div>
+            <div style="font-size:9px;color:var(--text3)">İsim</div>
+          </div>
+        </div>
+
+        <!-- Niyet modları -->
+        <div style="font-size:9px;letter-spacing:0.1em;color:var(--text4);text-transform:uppercase;margin-bottom:5px">Niyet Modu</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:10px">
+          <div style="border:1px solid rgba(232,149,109,0.5);border-radius:var(--rs);padding:6px 3px;text-align:center;background:rgba(232,149,109,0.06)">
+            <div style="font-size:10px;color:#e8956d;margin-bottom:1px">♥</div>
+            <div style="font-size:8px;color:var(--text3)">Aşk</div>
+          </div>
+          <div style="border:1px solid var(--border);border-radius:var(--rs);padding:6px 3px;text-align:center;opacity:0.4">
+            <div style="font-size:10px;color:var(--text3);margin-bottom:1px">◈</div>
+            <div style="font-size:8px;color:var(--text3)">İş</div>
+          </div>
+          <div style="border:1px solid var(--border);border-radius:var(--rs);padding:6px 3px;text-align:center;opacity:0.4">
+            <div style="font-size:10px;color:var(--text3);margin-bottom:1px">∿</div>
+            <div style="font-size:8px;color:var(--text3)">Sağlık</div>
+          </div>
+          <div style="border:1px solid var(--border);border-radius:var(--rs);padding:6px 3px;text-align:center;opacity:0.4">
+            <div style="font-size:10px;color:var(--text3);margin-bottom:1px">◎</div>
+            <div style="font-size:8px;color:var(--text3)">Zihin</div>
+          </div>
+        </div>
+
+        <!-- Kademe + Sayı -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+          <div>
+            <div style="font-size:9px;letter-spacing:0.1em;color:var(--text4);text-transform:uppercase;margin-bottom:4px">Kademe</div>
+            <div style="display:flex;gap:3px">
+              <div style="flex:1;border:1px solid var(--border);border-radius:var(--rs);padding:4px;text-align:center;opacity:0.4;font-size:9px;color:var(--text3)">◌ Tohum</div>
+              <div style="flex:1;border:1px solid rgba(201,169,110,0.5);border-radius:var(--rs);padding:4px;text-align:center;background:rgba(201,169,110,0.06);font-size:9px;color:var(--gold)">◈ Kanal</div>
+              <div style="flex:1;border:1px solid var(--border);border-radius:var(--rs);padding:4px;text-align:center;opacity:0.4;font-size:9px;color:var(--text3)">✦ Kaynak</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:9px;letter-spacing:0.1em;color:var(--text4);text-transform:uppercase;margin-bottom:4px">Taş Sayısı</div>
+            <div style="display:flex;gap:4px;align-items:center">
+              <div style="border:1px solid var(--border);border-radius:var(--rs);padding:4px 10px;font-size:15px;font-weight:500;color:var(--text)">21</div>
+              <div style="display:flex;gap:3px;flex-wrap:wrap">
+                <span style="font-size:8px;padding:2px 5px;border:1px solid var(--border);border-radius:8px;color:var(--text4)">Bileklik</span>
+                <span style="font-size:8px;padding:2px 5px;border:1px solid var(--border);border-radius:8px;color:var(--text4)">Mala 108</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dizimi Oluştur -->
+        <div style="border:1px solid rgba(201,169,110,0.3);border-radius:var(--rs);padding:9px;text-align:center;background:rgba(201,169,110,0.04)">
+          <span style="font-size:11px;color:var(--gold);letter-spacing:0.08em">✦ Dizimi Oluştur</span>
+        </div>
+      </div>
+
+      <!-- Özellik kartları -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px">
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);padding:10px">
+          <div style="font-size:15px;margin-bottom:5px">🔮</div>
+          <div style="font-size:11px;font-weight:500;color:var(--text2);margin-bottom:3px">Dizim motoru</div>
+          <div style="font-size:10px;color:var(--text4);line-height:1.5">108 taşlık mala, bileklik — tam oran hesabı</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);padding:10px">
+          <div style="font-size:15px;margin-bottom:5px">🪐</div>
+          <div style="font-size:11px;font-weight:500;color:var(--text2);margin-bottom:3px">Natal harita</div>
+          <div style="font-size:10px;color:var(--text4);line-height:1.5">Ay + Yükselen ile derin element profili</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);padding:10px">
+          <div style="font-size:15px;margin-bottom:5px">💎</div>
+          <div style="font-size:11px;font-weight:500;color:var(--text2);margin-bottom:3px">Koleksiyon</div>
+          <div style="font-size:10px;color:var(--text4);line-height:1.5">60 taşı işaretle, dizimde koleksiyonundan seç</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);padding:10px">
+          <div style="font-size:15px;margin-bottom:5px">📦</div>
+          <div style="font-size:11px;font-weight:500;color:var(--text2);margin-bottom:3px">Sipariş & üretim</div>
+          <div style="font-size:10px;color:var(--text4);line-height:1.5">Dizimini doğrudan sipariş et</div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div style="text-align:center;margin-top:4px">
+        <div style="font-size:12px;color:var(--text3);font-style:italic;line-height:1.65;margin-bottom:12px">
+          Bu taş reçeten Modulor'da günlük takip,<br>sipariş ve derin dönüşüm akışına entegre olur.
+        </div>
+        <button class="modulor-cta-link" onclick="window.open('https://modulor.app','_blank')">Modulor'da Devam Et →</button>
+        <div style="margin-top:10px">
+          <a href="/" style="font-size:11px;color:var(--text4);font-style:italic;text-decoration:none;font-family:'Cormorant Garamond',serif">← Haritama Dön</a>
+        </div>
+      </div>
+    </div>
+    <button onclick="resetRecipe()" style="width:100%;margin-top:9px;padding:8px;background:none;border:1px solid var(--border);border-radius:var(--rs);color:var(--text4);font-family:inherit;font-size:11px;cursor:pointer;letter-spacing:0.04em;transition:all 0.2s" onmouseover="this.style.color='var(--text3)'" onmouseout="this.style.color='var(--text4)'">↺ Yeniden Hesapla</button>
+  `;
+
+  document.getElementById('recete-result').style.display = 'block';
+  document.getElementById('recipe-form-area').style.display = 'none';
+
+  // Barları animate et
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.el-bar-fill').forEach(b => {
+      const w = b.style.width;
+      b.style.width = '0';
+      requestAnimationFrame(() => { b.style.width = w; });
+    });
+  });
+
+  toast('✦ Reçeten hazır');
+}
+
+function resetRecipe() {
+  document.getElementById('recete-result').style.display = 'none';
+  document.getElementById('recipe-form-area').style.display = 'block';
+  document.getElementById('recete-result').innerHTML = '';
+}
+
+// ───────────────────────────────────────────────
+// BAŞLAT
+// ───────────────────────────────────────────────
+
+// C) localStorage köprüsü — index.html'den gelen profil
+function loadProfileFromIndex() {
+  try {
+    const raw = localStorage.getItem('rm_profile_v2');
+    if (!raw) return;
+    const p = JSON.parse(raw);
+
+    // Formu doldur
+    if (p.fn) {
+      const fnEl = document.getElementById('r-fullname');
+      if (fnEl) { fnEl.value = p.fn; previewIsimEl(p.fn); }
+      const nameEl = document.getElementById('r-name');
+      if (nameEl) nameEl.value = p.fn.split(' ')[0] || '';
+    }
+    if (p.dt) {
+      const dtEl = document.getElementById('r-date');
+      if (dtEl) dtEl.value = p.dt;
+    }
+    if (p.st) {
+      const stEl = document.getElementById('r-time');
+      if (stEl) stEl.value = p.st;
+    }
+    if (p.niyet) {
+      _niyet = p.niyet;
+      document.querySelectorAll('.niyet-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.niyet === p.niyet);
+      });
+    }
+
+    // Profil varsa reçeteyi otomatik aç ve hesapla
+    if (p.fn || p.dt) {
+      document.getElementById('recipe-body').classList.add('open');
+      document.getElementById('recipe-toggle').classList.add('open');
+      // Kısa gecikme ile hesapla (DOM hazır olsun)
+      setTimeout(() => calcRecipe(), 80);
+    }
+  } catch(e) {
+    console.warn('[GEM] Profil yüklenemedi:', e);
+  }
+}
+
+// B+D) URL param — ?stone=Ametist ile direkt modal aç
+function openStoneFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const stone  = params.get('stone');
+  if (stone) {
+    setTimeout(() => openModal(decodeURIComponent(stone)), 120);
+  }
+}
+
+function init() {
+  initDaily();
+  renderGrid();
+  // Recipe toggle — başlangıçta kapalı
+  document.getElementById('recipe-body').classList.remove('open');
+  // localStorage'dan profil yükle
+  loadProfileFromIndex();
+  // URL'den taş aç
+  openStoneFromURL();
+}
+
+init();
+</script>
+</body>
+</html>

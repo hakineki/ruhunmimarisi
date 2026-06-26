@@ -1176,14 +1176,14 @@ function renderSummary(r) {
   const labels=['Ana Taş','Dengeleyen','Destekleyici','Tamamlayıcı'];
   document.getElementById('sum-stone-list').innerHTML = r.stones.map((s,i)=>{
     const c=EL[s.el]||{color:'var(--gold)',icon:'✦'};
-    return`<div class="stone-item">
+    return`<a class="stone-item" href="gem.html?stone=${encodeURIComponent(s.stone.n)}" style="text-decoration:none;cursor:pointer;display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;transition:opacity .2s" onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">
       <span class="stone-emoji">${s.stone.e}</span>
       <div class="stone-info">
         <div class="stone-name">${s.stone.n}</div>
         <div class="stone-why">${c.icon} ${c.tr} · ${s.stone.ruh}</div>
       </div>
       <span class="stone-badge">${labels[i]||''}</span>
-    </div>`;
+    </a>`;
   }).join('');
 
   // Bar animasyonu
@@ -1254,7 +1254,7 @@ function renderLayers() {
   const dAction = DAILY_ACTIONS[seed%DAILY_ACTIONS.length];
   document.getElementById('door-bugun-sub').textContent = dStone.n+' · '+(dom?EL[dom[0]].tr:'')+ ' günü';
   document.getElementById('door-bugun-body').innerHTML = `
-    <a class="daily-stone-row" href="/gem/">
+    <a class="daily-stone-row" href="gem.html?stone=${encodeURIComponent(dStone.n)}">
       <span class="daily-stone-emoji">${dStone.e}</span>
       <div class="daily-stone-info">
         <div class="daily-stone-label">Bugünün Taşı</div>
@@ -1289,14 +1289,14 @@ function renderLayers() {
     ${r.stones.map((s,i)=>{
       const c=EL[s.el]||{color:'var(--gold)',icon:'✦'};
       const labels=['Ana Taş','Dengeleyen','Destekleyici','Tamamlayıcı'];
-      return`<div class="stone-item">
+      return`<a class="stone-item" href="gem.html?stone=${encodeURIComponent(s.stone.n)}" style="text-decoration:none;display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;transition:opacity .2s" onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">
         <span class="stone-emoji">${s.stone.e}</span>
         <div class="stone-info">
           <div class="stone-name">${s.stone.n}</div>
           <div class="stone-why">${c.icon} ${c.tr} · ${s.stone.ruh}</div>
         </div>
         <span class="stone-badge">${labels[i]||''}</span>
-      </div>`;
+      </a>`;
     }).join('')}`;
 
   // ── Kapı 3: NUMEROLOJİ ──
