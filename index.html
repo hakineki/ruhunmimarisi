@@ -540,6 +540,41 @@ body{
 /* ─────────────────────────────────────────────
    RESPONSIVE
    ───────────────────────────────────────────── */
+/* ── Birleşik Alan ──────────────────────────── */
+.katman-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.katman-btn{
+  display:flex;align-items:center;gap:8px;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:4px;padding:10px 12px;cursor:pointer;
+  transition:border-color .2s,background .2s;
+  font-family:'Cormorant Garamond',serif;text-align:left;
+}
+.katman-btn.active{border-color:var(--gold);background:rgba(201,169,110,.06);}
+.katman-btn-icon{font-size:16px;flex-shrink:0;}
+.katman-btn-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);}
+.katman-btn.active .katman-btn-label{color:var(--gold);}
+.katman-btn-sub{font-size:10px;color:var(--text4);font-style:italic;margin-top:2px;}
+.katman-checkmark{margin-left:auto;font-size:10px;color:var(--gold);opacity:0;transition:opacity .2s;}
+.katman-btn.active .katman-checkmark{opacity:1;}
+.birlesik-header{
+  font-family:'Cinzel',serif;font-size:7px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--text4);margin-bottom:10px;margin-top:16px;
+}
+.birlesik-baskin{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:10px;padding:5px 14px;border-radius:20px;border:1px solid;
+  font-size:12px;font-style:italic;
+}
+.kombinasyon-info{
+  background:rgba(201,169,110,.04);border:1px solid rgba(201,169,110,.12);
+  border-radius:4px;padding:14px;margin-top:14px;
+}
+.kombinasyon-baslik{
+  font-family:'Cinzel',serif;font-size:7px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:6px;
+}
+.kombinasyon-metin{font-size:12px;color:var(--text3);line-height:1.75;font-style:italic;}
+
 @media(max-width:480px){
   .form-row{flex-direction:column;}
   .wow-headline{font-size:clamp(24px,7vw,40px);}
@@ -742,7 +777,24 @@ body{
       </div>
     </div>
 
-    <!-- KAPI 3: NUMEROLOJİ -->
+    <!-- KAPI 3: BİRLEŞİK ALAN -->
+    <div class="door" id="door-birlesik">
+      <div class="door-header" onclick="toggleDoor('birlesik')">
+        <div class="door-header-left">
+          <span class="door-icon">◈</span>
+          <div>
+            <div class="door-title">Birleşik Alan</div>
+            <div class="door-sub" id="door-birlesik-sub">Katmanları birleştir</div>
+          </div>
+        </div>
+        <span class="door-arrow">›</span>
+      </div>
+      <div class="door-body">
+        <div class="door-body-inner" id="door-birlesik-body"></div>
+      </div>
+    </div>
+
+    <!-- KAPI 4: NUMEROLOJİ -->
     <div class="door" id="door-num">
       <div class="door-header" onclick="toggleDoor('num')">
         <div class="door-header-left">
@@ -1299,7 +1351,11 @@ function renderLayers() {
       </a>`;
     }).join('')}`;
 
-  // ── Kapı 3: NUMEROLOJİ ──
+  // ── Kapı 3: BİRLEŞİK ALAN ──
+  document.getElementById('door-birlesik-sub').textContent = 'Doğum Şifresi seçili';
+  document.getElementById('door-birlesik-body').innerHTML  = buildBirlesikHTML(r);
+
+  // ── Kapı 4: NUMEROLOJİ ──
   const num = _computed?.num || null;
   const pyNum = num?.personalYear || getPySimple(r.dt);
   const pyInfo = PY_INFO[pyNum]||{title:'Kişisel Yıl '+pyNum,desc:''};
@@ -1357,6 +1413,221 @@ function renderLayers() {
 
   // ── Kapı 6: CHECK-İN ──
   renderCheckin();
+}
+
+/* ─────────────────────────────────────────────
+   BİRLEŞİK ALAN — Katman Motoru
+   ───────────────────────────────────────────── */
+
+// elements.js'ten alınan TEK DOĞRU harf tablosu
+const ISIM_ELEMENTS_RM = {
+  'A':'air','E':'air','İ':'air','N':'air','S':'air','Ş':'air','W':'air','I':'air',
+  'B':'water','G':'water','K':'water','P':'water','T':'water','Y':'water',
+  'C':'fire','Ç':'fire','F':'fire','L':'fire','O':'fire','Ö':'fire','U':'fire','Ü':'fire','X':'fire',
+  'D':'earth','H':'earth','M':'earth','V':'earth','Z':'earth','R':'earth','J':'earth','Q':'earth',
+};
+
+const ZODIAC_EL_RM = {
+  Koç:'fire',Aslan:'fire',Yay:'fire',
+  Boğa:'earth',Başak:'earth',Oğlak:'earth',
+  İkizler:'air',Terazi:'air',Kova:'air',
+  Yengeç:'water',Akrep:'water',Balık:'water',
+};
+
+const NUM_EL_RM = {
+  1:'fire',2:'water',3:'air',4:'earth',5:'air',
+  6:'earth',7:'water',8:'earth',9:'fire',
+  11:'water',22:'earth',33:'fire',
+};
+
+const EL_RM = {
+  fire:  {tr:'Ateş',   icon:'🔥',color:'var(--el-ates)'},
+  water: {tr:'Su',     icon:'💧',color:'var(--el-su)'},
+  air:   {tr:'Hava',   icon:'🌬',color:'var(--el-hava)'},
+  earth: {tr:'Toprak', icon:'🌿',color:'var(--el-toprak)'},
+};
+
+// Katman hesaplayıcılar
+function calcAdFrekansi(fn) {
+  if(!fn) return null;
+  const harfler = fn.toUpperCase().replace(/[^A-ZÇĞİÖŞÜ]/g,'').split('');
+  const c = {fire:0,water:0,air:0,earth:0};
+  harfler.forEach(h => { const e=ISIM_ELEMENTS_RM[h]; if(e) c[e]++; });
+  const t = Object.values(c).reduce((a,b)=>a+b,0);
+  if(!t) return null;
+  return {fire:c.fire/t, water:c.water/t, air:c.air/t, earth:c.earth/t};
+}
+
+function calcDogumSifresi(burc) {
+  if(!burc) return null;
+  const domEl = ZODIAC_EL_RM[burc];
+  if(!domEl) return null;
+  const base = {fire:.25,water:.25,air:.25,earth:.25};
+  base[domEl] = (base[domEl]||0) + .35;
+  const t = Object.values(base).reduce((a,b)=>a+b,0);
+  return Object.fromEntries(Object.entries(base).map(([k,v])=>[k,v/t]));
+}
+
+function calcYasamYoluEl(lp) {
+  if(!lp) return null;
+  const domEl = NUM_EL_RM[lp];
+  if(!domEl) return null;
+  const base = {fire:.25,water:.25,air:.25,earth:.25};
+  base[domEl] = (base[domEl]||0) + .35;
+  const t = Object.values(base).reduce((a,b)=>a+b,0);
+  return Object.fromEntries(Object.entries(base).map(([k,v])=>[k,v/t]));
+}
+
+function calcSaatEl(st) {
+  if(!st) return null;
+  const h = parseInt(st.split(':')[0]);
+  const saatElMap = {fire:0,water:0,air:0,earth:0};
+  if(h>=5&&h<10)       saatElMap.fire   = .35;
+  else if(h>=10&&h<16) saatElMap.air    = .35;
+  else if(h>=16&&h<21) saatElMap.water  = .35;
+  else                  saatElMap.earth  = .35;
+  const base = {fire:.25,water:.25,air:.25,earth:.25};
+  Object.entries(saatElMap).forEach(([k,v])=>{ base[k]=(base[k]||0)+v; });
+  const t = Object.values(base).reduce((a,b)=>a+b,0);
+  return Object.fromEntries(Object.entries(base).map(([k,v])=>[k,v/t]));
+}
+
+// Seçili katmanların eşit ağırlıklı ortalaması
+function calcBirlesik(katmanlar) {
+  const aktif = katmanlar.filter(k=>k.aktif && k.data);
+  if(!aktif.length) return null;
+  const result = {fire:0,water:0,air:0,earth:0};
+  aktif.forEach(k => {
+    Object.keys(result).forEach(el => { result[el] += (k.data[el]||0) / aktif.length; });
+  });
+  return result;
+}
+
+// Kombinasyon açıklamaları — statik
+const KOMBINASYON_INFO = {
+  'dogum':        { baslik:'Doğum Şifresi', metin:'Güneş burcundan gelen temel enerji kalıbın. Doğduğun anın evrensel titreşimi — değişmez, köklüdür. Dışa yansıyan kimliğinin çekirdeği.' },
+  'ad':           { baslik:'Ad Frekansı',   metin:'Adının her harfi bir element taşır. Sana takılan bu ses, yaşam boyu tekrarlanarak alanını şekillendirir. Bilinçdışı kimliğin.' },
+  'yy':           { baslik:'Yaşam Yolu',    metin:'Doğum tarihinin sayısal özü. Bu yaşamda nereye doğru ilerlediğini, hangi temayı derinleştirdiğini gösterir.' },
+  'saat':         { baslik:'Saat Enerjisi', metin:'Doğduğun saatin element rengi. Günün hangi enerjisine geliş yaptığın — içsel ritmin temelidir.' },
+  'dogum+ad':     { baslik:'Doğum × Ad',    metin:'Evrensel titreşim ile ismin tınısının buluşması. Kimliğinin görünür ve görünmez yüzlerinin haritası.' },
+  'dogum+yy':     { baslik:'Doğum × Yaşam Yolu', metin:'Nereden geldiğin ile nereye gittiğinin birleşimi. En güçlü uzun vadeli harita bu kombinasyondur.' },
+  'dogum+saat':   { baslik:'Doğum × Saat', metin:'Güneş burcunun genel enerjisi ile doğuş anının özgün titreşiminin sentezi.' },
+  'ad+yy':        { baslik:'Ad × Yaşam Yolu', metin:'İsim enerjisi ve yaşam yolu aynı yönü işaret ediyorsa güçlü bir uyum var. Farklı yönlerdeyse içsel bir gerilim yaşıyorsundur.' },
+  'ad+saat':      { baslik:'Ad × Saat',    metin:'Ses titreşimin ile doğuş ritmin. Anlık hissiyatın ile köklü frekansın kesiştiği yer.' },
+  'yy+saat':      { baslik:'Yaşam Yolu × Saat', metin:'Sayısal kaderinle zamansal ritmin birleşimi. Günlük pratiklerini hangi elementle güçlendireceğini gösterir.' },
+  'dogum+ad+yy':  { baslik:'Doğum × Ad × Yaşam Yolu', metin:'Üç temel katmanın sentezi. Burç, isim ve sayı aynı anda konuştuğunda senin için en kapsamlı element haritası ortaya çıkar.' },
+  'dogum+ad+saat':{ baslik:'Doğum × Ad × Saat', metin:'Anlık ritim, ses frekansı ve evrensel şifre bir arada. Günlük enerji yönetimi için güçlü bir rehber.' },
+  'dogum+yy+saat':{ baslik:'Doğum × Yaşam Yolu × Saat', metin:'Üç zaman katmanının buluşması — kozmik an, yaşam yönü ve günlük ritim.' },
+  'ad+yy+saat':   { baslik:'Ad × Yaşam Yolu × Saat', metin:'İsim, kader ve zaman; üç katmanın dansı. Güneş burcundan bağımsız, içsel bir harita.' },
+  'dogum+ad+yy+saat':{ baslik:'Dört Katman Sentezi', metin:'En kapsamlı harita. Doğum şifresi, isim frekansı, yaşam yolu ve saat enerjisi bir arada — tam birleşik profil.' },
+};
+
+function getKombinasyonKey(secili) {
+  const s = secili.sort();
+  if(s.length===1) return s[0];
+  return s.join('+');
+}
+
+// Ana render fonksiyonu
+function buildBirlesikHTML(r) {
+  const lp = _computed?.num?.lp?.value || getPySimple(r.dt) || null;
+
+  // 4 katman verisi
+  const katmanlar = [
+    { id:'dogum', label:'Doğum Şifresi', icon:'☀️', sub:r.burc||'Burç',   data:calcDogumSifresi(r.burc),   aktif:true  },
+    { id:'ad',    label:'Ad Frekansı',   icon:'∿',  sub:r.fn||'İsim',     data:calcAdFrekansi(r.fn),        aktif:false },
+    { id:'yy',    label:'Yaşam Yolu',    icon:'🔢', sub:lp?'YY '+lp:'Sayı', data:calcYasamYoluEl(lp),       aktif:false },
+    { id:'saat',  label:'Saat Enerjisi', icon:'🕐', sub:r.st||'Saat',     data:calcSaatEl(r.st),            aktif:!!r.st },
+  ];
+
+  const id = 'birlesik_' + Date.now();
+  window._birlesikKatmanlar = katmanlar;
+
+  const barsHTML = _renderBirlesikBars(katmanlar);
+  const kombKey  = getKombinasyonKey(katmanlar.filter(k=>k.aktif).map(k=>k.id));
+  const kombInfo = KOMBINASYON_INFO[kombKey] || KOMBINASYON_INFO['dogum'];
+
+  return `
+    <div class="katman-grid" id="birlesik-grid">
+      ${katmanlar.map(k=>`
+        <button class="katman-btn${k.aktif?' active':''}" onclick="toggleKatman('${k.id}')" data-id="${k.id}" ${!k.data?'disabled style="opacity:.4;cursor:default"':''}>
+          <span class="katman-btn-icon">${k.icon}</span>
+          <div>
+            <div class="katman-btn-label">${k.label}</div>
+            <div class="katman-btn-sub">${k.sub}</div>
+          </div>
+          <span class="katman-checkmark">✓</span>
+        </button>`).join('')}
+    </div>
+
+    <div class="birlesik-header" id="birlesik-baslik-label">DOĞUM ŞİFRESİ</div>
+    <div id="birlesik-bars">${barsHTML}</div>
+
+    <div class="kombinasyon-info" id="birlesik-kombinfo">
+      <div class="kombinasyon-baslik" id="birlesik-komb-baslik">${kombInfo.baslik}</div>
+      <div class="kombinasyon-metin" id="birlesik-komb-metin">${kombInfo.metin}</div>
+    </div>`;
+}
+
+function _renderBirlesikBars(katmanlar) {
+  const birlesik = calcBirlesik(katmanlar);
+  if(!birlesik) return '<div style="font-size:12px;color:var(--text4);font-style:italic;padding:8px 0">En az bir katman seç.</div>';
+  const aktifSayisi = katmanlar.filter(k=>k.aktif&&k.data).length;
+  const sorted = Object.entries(birlesik).sort((a,b)=>b[1]-a[1]);
+  const dom = sorted[0];
+  const domEl = EL_RM[dom[0]];
+  return `
+    ${sorted.map(([el,pct])=>{
+      const c=EL_RM[el]; const isD=el===dom[0];
+      const pctRound = Math.round(pct*100);
+      return`<div class="el-bar-row">
+        <span class="el-bar-icon">${c.icon}</span>
+        <span class="el-bar-name${isD?' dom':''}" style="${isD?'color:'+c.color:''}">${c.tr}</span>
+        <div class="el-bar-track"><div class="el-bar-fill" style="width:${pctRound}%;background:${c.color};opacity:${isD?1:.5};transition:width .5s ease"></div></div>
+        <span class="el-bar-pct">%${pctRound}</span>
+      </div>`;
+    }).join('')}
+    <div style="margin-top:10px">
+      <span class="birlesik-baskin" style="color:${domEl.color};border-color:${domEl.color}44;background:${domEl.color}09">
+        ${domEl.icon} Birleşik baskın: <strong style="margin-left:4px">${domEl.tr}</strong>
+      </span>
+      ${aktifSayisi>1?`<span style="font-size:10px;color:var(--text4);margin-left:10px">${aktifSayisi} katman · eşit ağırlık</span>`:''}
+    </div>`;
+}
+
+function toggleKatman(id) {
+  const katmanlar = window._birlesikKatmanlar;
+  if(!katmanlar) return;
+  const k = katmanlar.find(k=>k.id===id);
+  if(!k || !k.data) return;
+  // En az 1 aktif kalsın
+  const aktifler = katmanlar.filter(k=>k.aktif);
+  if(k.aktif && aktifler.length<=1) { return; }
+  k.aktif = !k.aktif;
+
+  // Butonları güncelle
+  document.querySelectorAll('.katman-btn').forEach(btn=>{
+    const ki = katmanlar.find(k=>k.id===btn.dataset.id);
+    if(ki) btn.classList.toggle('active', ki.aktif);
+  });
+
+  // Bars güncelle
+  document.getElementById('birlesik-bars').innerHTML = _renderBirlesikBars(katmanlar);
+
+  // Başlık güncelle
+  const secili = katmanlar.filter(k=>k.aktif).map(k=>k.label);
+  document.getElementById('birlesik-baslik-label').textContent =
+    secili.join(' × ').toUpperCase();
+
+  // Kombinasyon info güncelle
+  const kombKey  = getKombinasyonKey(katmanlar.filter(k=>k.aktif).map(k=>k.id));
+  const kombInfo = KOMBINASYON_INFO[kombKey] || KOMBINASYON_INFO['dogum'];
+  document.getElementById('birlesik-komb-baslik').textContent = kombInfo.baslik;
+  document.getElementById('birlesik-komb-metin').textContent  = kombInfo.metin;
+
+  // Kapı alt başlık güncelle
+  document.getElementById('door-birlesik-sub').textContent =
+    katmanlar.filter(k=>k.aktif).length + ' katman seçili · ' + EL_RM[Object.entries(calcBirlesik(katmanlar)).sort((a,b)=>b[1]-a[1])[0][0]].tr + ' baskın';
 }
 
 /* ── Gölge basit fallback ── */
