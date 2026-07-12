@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ruhun Mimarisi</title>
 <meta name="description" content="Kendi iç haritanı çıkar. Adın, doğumun, zamanın — hepsi sana dair bir şey söylüyor.">
+<meta property="og:title" content="Ruhun Mimarisi — Kendi İçinde Bir Harita Var">
+<meta property="og:description" content="Adın, doğum tarihin ve saatin üzerinden kişisel element profilini, taş reçeteni ve iç haritanı çıkar.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ruhunmimarisi.com">
+<meta property="og:image" content="https://ruhunmimarisi.com/og-image.jpg">
+<meta property="og:locale" content="tr_TR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ruhun Mimarisi — Kendi İçinde Bir Harita Var">
+<meta name="twitter:description" content="Adın, doğum tarihin ve saatin üzerinden kişisel element profilini ve iç haritanı çıkar.">
+<meta name="twitter:image" content="https://ruhunmimarisi.com/og-image.jpg">
+<link rel="canonical" href="https://ruhunmimarisi.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
 <style>
@@ -575,6 +586,62 @@ body{
 }
 .kombinasyon-metin{font-size:12px;color:var(--text3);line-height:1.75;font-style:italic;}
 
+/* ── Değişim Aynası ─────────────────────────── */
+.ayna-bos{
+  text-align:center;padding:24px 0;
+  font-size:12px;color:var(--text4);font-style:italic;line-height:1.7;
+}
+.ayna-ozet{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px;
+}
+.ayna-ozet-kart{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:4px;padding:12px;text-align:center;
+}
+.ayna-ozet-sayi{font-family:'Cinzel',serif;font-size:22px;color:var(--gold2);margin-bottom:2px;}
+.ayna-ozet-label{font-size:10px;color:var(--text4);letter-spacing:.08em;}
+.ayna-trend-baslik{
+  font-family:'Cinzel',serif;font-size:7px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--text4);margin-bottom:10px;margin-top:4px;
+}
+.ayna-grafik{margin-bottom:16px;}
+.ayna-grafik-row{
+  display:flex;align-items:center;gap:8px;margin-bottom:8px;
+}
+.ayna-grafik-icon{font-size:13px;width:18px;text-align:center;flex-shrink:0;}
+.ayna-grafik-label{font-size:11px;color:var(--text3);width:46px;flex-shrink:0;}
+.ayna-grafik-track{flex:1;height:6px;background:rgba(255,255,255,.05);border-radius:3px;position:relative;overflow:visible;}
+.ayna-grafik-fill{height:100%;border-radius:3px;transition:width .6s ease;}
+.ayna-grafik-trend{font-size:10px;width:28px;text-align:right;flex-shrink:0;}
+/* Mood dağılımı */
+.ayna-mood-row{
+  display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;
+}
+.ayna-mood-chip{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:20px;padding:4px 10px;font-size:11px;color:var(--text3);
+}
+.ayna-mood-chip span{font-size:14px;}
+/* Geçmiş liste */
+.ayna-gecmis{margin-top:4px;}
+.ayna-gecmis-item{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 0;border-bottom:1px solid var(--border);
+}
+.ayna-gecmis-item:last-child{border-bottom:none;}
+.ayna-gecmis-date{font-size:10px;color:var(--text4);width:58px;flex-shrink:0;}
+.ayna-gecmis-mood{font-size:16px;width:20px;text-align:center;}
+.ayna-gecmis-el{flex:1;display:flex;gap:3px;}
+.ayna-gecmis-el-bar{height:3px;border-radius:2px;transition:width .3s;}
+.ayna-gecmis-niyet{font-size:10px;color:var(--text4);font-style:italic;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+/* Modulor teşvik -->
+.ayna-modulor-hint{
+  margin-top:12px;padding:12px;
+  background:rgba(196,184,248,.04);border:1px solid rgba(196,184,248,.12);
+  border-radius:4px;text-align:center;
+}
+
 @media(max-width:480px){
   .form-row{flex-direction:column;}
   .wow-headline{font-size:clamp(24px,7vw,40px);}
@@ -862,7 +929,24 @@ body{
       </div>
     </div>
 
-    <!-- KAPI 7: MODULOR -->
+    <!-- KAPI 7: DEĞİŞİM AYNASI -->
+    <div class="door" id="door-ayna">
+      <div class="door-header" onclick="toggleDoor('ayna')">
+        <div class="door-header-left">
+          <span class="door-icon">🪞</span>
+          <div>
+            <div class="door-title">Değişim Aynası</div>
+            <div class="door-sub" id="door-ayna-sub">Element trendlerin</div>
+          </div>
+        </div>
+        <span class="door-arrow">›</span>
+      </div>
+      <div class="door-body">
+        <div class="door-body-inner" id="door-ayna-body"></div>
+      </div>
+    </div>
+
+    <!-- KAPI 8: MODULOR -->
     <div class="door" id="door-modulor">
       <div class="door-header" onclick="toggleDoor('modulor')">
         <div class="door-header-left">
@@ -885,14 +969,24 @@ body{
               Modulor, bu haritayı günlük yaşamına entegre eden<br>
               kişisel bir rehber uygulaması.
             </div>
-            <a href="/modulor/" class="btn-modulor">Modulor'u Keşfet →</a>
+            <a href="https://modulor-v2.vercel.app" class="btn-modulor">Modulor'u Keşfet →</a>
           </div>
         </div>
       </div>
     </div>
 
     <div class="layers-footer">
-      <button class="screen-back" style="margin-bottom:0;" onclick="goTo('form')">← Yeniden Hesapla</button>
+      <button class="screen-back" style="margin-bottom:16px;" onclick="goTo('form')">← Yeniden Hesapla</button>
+
+      <!-- Export / Import -->
+      <div style="border-top:1px solid var(--border);padding-top:16px;margin-top:4px;">
+        <div style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:.2em;text-transform:uppercase;color:var(--text4);margin-bottom:12px;">Veri Taşıma</div>
+        <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+          <button onclick="exportProfil()" style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);background:var(--bg3);border:1px solid var(--border);border-radius:3px;padding:8px 16px;cursor:pointer;transition:border-color .2s" onmouseover="this.style.borderColor='var(--border2)'" onmouseout="this.style.borderColor='var(--border)'">↓ Dışa Aktar</button>
+          <label style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);background:var(--bg3);border:1px solid var(--border);border-radius:3px;padding:8px 16px;cursor:pointer;transition:border-color .2s" onmouseover="this.style.borderColor='var(--border2)'" onmouseout="this.style.borderColor='var(--border)'">↑ İçe Aktar<input type="file" accept=".json" onchange="importProfil(event)" style="display:none"></label>
+        </div>
+        <div style="font-size:10px;color:var(--text4);font-style:italic;margin-top:8px;line-height:1.6;">Başka bir cihaza taşımak için dışa aktar,<br>yeni cihazda içe aktar.</div>
+      </div>
     </div>
 
   </div>
@@ -914,12 +1008,12 @@ const EL = {
   firtina: {tr:'Fırtına',icon:'⚡', color:'var(--el-firtina)',bg:'rgba(168,230,207,.06)'},
 };
 
-/* ── Harf → element ── */
+/* ── Harf → element (tek tablo — elements.js kaynağı) ── */
 const HARF_EL = {
-  A:'ates',B:'toprak',C:'hava',Ç:'su',D:'toprak',E:'hava',F:'ates',
-  G:'toprak',Ğ:'su',H:'ates',I:'toprak',İ:'hava',J:'ates',K:'toprak',
-  L:'hava',M:'su',N:'hava',O:'su',Ö:'hava',P:'toprak',R:'ates',
-  S:'hava',Ş:'su',T:'toprak',U:'su',Ü:'hava',V:'ates',Y:'hava',Z:'ates',
+  'A':'hava','E':'hava','İ':'hava','N':'hava','S':'hava','Ş':'hava','W':'hava','I':'hava',
+  'B':'su',  'G':'su',  'K':'su',  'P':'su',  'T':'su',  'Y':'su',
+  'C':'ates','Ç':'ates','F':'ates','L':'ates','O':'ates','Ö':'ates','U':'ates','Ü':'ates','X':'ates',
+  'D':'toprak','H':'toprak','M':'toprak','V':'toprak','Z':'toprak','R':'toprak','J':'toprak','Q':'toprak',
 };
 
 /* ── Burç → element ── */
@@ -1172,15 +1266,39 @@ function hesapla() {
 
     // Engine hesabı — motorlar yüklüyse
     try {
-      if(typeof RuhunMimarisi !== 'undefined') {
+      if (typeof RuhunMimarisi !== 'undefined' && RuhunMimarisi.engines) {
         const profile = {
           fullName: fn,
-          astro: { birthDate:dt, birthTime:st, birthCity:null },
+          astro: {
+            birthDate: dt || null,
+            birthTime: st || null,
+            birthCity: null,
+            sun: burc || null,
+          },
           num: {},
         };
         _computed = RuhunMimarisi.engines.compute(profile);
+        console.log('[RM] Motorlar çalıştı:', Object.keys(_computed).filter(k=>_computed[k]));
+      } else {
+        // Motorlar yüklü değil — basit fallback
+        const lp = getPySimple(dt);
+        _computed = {
+          astro:  burc ? { sunSign: burc } : null,
+          num:    lp   ? { lp: { value: lp, label: 'Yaşam Yolu' }, personalYear: getPySimple(dt) } : null,
+          iching: null,
+          shadow: null,
+        };
       }
-    } catch(e) { console.warn('[RM] Engine compute hatası:', e); }
+    } catch(e) {
+      console.warn('[RM] Engine compute hatası:', e);
+      const lp = getPySimple(dt);
+      _computed = {
+        astro:  burc ? { sunSign: burc } : null,
+        num:    lp   ? { lp: { value: lp, label: 'Yaşam Yolu' }, personalYear: lp } : null,
+        iching: null,
+        shadow: null,
+      };
+    }
 
     renderSummary(_result);
     goTo('summary');
@@ -1411,7 +1529,10 @@ function renderLayers() {
       </div>
     </div>`;
 
-  // ── Kapı 6: CHECK-İN ──
+  // ── Kapı 7: DEĞİŞİM AYNASI ──
+  renderAyna();
+
+  // ── Kapı 8: CHECK-İN ──
   renderCheckin();
 }
 
@@ -1726,14 +1847,28 @@ function renderGolgeBody(profil, shadow, dailyCift, hdTip, lp) {
   }
 
   // ── D: Modulor yönlendirmesi ──
+  // Video butonu — videos.js yüklüyse ve yaşam yolu kapıya dönüşüyorsa
+  const golgeVideoHtml = (() => {
+    if (typeof renderVideoBtn === 'undefined' || !lp) return '';
+    // Yaşam yolu → kapı no eşleştirmesi (basit)
+    const LP_KAPI = {1:1, 2:2, 3:3, 4:4, 5:5, 6:6, 7:7, 8:8, 9:9, 11:11, 22:22, 33:33};
+    const kapiNo = LP_KAPI[lp] || null;
+    if (!kapiNo) return '';
+    const poz = renderVideoBtn(kapiNo, 'pozitif');
+    const neg = renderVideoBtn(kapiNo, 'negatif');
+    if (!poz && !neg) return '';
+    return `<div style="margin-bottom:12px;display:flex;flex-wrap:wrap;gap:8px">${poz}${neg}</div>`;
+  })();
+
   html += `
   <div style="border-top:1px solid var(--border);margin-top:12px;padding-top:14px;text-align:center">
+    ${golgeVideoHtml}
     <div style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:.2em;text-transform:uppercase;color:var(--text4);margin-bottom:8px">✦ Modulor</div>
     <div style="font-size:12px;color:var(--text3);line-height:1.65;margin-bottom:12px;font-style:italic">
       Bu gölge haritası Modulor'da günlük pratiklere, alışkanlık döngülerine ve<br>
       derin dönüşüm akışına entegre olur.
     </div>
-    <a href="/modulor/" style="display:inline-block;padding:9px 22px;border:1px solid var(--violet);color:var(--violet);border-radius:3px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:background .2s" onmouseover="this.style.background='rgba(196,184,248,.08)'" onmouseout="this.style.background='transparent'">Modulor'da Devam Et →</a>
+    <a href="https://modulor-v2.vercel.app" style="display:inline-block;padding:9px 22px;border:1px solid var(--violet);color:var(--violet);border-radius:3px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:background .2s" onmouseover="this.style.background='rgba(196,184,248,.08)'" onmouseout="this.style.background='transparent'">Modulor'da Devam Et →</a>
   </div>`;
 
   return html;
@@ -1773,6 +1908,13 @@ function renderIChingBody(iching) {
     return`<div class="hex-line ${l?'yang':'yin'}${isActive?' active-hat':''}"></div>`;
   }).join('');
   const psych = iching.psych||{};
+
+  // Video butonu — videos.js yüklüyse
+  const kapiNo  = hx.no || null;
+  const videoHtml = (typeof renderVideoBtn !== 'undefined' && kapiNo)
+    ? renderVideoBtn(kapiNo, 'pozitif') + renderVideoBtn(kapiNo, 'negatif')
+    : '';
+
   return `
     <div class="hex-card">
       <div class="hex-number">Hekzagram ${hx.no||''}</div>
@@ -1781,6 +1923,7 @@ function renderIChingBody(iching) {
       <div class="hex-lines">${linesHtml}</div>
       ${psych.golge?`<div class="hex-block"><strong style="color:var(--text4);font-style:normal;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.14em">GÖLGE</strong><br>${psych.golge}</div>`:''}
       ${psych.donusum?`<div class="hex-block" style="margin-top:8px"><strong style="color:var(--text4);font-style:normal;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.14em">DÖNÜŞÜM</strong><br>${psych.donusum}</div>`:''}
+      ${videoHtml ? `<div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px">${videoHtml}</div>` : ''}
     </div>`;
 }
 
@@ -1834,6 +1977,151 @@ function getMoonDay() {
   return Math.round(((((now-known)/(1000*60*60*24))%29.53)+29.53)%29.53)+1;
 }
 
+/* ─────────────────────────────────────────────
+   DEĞİŞİM AYNASI
+   Check-in geçmişinden element trend grafiği
+   ───────────────────────────────────────────── */
+function renderAyna() {
+  const checkins = getCheckins();
+  const aynaSub  = document.getElementById('door-ayna-sub');
+  const aynaBody = document.getElementById('door-ayna-body');
+  if (!aynaSub || !aynaBody) return;
+
+  if (!checkins.length) {
+    aynaSub.textContent = 'Henüz check-in yok';
+    aynaBody.innerHTML = `
+      <div class="ayna-bos">
+        Henüz check-in yapmadın.<br>
+        Her gün bir kez check-in yaptığında<br>
+        element trendlerin burada görünecek.
+      </div>`;
+    return;
+  }
+
+  aynaSub.textContent = checkins.length + ' gün · ' + _getAynaTrend(checkins);
+
+  // ── Özet kartları ──
+  const son7  = checkins.slice(0, 7);
+  const son30 = checkins.slice(0, 30);
+  const domEl7 = _getDomEl(son7);
+
+  // ── Element ortalamaları (son 30 gün) ──
+  const elOrts = _calcElOrts(son30);
+
+  // ── Trend (ilk 7 vs son 7) ──
+  const trends = checkins.length >= 14
+    ? _calcTrend(checkins.slice(0,7), checkins.slice(7,14))
+    : null;
+
+  // ── Mood dağılımı ──
+  const moodCount = {};
+  checkins.slice(0,30).forEach(c => { moodCount[c.mood] = (moodCount[c.mood]||0)+1; });
+
+  // ── Render ──
+  aynaBody.innerHTML = `
+    <div class="ayna-ozet">
+      <div class="ayna-ozet-kart">
+        <div class="ayna-ozet-sayi">${checkins.length}</div>
+        <div class="ayna-ozet-label">Toplam Gün</div>
+      </div>
+      <div class="ayna-ozet-kart">
+        <div class="ayna-ozet-sayi" style="color:${domEl7?EL[domEl7]?.color||'var(--gold2)':'var(--gold2)'}">${domEl7?EL[domEl7]?.icon||'✦':'-'}</div>
+        <div class="ayna-ozet-label">Son 7 Gün Baskın</div>
+      </div>
+    </div>
+
+    <div class="ayna-trend-baslik">Element Trendi (Son ${Math.min(son30.length,30)} Gün)</div>
+    <div class="ayna-grafik">
+      ${Object.entries(elOrts).sort((a,b)=>b[1]-a[1]).map(([el,pct])=>{
+        const c = EL[el]||{icon:'·',tr:el,color:'var(--text3)'};
+        const tr = trends?.[el];
+        const trIcon = tr === null ? '' : tr > 0 ? `<span style="color:${c.color}">↑</span>` : tr < 0 ? `<span style="color:var(--text4)">↓</span>` : '→';
+        return `<div class="ayna-grafik-row">
+          <span class="ayna-grafik-icon">${c.icon}</span>
+          <span class="ayna-grafik-label">${c.tr}</span>
+          <div class="ayna-grafik-track">
+            <div class="ayna-grafik-fill" style="width:${Math.round(pct*100)}%;background:${c.color};opacity:.75"></div>
+          </div>
+          <span class="ayna-grafik-trend">${trIcon} %${Math.round(pct*100)}</span>
+        </div>`;
+      }).join('')}
+    </div>
+
+    ${Object.keys(moodCount).length ? `
+    <div class="ayna-trend-baslik">Ruh Hali Dağılımı</div>
+    <div class="ayna-mood-row">
+      ${Object.entries(moodCount).sort((a,b)=>b[1]-a[1]).map(([mood,cnt])=>`
+        <div class="ayna-mood-chip">
+          <span>${getMoodEmoji(mood)}</span>
+          ${cnt} gün
+        </div>`).join('')}
+    </div>` : ''}
+
+    <div class="ayna-trend-baslik">Son 7 Gün</div>
+    <div class="ayna-gecmis">
+      ${checkins.slice(0,7).map(c=>{
+        const els = Object.entries(c.elements||{}).filter(([k])=>EL[k]).sort((a,b)=>b[1]-a[1]);
+        const total = els.reduce((s,[,v])=>s+v,0)||1;
+        return `<div class="ayna-gecmis-item">
+          <span class="ayna-gecmis-date">${c.date.slice(5)}</span>
+          <span class="ayna-gecmis-mood">${getMoodEmoji(c.mood)}</span>
+          <div class="ayna-gecmis-el">
+            ${els.map(([el,v])=>{
+              const cc=EL[el];
+              return `<div class="ayna-gecmis-el-bar" style="width:${Math.round(v/total*60)}px;background:${cc?.color||'var(--border)'}"></div>`;
+            }).join('')}
+          </div>
+          <span class="ayna-gecmis-niyet">${c.niyet||''}</span>
+        </div>`;
+      }).join('')}
+    </div>
+
+    ${checkins.length >= 7 ? `
+    <div class="ayna-modulor-hint">
+      <div style="font-size:11px;color:var(--text3);font-style:italic;line-height:1.6;margin-bottom:8px">
+        Modulor'da bu trend 21 günlük dönüşüm<br>programına dönüşüyor.
+      </div>
+      <a href="https://modulor-v2.vercel.app" target="_blank" style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--violet);text-decoration:none">Modulor'da Devam Et →</a>
+    </div>` : ''}`;
+}
+
+// Yardımcı: element ortalamaları
+function _calcElOrts(checkins) {
+  const sums = {ates:0, su:0, hava:0, toprak:0};
+  let count = 0;
+  checkins.forEach(c => {
+    const els = c.elements || {};
+    if (!Object.keys(els).length) return;
+    Object.keys(sums).forEach(el => { sums[el] += (els[el]||0); });
+    count++;
+  });
+  if (!count) return {ates:.25, su:.25, hava:.25, toprak:.25};
+  const total = Object.values(sums).reduce((a,b)=>a+b,0) || 1;
+  return Object.fromEntries(Object.entries(sums).map(([k,v])=>[k,v/total]));
+}
+
+// Yardımcı: baskın element
+function _getDomEl(checkins) {
+  const orts = _calcElOrts(checkins);
+  return Object.entries(orts).sort((a,b)=>b[1]-a[1])[0]?.[0] || null;
+}
+
+// Yardımcı: trend (yeni - eski, pozitif = artış)
+function _calcTrend(yeni, eski) {
+  const yO = _calcElOrts(yeni);
+  const eO = _calcElOrts(eski);
+  return Object.fromEntries(
+    Object.keys(yO).map(el => [el, Math.round((yO[el]-eO[el])*100)])
+  );
+}
+
+// Yardımcı: trend özet metni
+function _getAynaTrend(checkins) {
+  if (checkins.length < 3) return 'Devam et';
+  const dom = _getDomEl(checkins.slice(0,7));
+  return dom ? (EL[dom]?.tr||dom) + ' etkili' : 'Trend oluşuyor';
+}
+
 /* ── Check-in render ── */
 let _selectedMood = 'iyi';
 function renderCheckin() {
@@ -1874,6 +2162,87 @@ function saveCheckinData() {
   saveCheckin(_selectedMood, niyet);
   toast('✦ Check-in kaydedildi');
   renderCheckin();
+}
+
+/* ── Export / Import ── */
+function exportProfil() {
+  try {
+    const profil   = localStorage.getItem(LS_KEY);
+    const checkins = localStorage.getItem(CI_KEY);
+    if (!profil && !checkins) { toast('Dışa aktarılacak veri yok'); return; }
+
+    const paket = {
+      _versiyon:  '1.0',
+      _tarih:     new Date().toISOString(),
+      _kaynak:    'ruhunmimarisi.com',
+      profil:     profil  ? JSON.parse(profil)  : null,
+      checkins:   checkins? JSON.parse(checkins): [],
+    };
+
+    const blob = new Blob([JSON.stringify(paket, null, 2)], {type:'application/json'});
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    const ad   = (paket.profil?.fn?.split(' ')[0] || 'haritam').toLowerCase().replace(/[^a-z0-9]/g,'');
+    a.href     = url;
+    a.download = `ruhunmimarisi_${ad}_${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast('✦ Profil dışa aktarıldı');
+  } catch(e) {
+    toast('Dışa aktarma hatası');
+    console.error('[RM] Export hatası:', e);
+  }
+}
+
+function importProfil(event) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const paket = JSON.parse(e.target.result);
+
+      // Versiyon ve kaynak kontrolü
+      if (paket._kaynak !== 'ruhunmimarisi.com') {
+        toast('Bu dosya tanınmıyor'); return;
+      }
+
+      let yuklenen = 0;
+
+      if (paket.profil) {
+        localStorage.setItem(LS_KEY, JSON.stringify(paket.profil));
+        _result = paket.profil;
+        yuklenen++;
+      }
+      if (paket.checkins?.length) {
+        // Mevcut check-inlerle birleştir — tekrarı önle
+        const mevcut  = getCheckins();
+        const mevcutD = new Set(mevcut.map(c=>c.date));
+        const yeni    = paket.checkins.filter(c=>!mevcutD.has(c.date));
+        const birlesik = [...yeni, ...mevcut].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,90);
+        localStorage.setItem(CI_KEY, JSON.stringify(birlesik));
+        yuklenen++;
+      }
+
+      // Formu doldur
+      if (_result?.fn)  document.getElementById('f-name').value = _result.fn;
+      if (_result?.dt)  document.getElementById('f-date').value = _result.dt;
+      if (_result?.st)  document.getElementById('f-time').value = _result.st;
+
+      toast(`✦ ${paket.profil?.fn?.split(' ')[0]||'Profil'} yüklendi`);
+
+      // Katmanları yenile
+      setTimeout(() => { renderLayers(); }, 300);
+
+    } catch(err) {
+      toast('Geçersiz dosya formatı');
+      console.error('[RM] Import hatası:', err);
+    }
+  };
+  reader.readAsText(file);
+  // Input'u sıfırla — aynı dosyayı tekrar seçebilsin
+  event.target.value = '';
 }
 
 /* ── WOW yantra animasyonu ── */
@@ -1925,6 +2294,7 @@ function saveCheckinData() {
 <!-- ─── VERİ KATMANI ─────────────────────────────────────────── -->
 <script src="profiles.js"></script>
 <script src="ciftler.js"></script>
+<script src="videos.js"></script>
 
 <!-- ─── 32 ÇİFT KAPISI ───────────────────────────────────────── -->
 <script src="cift/cift_01.js"></script>
