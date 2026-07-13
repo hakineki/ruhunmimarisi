@@ -200,7 +200,7 @@ body{
    EKRAN 2 — FORM
    ───────────────────────────────────────────── */
 #screen-form{justify-content:flex-start;padding-top:52px;}
-.form-wrap{width:100%;max-width:900px;margin:0 auto;}
+.form-wrap{width:100%;max-width:720px;margin:0 auto;}
 .form-title{
   font-family:'Cinzel',serif;font-size:16px;letter-spacing:.12em;
   color:var(--gold2);margin-bottom:6px;
@@ -292,7 +292,7 @@ body{
    EKRAN 4 — ÖZET
    ───────────────────────────────────────────── */
 #screen-summary{justify-content:flex-start;padding-top:52px;}
-.summary-wrap{width:100%;max-width:900px;margin:0 auto;}
+.summary-wrap{width:100%;max-width:720px;margin:0 auto;}
 .summary-greeting{margin-bottom:24px;}
 .summary-name{
   font-family:'Cinzel',serif;font-size:22px;letter-spacing:.08em;
@@ -370,7 +370,7 @@ body{
    EKRAN 5 — KATMANLAR (Dashboard / Odalar)
    ───────────────────────────────────────────── */
 #screen-layers{justify-content:flex-start;padding-top:0;overflow-y:auto;}
-.layers-wrap{width:100%;max-width:900px;margin:0 auto;padding:52px 0 80px;}
+.layers-wrap{width:100%;max-width:720px;margin:0 auto;padding:52px 0 80px;}
 
 /* profil şeridi */
 .dash-profile{
@@ -678,16 +678,9 @@ body{
   border-radius:4px;text-align:center;
 }
 
-/* ── ÜST KONTROL ÇUBUĞU ────────────────────── */
-#control-bar{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  pointer-events:none;
-}
-#control-bar-inner{
-  max-width:900px;margin:0 auto;
-  padding:16px 24px 0;
+/* ── ÜST KONTROL ÇUBUĞU — sayfa akışında, sabit değil ── */
+.ctrl-row{
   display:flex;justify-content:flex-end;align-items:center;gap:6px;
-  pointer-events:auto;
 }
 .ctrl-btn{
   width:32px;height:32px;border-radius:50%;
@@ -696,7 +689,7 @@ body{
   cursor:pointer;font-size:13px;color:var(--text2);
   transition:background .2s,border-color .2s,transform .2s;
   font-family:'Cinzel',serif;
-  user-select:none;
+  user-select:none;flex-shrink:0;
 }
 .ctrl-btn:hover{border-color:var(--gold);color:var(--gold2);}
 .ctrl-btn:active{transform:scale(.92);}
@@ -706,7 +699,6 @@ body{
 #zoom-wrapper{ zoom:100%; }
 
 @media(max-width:480px){
-  #control-bar-inner{padding:12px 14px 0;gap:5px;}
   .ctrl-btn{width:28px;height:28px;font-size:11px;}
   #theme-toggle{font-size:13px;}
   .form-row{flex-direction:column;}
@@ -718,14 +710,6 @@ body{
 </style>
 </head>
 <body>
-
-<div id="control-bar">
-  <div id="control-bar-inner">
-    <div class="ctrl-btn" onclick="adjustFont(-1)" title="Yazıyı küçült">A−</div>
-    <div class="ctrl-btn" onclick="adjustFont(1)" title="Yazıyı büyüt">A+</div>
-    <div class="ctrl-btn" id="theme-toggle" onclick="toggleTheme()" title="Görünümü değiştir">🌙</div>
-  </div>
-</div>
 
 <div id="zoom-wrapper">
 
@@ -783,7 +767,14 @@ body{
 <!-- ─── EKRAN 2: FORM ─────────────────────────── -->
 <div class="screen" id="screen-form">
   <div class="form-wrap">
-    <button class="screen-back" onclick="goTo('wow')">← Geri</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;">
+      <button class="screen-back" style="margin-bottom:0;" onclick="goTo('wow')">← Geri</button>
+      <div class="ctrl-row">
+        <div class="ctrl-btn" onclick="adjustFont(-1)" title="Yazıyı küçült">A−</div>
+        <div class="ctrl-btn" onclick="adjustFont(1)" title="Yazıyı büyüt">A+</div>
+        <div class="ctrl-btn theme-toggle-btn" onclick="toggleTheme()" title="Görünümü değiştir">🌙</div>
+      </div>
+    </div>
     <div class="form-title">Seni Tanıyalım</div>
     <p class="form-sub">Harf enerjin, doğum tarihin ve saatin<br>sana özel bir harita çıkarır.</p>
 
@@ -837,7 +828,14 @@ body{
 <!-- ─── EKRAN 4: ÖZET ─────────────────────────── -->
 <div class="screen" id="screen-summary">
   <div class="summary-wrap">
-    <button class="screen-back" onclick="goTo('form')">← Yeniden Hesapla</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;">
+      <button class="screen-back" style="margin-bottom:0;" onclick="goTo('form')">← Yeniden Hesapla</button>
+      <div class="ctrl-row">
+        <div class="ctrl-btn" onclick="adjustFont(-1)" title="Yazıyı küçült">A−</div>
+        <div class="ctrl-btn" onclick="adjustFont(1)" title="Yazıyı büyüt">A+</div>
+        <div class="ctrl-btn theme-toggle-btn" onclick="toggleTheme()" title="Görünümü değiştir">🌙</div>
+      </div>
+    </div>
 
     <div class="summary-greeting">
       <div class="summary-name" id="sum-name"></div>
@@ -877,9 +875,14 @@ body{
     <!-- Profil şeridi -->
     <div class="dash-profile">
       <div class="dash-avatar" id="lay-avatar">✦</div>
-      <div>
+      <div style="flex:1">
         <div class="dash-profile-name" id="lay-name">—</div>
         <div class="dash-profile-sub" id="lay-sub"></div>
+      </div>
+      <div class="ctrl-row">
+        <div class="ctrl-btn" onclick="adjustFont(-1)" title="Yazıyı küçült">A−</div>
+        <div class="ctrl-btn" onclick="adjustFont(1)" title="Yazıyı büyüt">A+</div>
+        <div class="ctrl-btn theme-toggle-btn" onclick="toggleTheme()" title="Görünümü değiştir">🌙</div>
       </div>
     </div>
 
@@ -2347,13 +2350,13 @@ const THEME_KEY = 'rm_theme_v1';
 
 function applyTheme(theme) {
   const html = document.documentElement;
-  const btn  = document.getElementById('theme-toggle');
+  const btns = document.querySelectorAll('.theme-toggle-btn');
   if (theme === 'light') {
     html.setAttribute('data-theme', 'light');
-    if (btn) btn.textContent = '☀️';
+    btns.forEach(b => b.textContent = '☀️');
   } else {
     html.removeAttribute('data-theme');
-    if (btn) btn.textContent = '🌙';
+    btns.forEach(b => b.textContent = '🌙');
   }
 }
 
