@@ -39,7 +39,43 @@
   --el-hava:   #c4b8f8;
   --el-toprak: #b49664;
   --el-firtina:#a8e6cf;
+  --shadow-soft: rgba(0,0,0,0.25);
+  --track-bg: rgba(255,255,255,0.06);
 }
+
+/* ── LIGHT MODE — açık mor-lavanta ── */
+html[data-theme="light"] {
+  --bg:     #f8f5fc;
+  --bg2:    #f1ebf9;
+  --bg3:    #e9e0f5;
+  --bg4:    #ded2ef;
+  --border: rgba(90,60,150,0.12);
+  --border2:rgba(90,60,150,0.22);
+  --gold:   #a9793a;
+  --gold2:  #8a5f26;
+  --violet: #7457c9;
+  --text:   rgba(28,20,48,0.90);
+  --text2:  rgba(28,20,48,0.62);
+  --text3:  rgba(28,20,48,0.42);
+  --text4:  rgba(28,20,48,0.24);
+  --el-ates:   #e0723a;
+  --el-su:     #2f7fc9;
+  --el-hava:   #7457c9;
+  --el-toprak: #8a6a3a;
+  --el-firtina:#3f9b7a;
+  --shadow-soft: rgba(90,60,150,0.10);
+  --track-bg: rgba(90,60,150,0.08);
+}
+html[data-theme="light"] .cosmos-bg{
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 15%, rgba(140,100,220,.05) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(120,80,200,.05) 0%, transparent 70%);
+}
+html[data-theme="light"] .stars-layer{ opacity:0.5; }
+html[data-theme="light"] .loading-orb{
+  box-shadow:0 0 30px rgba(169,121,58,.15),0 0 60px rgba(116,87,201,.10);
+}
+html[data-theme="light"] .wow-canvas-wrap{ opacity:0.35; }
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -142,7 +178,7 @@ body{
 }
 .wow-cta{
   font-family:'Cinzel',serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--bg);background:var(--gold2);
+  color:#07050e;background:var(--gold2);
   border:none;border-radius:2px;
   padding:14px 36px;cursor:pointer;
   transition:background .2s,transform .15s;
@@ -277,7 +313,7 @@ body{
 .el-bar-icon{font-size:14px;width:20px;text-align:center;}
 .el-bar-name{font-size:13px;color:var(--text2);width:56px;}
 .el-bar-name.dom{font-weight:500;}
-.el-bar-track{flex:1;height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
+.el-bar-track{flex:1;height:4px;background:var(--track-bg);border-radius:2px;overflow:hidden;}
 .el-bar-fill{height:100%;border-radius:2px;width:0%;transition:width 1s ease;}
 .el-bar-pct{font-size:11px;color:var(--text3);width:32px;text-align:right;}
 .dom-badge{
@@ -356,7 +392,7 @@ body{
 .el-mini-strip{display:flex;gap:6px;padding:0 20px;margin-bottom:20px;}
 .el-mini-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
 .el-mini-icon{font-size:12px;}
-.el-mini-track{width:100%;height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
+.el-mini-track{width:100%;height:3px;background:var(--track-bg);border-radius:2px;overflow:hidden;}
 .el-mini-fill{height:100%;border-radius:2px;}
 .el-mini-pct{font-size:9px;color:var(--text4);}
 
@@ -370,7 +406,7 @@ body{
   padding:16px 20px;cursor:pointer;user-select:none;
   transition:background .15s;
 }
-.door-header:hover{background:rgba(255,255,255,.02);}
+.door-header:hover{background:var(--track-bg);}
 .door-header-left{display:flex;align-items:center;gap:12px;}
 .door-icon{font-size:18px;width:28px;text-align:center;}
 .door-title{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--text2);}
@@ -436,7 +472,7 @@ body{
 .hex-name{font-size:20px;color:var(--gold2);margin-bottom:2px;}
 .hex-name-tr{font-size:13px;color:var(--text3);margin-bottom:10px;font-style:italic;}
 .hex-lines{display:flex;flex-direction:column;gap:4px;margin-bottom:12px;}
-.hex-line{height:4px;background:rgba(255,255,255,.1);border-radius:2px;position:relative;}
+.hex-line{height:4px;background:var(--track-bg);border-radius:2px;position:relative;}
 .hex-line.yang{background:var(--gold);}
 .hex-line.yin{background:transparent;border:1px solid rgba(201,169,110,.3);}
 .hex-line.active-hat::after{
@@ -610,7 +646,7 @@ body{
 }
 .ayna-grafik-icon{font-size:13px;width:18px;text-align:center;flex-shrink:0;}
 .ayna-grafik-label{font-size:11px;color:var(--text3);width:46px;flex-shrink:0;}
-.ayna-grafik-track{flex:1;height:6px;background:rgba(255,255,255,.05);border-radius:3px;position:relative;overflow:visible;}
+.ayna-grafik-track{flex:1;height:6px;background:var(--track-bg);border-radius:3px;position:relative;overflow:visible;}
 .ayna-grafik-fill{height:100%;border-radius:3px;transition:width .6s ease;}
 .ayna-grafik-trend{font-size:10px;width:28px;text-align:right;flex-shrink:0;}
 /* Mood dağılımı */
@@ -642,6 +678,18 @@ body{
   border-radius:4px;text-align:center;
 }
 
+/* ── TEMA TOGGLE ────────────────────────────── */
+#theme-toggle{
+  position:fixed;top:18px;right:18px;z-index:100;
+  width:38px;height:38px;border-radius:50%;
+  background:var(--bg3);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:16px;
+  transition:background .2s,border-color .2s,transform .3s;
+}
+#theme-toggle:hover{border-color:var(--gold);transform:rotate(15deg);}
+#theme-toggle:active{transform:rotate(15deg) scale(.92);}
+
 @media(max-width:480px){
   .form-row{flex-direction:column;}
   .wow-headline{font-size:clamp(24px,7vw,40px);}
@@ -652,6 +700,8 @@ body{
 </style>
 </head>
 <body>
+
+<button id="theme-toggle" onclick="toggleTheme()" title="Görünümü değiştir">🌙</button>
 
 <div class="cosmos-bg"></div>
 <div class="stars-layer"></div>
@@ -2264,8 +2314,43 @@ function importProfil(event) {
   frame();
 })();
 
+/* ── Tema Toggle ── */
+const THEME_KEY = 'rm_theme_v1';
+
+function applyTheme(theme) {
+  const html = document.documentElement;
+  const btn  = document.getElementById('theme-toggle');
+  if (theme === 'light') {
+    html.setAttribute('data-theme', 'light');
+    if (btn) btn.textContent = '☀️';
+  } else {
+    html.removeAttribute('data-theme');
+    if (btn) btn.textContent = '🌙';
+  }
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  applyTheme(next);
+  try { localStorage.setItem(THEME_KEY, next); } catch(e){}
+}
+
+function loadTheme() {
+  let saved = null;
+  try { saved = localStorage.getItem(THEME_KEY); } catch(e){}
+  if (!saved) {
+    // Sistem tercihini kontrol et
+    const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    saved = prefersLight ? 'light' : 'dark';
+  }
+  applyTheme(saved);
+}
+
 /* ── Sayfa başlatma ── */
 (function init() {
+  loadTheme();
+
   // Kaydedilmiş profil var mı?
   const saved = loadLocal();
   if(saved) {
