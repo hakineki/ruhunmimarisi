@@ -30,10 +30,10 @@
   --gold:   #c9a96e;
   --gold2:  #e8c98a;
   --violet: #c4b8f8;
-  --text:   rgba(245,240,232,0.92);
-  --text2:  rgba(245,240,232,0.65);
-  --text3:  rgba(245,240,232,0.35);
-  --text4:  rgba(245,240,232,0.16);
+  --text:   rgba(248,244,238,0.96);
+  --text2:  rgba(248,244,238,0.74);
+  --text3:  rgba(248,244,238,0.50);
+  --text4:  rgba(248,244,238,0.26);
   --el-ates:   #ff9650;
   --el-su:     #64b4ff;
   --el-hava:   #c4b8f8;
@@ -54,10 +54,10 @@ html[data-theme="light"] {
   --gold:   #a9793a;
   --gold2:  #8a5f26;
   --violet: #7457c9;
-  --text:   rgba(28,20,48,0.90);
-  --text2:  rgba(28,20,48,0.62);
-  --text3:  rgba(28,20,48,0.42);
-  --text4:  rgba(28,20,48,0.24);
+  --text:   rgba(24,16,42,0.94);
+  --text2:  rgba(24,16,42,0.72);
+  --text3:  rgba(24,16,42,0.54);
+  --text4:  rgba(24,16,42,0.34);
   --el-ates:   #e0723a;
   --el-su:     #2f7fc9;
   --el-hava:   #7457c9;
@@ -200,7 +200,7 @@ body{
    EKRAN 2 — FORM
    ───────────────────────────────────────────── */
 #screen-form{justify-content:flex-start;padding-top:52px;}
-.form-wrap{width:100%;max-width:420px;margin:0 auto;}
+.form-wrap{width:100%;max-width:900px;margin:0 auto;}
 .form-title{
   font-family:'Cinzel',serif;font-size:16px;letter-spacing:.12em;
   color:var(--gold2);margin-bottom:6px;
@@ -292,7 +292,7 @@ body{
    EKRAN 4 — ÖZET
    ───────────────────────────────────────────── */
 #screen-summary{justify-content:flex-start;padding-top:52px;}
-.summary-wrap{width:100%;max-width:420px;margin:0 auto;}
+.summary-wrap{width:100%;max-width:900px;margin:0 auto;}
 .summary-greeting{margin-bottom:24px;}
 .summary-name{
   font-family:'Cinzel',serif;font-size:22px;letter-spacing:.08em;
@@ -370,7 +370,7 @@ body{
    EKRAN 5 — KATMANLAR (Dashboard / Odalar)
    ───────────────────────────────────────────── */
 #screen-layers{justify-content:flex-start;padding-top:0;overflow-y:auto;}
-.layers-wrap{width:100%;max-width:460px;margin:0 auto;padding:52px 0 80px;}
+.layers-wrap{width:100%;max-width:900px;margin:0 auto;padding:52px 0 80px;}
 
 /* profil şeridi */
 .dash-profile{
@@ -678,19 +678,37 @@ body{
   border-radius:4px;text-align:center;
 }
 
-/* ── TEMA TOGGLE ────────────────────────────── */
-#theme-toggle{
-  position:fixed;top:18px;right:18px;z-index:100;
-  width:38px;height:38px;border-radius:50%;
+/* ── ÜST KONTROL ÇUBUĞU ────────────────────── */
+#control-bar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  pointer-events:none;
+}
+#control-bar-inner{
+  max-width:900px;margin:0 auto;
+  padding:16px 24px 0;
+  display:flex;justify-content:flex-end;align-items:center;gap:6px;
+  pointer-events:auto;
+}
+.ctrl-btn{
+  width:32px;height:32px;border-radius:50%;
   background:var(--bg3);border:1px solid var(--border2);
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:16px;
-  transition:background .2s,border-color .2s,transform .3s;
+  cursor:pointer;font-size:13px;color:var(--text2);
+  transition:background .2s,border-color .2s,transform .2s;
+  font-family:'Cinzel',serif;
+  user-select:none;
 }
-#theme-toggle:hover{border-color:var(--gold);transform:rotate(15deg);}
-#theme-toggle:active{transform:rotate(15deg) scale(.92);}
+.ctrl-btn:hover{border-color:var(--gold);color:var(--gold2);}
+.ctrl-btn:active{transform:scale(.92);}
+#theme-toggle{font-size:15px;}
+#theme-toggle:hover{transform:rotate(15deg);}
+
+#zoom-wrapper{ zoom:100%; }
 
 @media(max-width:480px){
+  #control-bar-inner{padding:12px 14px 0;gap:5px;}
+  .ctrl-btn{width:28px;height:28px;font-size:11px;}
+  #theme-toggle{font-size:13px;}
   .form-row{flex-direction:column;}
   .wow-headline{font-size:clamp(24px,7vw,40px);}
 }
@@ -701,7 +719,15 @@ body{
 </head>
 <body>
 
-<button id="theme-toggle" onclick="toggleTheme()" title="Görünümü değiştir">🌙</button>
+<div id="control-bar">
+  <div id="control-bar-inner">
+    <div class="ctrl-btn" onclick="adjustFont(-1)" title="Yazıyı küçült">A−</div>
+    <div class="ctrl-btn" onclick="adjustFont(1)" title="Yazıyı büyüt">A+</div>
+    <div class="ctrl-btn" id="theme-toggle" onclick="toggleTheme()" title="Görünümü değiştir">🌙</div>
+  </div>
+</div>
+
+<div id="zoom-wrapper">
 
 <div class="cosmos-bg"></div>
 <div class="stars-layer"></div>
@@ -1044,6 +1070,8 @@ body{
 
 <!-- ─── TOAST ─────────────────────────────────── -->
 <div id="toast"></div>
+
+</div><!-- /#zoom-wrapper -->
 
 <!-- ────────────────────────────────────────────
      VERİ — HARF / EL / BURC / TAŞ
@@ -2340,16 +2368,38 @@ function loadTheme() {
   let saved = null;
   try { saved = localStorage.getItem(THEME_KEY); } catch(e){}
   if (!saved) {
-    // Sistem tercihini kontrol et
     const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
     saved = prefersLight ? 'light' : 'dark';
   }
   applyTheme(saved);
 }
 
+/* ── Yazı Boyutu (Zoom) ── */
+const FONT_KEY = 'rm_fontzoom_v1';
+const FONT_MIN = 85, FONT_MAX = 130, FONT_STEP = 8;
+let _fontZoom = 100;
+
+function applyFontZoom(pct) {
+  _fontZoom = Math.max(FONT_MIN, Math.min(FONT_MAX, pct));
+  const wrap = document.getElementById('zoom-wrapper');
+  if (wrap) wrap.style.zoom = _fontZoom + '%';
+}
+
+function adjustFont(dir) {
+  applyFontZoom(_fontZoom + (dir * FONT_STEP));
+  try { localStorage.setItem(FONT_KEY, String(_fontZoom)); } catch(e){}
+}
+
+function loadFontZoom() {
+  let saved = null;
+  try { saved = localStorage.getItem(FONT_KEY); } catch(e){}
+  applyFontZoom(saved ? parseInt(saved) : 100);
+}
+
 /* ── Sayfa başlatma ── */
 (function init() {
   loadTheme();
+  loadFontZoom();
 
   // Kaydedilmiş profil var mı?
   const saved = loadLocal();
